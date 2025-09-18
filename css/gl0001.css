@@ -43,22 +43,24 @@ header.scrolled {
 /* Section title floating animation */
 .section-title {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .section-title.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Recommend items floating animation */
 .recommend-item {
   opacity: 0 !important;
   transform: translate3d(0, 40px, 0) !important;
-  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: transform, opacity;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   visibility: hidden;
@@ -102,24 +104,24 @@ header.scrolled {
 /* About images floating animation */
 .about {
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translate3d(0, 50px, 0);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .about.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* iPhone items sliding from right animation */
 .iphone-item {
   opacity: 0 !important;
   transform: translate3d(60px, 0, 0) !important;
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: transform, opacity;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important,
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   visibility: hidden;
@@ -206,8 +208,8 @@ header.scrolled {
 .evi-item {
   opacity: 0 !important;
   transform: translate3d(60px, 0, 0) !important;
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: transform, opacity;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important,
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   visibility: hidden;
@@ -251,54 +253,54 @@ header.scrolled {
 /* Ad panel floating upward animation */
 .ad-panel {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .ad-panel.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Mobile ad panel floating upward animation */
 .mobile-ad-panel {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .mobile-ad-panel.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Step item floating upward animation */
 .step-item {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  transform: translate3d(0, 40px, 0);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
 .step-item.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Testimonial card floating upward animation */
 .testimonial-card {
   opacity: 0 !important;
   transform: translate3d(0, 40px, 0) !important;
-  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: transform, opacity;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   visibility: hidden;
@@ -337,8 +339,8 @@ header.scrolled {
 .qa-item {
   opacity: 0 !important;
   transform: translate3d(0, 40px, 0) !important;
-  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: transform, opacity;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   visibility: hidden;
