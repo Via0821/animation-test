@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML xmlns="https://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel=stylesheet type=text/css href="css/basic_style.css">
+    <link rel=stylesheet type=text/css href="css/text.css">
+	<link rel=stylesheet type=text/css href="css/btn_animate2.css">
+  
+    <!-- jQuery.jsの読み込み -->
+    <script src="js/setup.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/countdown.js"></script>
+</head>
+
+<body>
+	
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+
+    <!-- 背景画像として適用 -->
+    <div class="popup-inner">
+		
+		<div class="btn_box05">
+      <a href="https://lin.ee/p3kfFFKh" class="btn">
+        <img src="images/btn_p.png" alt="ボタン">
+      </a>
+		</div>
+	
+		
+    </div>
+
+  </div>
+</div>
+
+
+  
+	
+    <!-- ヘッダー（レスポンシブ）-->
+    <!--PC_header-->
+	    <div class="bg_top">	
+        <div class="container">
+         <img src="images/logo.png" alt="ロゴ" class="logo">
+           
+        </div>
+    </div>
+    <div class="bg_head">	
+        <div class="container">
+         <img src="images/header.png" alt="ヘッダー" class="head">
+           
+        </div>
+    </div>
+	
+    <div class="bg_glay">
+        <div class="container">
+    
+     
+           <img src="images/step.png" alt="" class="step">
+	
+<!-- PCのみ表示 -->
+<div class="btn_box">
+  <a href="https://lin.ee/p3kfFFKh">
+    <img class="btn pc-only" src="images/btn.png" alt="申し込みボタン">
+  </a>
+</div>
+			
+<!-- スマホのみ表示 -->
+<div class="btn_box02">
+<a href="https://lin.ee/p3kfFFKh"><img class="btn sp-only" src="images/btn_sp.png" alt="申し込みボタン"></a><br>
+</div>
+			
+        </div>
+    </div>
+	
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">利用規約</a>
+    <a href="#">特定商取引法に基づく表記</a>
+    <a href="#">プライバシーポリシー</a>
+  </div>
+  <p class="footer-license">大阪府公安委員会　第00000000000号</p>
+</footer>
+
+
+ 
+	
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const floatUps = document.querySelectorAll(".float-up");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    }, {
+      threshold: 0.1  // 画面に10%入ったら表示
+    });
+
+    floatUps.forEach(el => observer.observe(el));
+  });
+</script>
+
+<script>
+let modal = document.getElementById("modal");
+let closeBtn = document.getElementById("closeModal");
+
+// PC：マウスが画面上から離れたときに表示
+document.addEventListener('mouseleave', function (event) {
+  if (event.clientY <= 0 && window.innerWidth > 768 && modal.style.display !== "flex") {
+    modal.style.display = "flex";
+  }
+});
+
+// スマホ：50%スクロールしたら表示
+window.addEventListener('scroll', function () {
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (
+    scrollPosition / documentHeight > 0.5 &&
+    window.innerWidth <= 768 &&
+    modal.style.display !== "flex"
+  ) {
+    modal.style.display = "flex";
+  }
+});
+
+// 閉じるボタンで閉じるだけ（再び条件満たせばまた出る！）
+closeBtn.addEventListener("click", function () {
+  modal.style.display = "none";
+});
+</script>
+
+
+
+</body>
+
+</HTML>

@@ -1,0 +1,194 @@
+@charset "utf-8";
+
+
+
+.btn {
+	
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	border: 0px solid;
+	margin-bottom:60px;
+
+}
+
+.btn:hover{
+		opacity: 0.7;
+		transition: 0.5s;
+	}
+
+.btn2:hover{
+		opacity: 0.7;
+		transition: 0.5s;
+	}
+
+@media screen and (max-width: 780px) {
+.btn {
+	margin-bottom:60px;
+
+}	
+	
+ .btn2{
+       margin-bottom:60px;
+    }
+}
+
+
+/*  ボタン アニメーション
+---------------------------------------------------------- */
+@keyframes anime{
+10%{transform:scale(.95); opacity:1.5}
+80%{opacity:.1}to{transform:scale(1.2,1.2); opacity:0}
+}
+
+
+/*01*/
+.btn_box {
+  position: relative;
+  top: 40px;
+  width: 80%;
+  max-width: 1129px;
+  margin: 1% auto 0;
+  display: block; 
+  animation: poyon 2s infinite;
+  transition: 0.2s;
+  z-index: 1000;
+  text-align: center; 
+}
+
+
+.btn_box:before, .btn_box:after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 90%;
+    top: 0px;
+    left: 0;
+    border-radius:90px;
+    background:#7cce6a;
+}
+.btn_box:before {animation: anime 2s ease-out infinite;}
+.btn_box:after {animation: anime 2s ease-out 1s infinite;}
+/*/01*/
+
+
+/*02*/
+.btn_box02 {
+  position: relative;
+  top: 40px;
+  width: 90%;
+  max-width: 700px;
+  margin: 1% auto 0;
+  display: block; 
+  animation: poyon 2s infinite;
+  transition: 0.2s;
+  z-index: 1000;
+  text-align: center; 
+}
+
+
+.btn_box02:before, .btn_box02:after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 50%;
+    top: 0px;
+    left: 0;
+    border-radius:90px;
+    background:#7cce6a;
+}
+.btn_box02:before {animation: anime 2s ease-out infinite;}
+.btn_box02:after {animation: anime 2s ease-out 1s infinite;}
+/*/02*/
+
+/*03*/
+.btn_box03 {
+  position: relative;
+  top: 0px;
+  width: 90%;
+  max-width: 700px;
+  margin: 1% auto 0;
+  display: block; 
+  animation: poyon 2s infinite;
+  transition: 0.2s;
+  z-index: 1000;
+  text-align: center; 
+}
+
+
+.btn_box03:before, .btn_box03:after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 90%;
+    top: 0px;
+    left: 0;
+    border-radius:90px;
+    background:#7cce6a;
+}
+.btn_box03:before {animation: anime 2s ease-out infinite;}
+.btn_box03:after {animation: anime 2s ease-out 1s infinite;}
+/*/03*/
+
+/*04*/
+.btn_box04 {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  max-width: 700px;
+  margin: 1% auto 0;
+  display: block; 
+  animation: poyon 2s infinite;
+  transition: 0.2s;
+  z-index: 1000;
+  text-align: center; 
+}
+
+
+.btn_box04:before, .btn_box04:after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0;
+    border-radius:90px;
+    background:#7cce6a;
+}
+.btn_box04:before {animation: anime 2s ease-out infinite;}
+.btn_box04:after {animation: anime 2s ease-out 1s infinite;}
+/*/04*/
+
+/*05*/
+.btn_box05 {
+  position: relative;
+  top: 30px;
+  width: 90%;
+  max-width: 700px;
+  margin: 1% auto 0;
+  display: block; 
+  animation: poyon 2s infinite;
+  transition: 0.2s;
+  z-index: 1000;
+  text-align: center; 
+}
+
+
+.btn_box05:before, .btn_box05:after {
+    content: "";
+    position: absolute;
+    z-index: -10;
+    width: 100%;
+    height: 70%;
+    top: 20px;
+    left: 0;
+    border-radius:90px;
+    background:#7cce6a;
+}
+.btn_box05:before {animation: anime 2s ease-out infinite;}
+.btn_box05:after {animation: anime 2s ease-out 1s infinite;}
+/*/04*/

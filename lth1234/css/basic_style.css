@@ -1,0 +1,352 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap');
+* {
+	padding: 0;
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	list-style-type: none;
+	word-break: break-all;
+}
+
+html,body{
+	width: 100%;
+	height: 100%;
+}
+
+/* common
+---------------------------------------------*/
+* {margin:0;padding:0;}
+
+a:link,a:visited {
+	color: #fff;
+	text-decoration:underline;
+}
+a:hover,a:active {
+	color: #fff;
+	text-decoration:underline;
+}
+
+body {
+	position: relative;
+	font-family: 'Noto Sans JP', "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, sans-serif;
+	-webkit-text-size-adjust: 100%;
+
+	font-weight: normal;
+	font-feature-settings: "palt";
+	-webkit-font-feature-settings: "palt";
+	letter-spacing: 0.05em;
+	font-size: 3.7vw;
+	line-height: 6.8vw;
+	color: #272727;
+	
+	background: #fff;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	animation: fadeIn 2s ease 0s;
+}
+
+/* 初期状態ではスマホ用ヘッダーを非表示 */
+.header-pc {
+    display: none;
+}
+
+.header-sp {
+    display: block;
+    width: 100%; /* 画面幅いっぱいにする場合 */
+}
+
+ /* 表示領域が1001px以上の場合に適用するスタイル（パソコン向け） */
+@media screen and (min-width: 780px) {
+.pc{
+	display: block;
+}
+.sp{
+	display: none;
+}
+	
+}
+
+/* 画面幅が780px以上ならPC用を表示、スマホ用を非表示 */
+@media screen and (min-width: 780px) {
+    .header-pc {
+        display: block;
+        width: 100%; /* 画面幅いっぱいにする場合 */
+    }
+
+    .header-sp {
+        display: none;
+    }
+	
+	body {
+	font-size: 20px;
+	line-height: 36px;
+
+}
+}
+
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style-type: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a,
+a img {
+	color: #163c52;
+  text-decoration: none;
+}
+img{
+	display:block;
+	width: 100%;
+	height: auto;
+}
+
+.float-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.float-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.pc{
+	display: block;
+}
+.sp{
+	display: none;
+}
+	
+	
+}
+.yellow{
+	color: #fffc50!important;
+}
+.red{
+	color: #ea2218!important;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1010px; /* PCで最大1010pxに */
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    background-size: cover;
+}
+
+
+.bg_top {
+ background-color:#edf3fb;
+padding-bottom:0px;
+padding-top: 20px;
+}
+
+.bg_head {
+    background: linear-gradient(to right, #2cb28a, #0b6c70); /* ←ここが画像のグラデ色 */
+    padding-bottom: 30px;
+    padding-top: 0px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+.bg_glay {
+ background-color:#edf4f2;
+padding-bottom:0px;
+padding-top: 20px;
+}
+
+
+
+
+
+/* 画面サイズによって表示を切り替える */
+.pc-only {
+    display: block;
+}
+
+.sp-only {
+    display: none;
+}
+
+/* スマホサイズ（768px以下）の場合 */
+@media screen and (max-width: 780px) {
+    .pc-only {
+        display: none;
+    }
+
+    .sp-only {
+        display: block;
+    }
+}
+
+.logo {
+    width: 10%;
+    margin: 0% 0 2% 5%;  /* 上:5%、右:0、下:0、左:5%（左寄せ） */
+}
+
+/* スマホサイズ（768px以下）の場合 */
+@media screen and (max-width: 780px) {
+	
+    .logo {
+        width: 20%;
+		margin: 1% auto 5%; /* スマホ：上8%・左右auto(中央)・下5% */
+
+ 
+}
+}
+
+.head {
+    width: 90%;
+    margin: 5% auto 0;
+}
+
+
+
+.step {
+    width: 90%;
+    margin: 5% auto 0;
+}
+
+
+/* スマホ（768px以下） */
+@media screen and (max-width: 768px) {
+   .step{
+	width: 90%;
+	margin: 10% auto 0
+}
+	}
+
+
+
+
+
+.footer {
+  background: linear-gradient(to right, #006a4e, #017b77); /* 背景グラデ再現 */
+  color: white;
+  text-align: center;
+  padding: 20px 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;      /* ← 折り返さないように */
+  gap: 20px;               /* ← 3つの間の余白 */
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;     /* ← 長いテキストで改行しないように */
+}
+
+.footer-license {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* スマホ表示（768px以下）でも横並びにしたい場合 */
+@media screen and (max-width: 768px) {
+  .footer-links {
+    flex-wrap: nowrap;       /* ← ここもwrapではなくnowrapに */
+    justify-content: center;
+    gap: 16px;
+    font-size: 10px;
+  }
+
+  .footer-links a {
+    width: auto;             /* ← 固定幅は不要 */
+    font-size: 10px;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  width: auto;
+  max-width: 90%;
+}
+
+.popup-inner {
+  width: 100%;                /* はみ出し防止！ */
+  max-width: 700px;           /* PC最大サイズ */
+  aspect-ratio: 1 / 1;        /* 正方形比率（必要に応じて調整） */
+  background-image: url("../images/popup_bg.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 8%;
+  box-sizing: border-box;
+}
+
+
+
+.popup-btn img {
+  width: 80%; /* ボタンサイズ調整 */
+  max-width: 240px;
+  height: auto;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  font-size: 28px;
+  color: #fff;
+  background: #000;
+  border-radius: 50%;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .popup-inner {
+    padding-bottom: 12%; /* スマホ時の余白調整 */
+  }
+}
+
+
+
+
+
+
+
+
