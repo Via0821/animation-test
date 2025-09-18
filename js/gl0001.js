@@ -674,7 +674,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtnPC = document.getElementById("submitBtn");
   const submitBtnSP = document.getElementById("submitBtnSp");
 
-  // ✅ チェックされてる時だけ両方のボタンを有効にする
+  //  チェックされてる時だけ両方のボタンを有効にする
   checkbox.addEventListener("change", function () {
     const isChecked = checkbox.checked;
     submitBtnPC.disabled = !isChecked;
@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMsg.style.display = isChecked ? "none" : "block";
   });
 
-  // ✅ ボタンクリック時の共通処理
+  //  ボタンクリック時の共通処理
   function handleSubmit(e) {
     if (!checkbox.checked) {
       e.preventDefault();
