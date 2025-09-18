@@ -1,3 +1,5 @@
+//Final
+
 // Device performance detection
 function detectDevicePerformance() {
   const canvas = document.createElement("canvas");

@@ -17,6 +17,7 @@ body {
   align-items: center;
   overflow-x: hidden;
 }
+/* ---- Header ------ */
 header {
   width: 100%;
   display: flex;
