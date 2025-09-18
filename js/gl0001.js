@@ -1,42 +1,321 @@
-// メインアニメーション
-document.addEventListener("DOMContentLoaded", function () {
-  // スマートフォンとコインのアニメーション
-  const smartphone = document.querySelector(".smartphone");
-  const coin = document.querySelector(".coin");
+// Device performance detection
+function detectDevicePerformance() {
+  const canvas = document.createElement("canvas");
+  const gl =
+    canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
 
-  if (smartphone && coin) {
-    // アニメーション開始
-    setTimeout(() => {
-      smartphone.style.animation = "float 3s ease-in-out infinite";
-      coin.style.animation = "scalePulse 2s ease-in-out infinite";
-    }, 500);
+  // Check for WebGL support
+  const hasWebGL = !!gl;
+
+  // Check device memory (if available)
+  const deviceMemory = navigator.deviceMemory || 4; // Default to 4GB if not available
+
+  // Check hardware concurrency
+  const cores = navigator.hardwareConcurrency || 4;
+
+  // Check connection speed (if available)
+  const connection =
+    navigator.connection ||
+    navigator.mozConnection ||
+    navigator.webkitConnection;
+  const connectionSpeed = connection ? connection.effectiveType : "4g";
+
+  // Check if device prefers reduced motion
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // Performance score calculation
+  let performanceScore = 0;
+
+  if (hasWebGL) performanceScore += 2;
+  if (deviceMemory >= 4) performanceScore += 2;
+  if (deviceMemory >= 8) performanceScore += 1;
+  if (cores >= 4) performanceScore += 1;
+  if (cores >= 8) performanceScore += 1;
+  if (connectionSpeed === "4g") performanceScore += 1;
+  if (connectionSpeed === "3g") performanceScore -= 1;
+  if (connectionSpeed === "2g") performanceScore -= 2;
+
+  // Determine performance level
+  let performanceLevel = "high";
+  if (performanceScore <= 2 || prefersReducedMotion) {
+    performanceLevel = "low";
+  } else if (performanceScore <= 4) {
+    performanceLevel = "medium";
   }
 
-  // ヘッダーのスクロール処理
+  return {
+    level: performanceLevel,
+    score: performanceScore,
+    hasWebGL,
+    deviceMemory,
+    cores,
+    connectionSpeed,
+    prefersReducedMotion
+  };
+}
+
+// Adaptive animation settings based on device performance
+function getAnimationSettings(performance) {
+  const settings = {
+    low: {
+      duration: 0.3,
+      staggerDelay: 0.05,
+      useTransforms: false,
+      useOpacity: true,
+      useScale: false,
+      useHardwareAcceleration: false,
+      reduceMotion: true
+    },
+    medium: {
+      duration: 0.5,
+      staggerDelay: 0.1,
+      useTransforms: true,
+      useOpacity: true,
+      useScale: false,
+      useHardwareAcceleration: true,
+      reduceMotion: false
+    },
+    high: {
+      duration: 0.8,
+      staggerDelay: 0.2,
+      useTransforms: true,
+      useOpacity: true,
+      useScale: true,
+      useHardwareAcceleration: true,
+      reduceMotion: false
+    }
+  };
+
+  return settings[performance.level];
+}
+
+// Performance monitoring to detect frame drops
+function monitorPerformance() {
+  let frameCount = 0;
+  let lastTime = performance.now();
+  let droppedFrames = 0;
+
+  function checkFrame() {
+    frameCount++;
+    const currentTime = performance.now();
+    const deltaTime = currentTime - lastTime;
+
+    // If frame took longer than 16.67ms (60fps), it's a dropped frame
+    if (deltaTime > 16.67) {
+      droppedFrames++;
+    }
+
+    lastTime = currentTime;
+
+    // Check every 60 frames
+    if (frameCount % 60 === 0) {
+      const dropRate = droppedFrames / 60;
+
+      // If more than 20% frames are dropped, reduce animation complexity
+      if (dropRate > 0.2) {
+        console.log("High frame drop rate detected:", dropRate);
+        document.body.classList.add("performance-degraded");
+
+        // Reduce animation complexity
+        const animatedElements = document.querySelectorAll(
+          ".float-up, .stagger-up, .slide-from-right"
+        );
+        animatedElements.forEach((el) => {
+          el.classList.add("reduced-motion");
+          el.style.transition = "opacity 0.2s ease-out";
+        });
+      }
+
+      // Reset counters
+      droppedFrames = 0;
+    }
+
+    requestAnimationFrame(checkFrame);
+  }
+
+  requestAnimationFrame(checkFrame);
+}
+
+// Counter animation function
+function startCounterAnimation(priceTag) {
+  const digitContainers = priceTag.querySelectorAll(".digit-container");
+
+  // Animate each digit from right to left
+  digitContainers.forEach((container, index) => {
+    const targetValue = parseInt(container.dataset.target);
+
+    // Clear container and create rolling digits
+    container.innerHTML = "";
+    container.style.overflow = "hidden";
+    container.style.position = "relative";
+
+    // Create 20 digit elements for smooth rolling effect
+    for (let i = 0; i < 20; i++) {
+      const digitElement = document.createElement("div");
+      digitElement.className = "digit";
+      digitElement.textContent = i % 10; // 0-9 repeating
+      digitElement.style.position = "absolute";
+      digitElement.style.top = `${i * 1.2}em`;
+      digitElement.style.left = "0";
+      digitElement.style.width = "100%";
+      digitElement.style.height = "1.2em";
+      digitElement.style.display = "flex";
+      digitElement.style.alignItems = "center";
+      digitElement.style.justifyContent = "center";
+      digitElement.style.fontSize = "inherit";
+      digitElement.style.fontWeight = "inherit";
+      digitElement.style.color = "inherit";
+      container.appendChild(digitElement);
+    }
+
+    // Start rolling animation
+    setTimeout(() => {
+      // Find the target digit (first occurrence of target value)
+      const targetIndex = Array.from(container.children).findIndex(
+        (el, i) => parseInt(el.textContent) === targetValue && i >= 10
+      );
+
+      if (targetIndex !== -1) {
+        // Animate to target position
+        const targetElement = container.children[targetIndex];
+        const translateY = -(targetIndex * 1.2);
+
+        // Apply rolling animation
+        Array.from(container.children).forEach((el, i) => {
+          el.style.transition =
+            "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+          el.style.transform = `translateY(${
+            translateY + (i - targetIndex) * 1.2
+          }em)`;
+        });
+
+        // Hide non-target digits after animation
+        setTimeout(() => {
+          Array.from(container.children).forEach((el, i) => {
+            if (i !== targetIndex) {
+              el.style.opacity = "0";
+            }
+          });
+        }, 800);
+      }
+    }, 200 + (digitContainers.length - 1 - index) * 200); // Right to left timing
+  });
+}
+
+// Smartphone and price tag animation script
+document.addEventListener("DOMContentLoaded", function () {
+  // Detect device performance
+  const devicePerformance = detectDevicePerformance();
+  const animationSettings = getAnimationSettings(devicePerformance);
+
+  // Log performance info for debugging
+  console.log("Device Performance:", devicePerformance);
+  console.log("Animation Settings:", animationSettings);
+
+  // Apply performance-based classes to body
+  document.body.classList.add(`performance-${devicePerformance.level}`);
+  if (devicePerformance.prefersReducedMotion) {
+    document.body.classList.add("reduced-motion");
+  }
+
+  // Ensure all animation elements start in hidden state
+  const animationElements = document.querySelectorAll(
+    ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
+  );
+  animationElements.forEach((el) => {
+    el.style.visibility = "hidden";
+    el.style.opacity = "0";
+
+    // Apply performance-based optimizations
+    if (animationSettings.reduceMotion) {
+      el.classList.add("reduced-motion");
+    }
+    if (!animationSettings.useHardwareAcceleration) {
+      el.classList.add("no-hardware-accel");
+    }
+  });
+  function startAnimation() {
+    // 1. First, animate the smartphone images with fade-in effect from both sides
+    const phoneContainer = document.querySelector(".coin-animation");
+    const smartphone1 = document.querySelector(".smartphone1");
+    const smartphone2 = document.querySelector(".smartphone2");
+
+    if (phoneContainer) {
+      phoneContainer.classList.add("animate");
+    }
+
+    // Animate smartphone1 from right side with enhanced slide animation
+    if (smartphone1) {
+      setTimeout(() => {
+        smartphone1.classList.add("slide-animate");
+      }, 100);
+    }
+
+    // Animate smartphone2 from left side with enhanced slide animation
+    if (smartphone2) {
+      setTimeout(() => {
+        smartphone2.classList.add("slide-animate");
+      }, 300);
+    }
+
+    // 2. Wait for smartphones to appear, then animate price tags
+    setTimeout(() => {
+      const priceTags = document.querySelectorAll(".price");
+      // Both tags appear simultaneously with flexible animation
+      priceTags.forEach((tag) => {
+        tag.classList.add("animate");
+
+        // Start counter animation after price tag appears
+        setTimeout(() => {
+          startCounterAnimation(tag);
+        }, 200); // Small delay after price tag appears
+      });
+    }, 1300); // Wait for smartphones to complete (1200ms + 100ms buffer)
+
+    // 3. Wait for price tags to finish, then start coin animations
+    setTimeout(() => {
+      const coins = document.querySelectorAll(".coin--animated");
+
+      // Start all coin animations by adding the 'started' class
+      coins.forEach((coin) => {
+        coin.classList.add("started");
+      });
+    }, 3000); // Wait for price tags to complete (1300ms + 1500ms + 200ms buffer)
+  }
+
+  // Start animation once on page load
+  setTimeout(startAnimation, 500);
+
+  // Start performance monitoring
+  monitorPerformance();
+
+  // Header scroll effect
   const header = document.querySelector("header");
-  let lastScrollY = window.scrollY;
-  let ticking = false;
+  const mainSection = document.querySelector("main");
+  const boxContent = document.querySelector(".box-content");
 
   function handleScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        const currentScrollY = window.scrollY;
+    const scrollPosition = window.scrollY;
 
-        if (currentScrollY > 100) {
-          header.classList.add("scrolled");
-        } else {
-          header.classList.remove("scrolled");
-        }
+    // Hide header when scrolling down 200px
+    if (scrollPosition > 35) {
+      header.classList.add("hidden");
+    } else {
+      header.classList.remove("hidden");
+    }
 
-        if (currentScrollY > lastScrollY && currentScrollY > 200) {
-          header.classList.add("hidden");
-        } else {
-          header.classList.remove("hidden");
-        }
+    // Keep existing scrolled effect for main section
+    if (mainSection && boxContent) {
+      const mainBottom = mainSection.offsetTop + mainSection.offsetHeight;
 
-        lastScrollY = currentScrollY;
-        ticking = false;
-      });
+      // Trigger header effect when scrolling past the main section
+      if (scrollPosition > mainBottom - 100) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
     }
   }
 
@@ -46,181 +325,185 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial check
   handleScroll();
 
-  // Single optimized animation observer for all elements
+  // Track animated elements to prevent re-triggering
+  const animatedElements = new Set();
+
+  // Create a single observer that triggers animations only once
   const animationObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        const element = entry.target;
+        const elementId = element.id || element.className + Math.random();
+
+        // Check if element is already animated or currently animating
         if (
           entry.isIntersecting &&
-          !entry.target.classList.contains("is-visible") &&
-          !entry.target.classList.contains("animation-completed")
+          !element.classList.contains("is-visible") &&
+          !element.classList.contains("animation-completed") &&
+          !animatedElements.has(elementId)
         ) {
+          // Mark as being animated
+          animatedElements.add(elementId);
+
           // Use requestAnimationFrame for smoother animation triggering
           requestAnimationFrame(() => {
-            entry.target.classList.add("is-visible");
+            element.classList.add("is-visible");
+            element.style.visibility = "visible";
 
-            // Mark as completed after animation duration based on element type
-            const duration = getAnimationDuration(entry.target);
+            // Apply performance-based animation duration
+            const duration = animationSettings.duration * 1000;
+
+            // Mark as completed after animation duration
             setTimeout(() => {
-              entry.target.classList.add("animation-completed");
+              element.classList.add("animation-completed");
+              // Remove the is-visible class to prevent conflicts
+              element.classList.remove("is-visible");
+              // Force final state based on performance settings
+              element.style.opacity = "1";
+              if (animationSettings.useTransforms) {
+                element.style.transform = "translate3d(0, 0, 0)";
+                element.style.webkitTransform = "translate3d(0, 0, 0)";
+              }
             }, duration);
           });
 
           // Stop observing this element immediately after animation is triggered
-          animationObserver.unobserve(entry.target);
+          animationObserver.unobserve(element);
         }
       });
     },
     {
       threshold: 0.15, // Trigger when 15% of the element is visible
-      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+      rootMargin: "0px 0px -50px 0px" // Larger margin to prevent re-triggering
     }
   );
 
-  // Get animation duration based on element type
-  function getAnimationDuration(element) {
-    if (
-      element.classList.contains("section-title") ||
-      element.classList.contains("about") ||
-      element.classList.contains("ad-panel") ||
-      element.classList.contains("mobile-ad-panel")
-    ) {
-      return 1500;
-    } else if (element.classList.contains("step-item")) {
-      return 1800;
-    } else {
-      return 1200; // Default for recommend-item, iphone-item, evi-item, testimonial-card, qa-item
-    }
+  // Wait for page to be fully loaded before starting animations
+  if (document.readyState === "complete") {
+    initializeAnimations();
+  } else {
+    window.addEventListener("load", initializeAnimations);
   }
 
-  // Initialize all animations with single observer
-  function initializeAllAnimations() {
-    // Section titles
-    const sectionTitles = document.querySelectorAll(".section-title");
-    sectionTitles.forEach((title) => {
-      animationObserver.observe(title);
+  function initializeAnimations() {
+    // Check if mobile device for optimization
+    const isMobile =
+      window.innerWidth <= 768 ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+
+    // Float-up animation on scroll
+    const floatUps = document.querySelectorAll(".float-up");
+    floatUps.forEach((el) => {
+      // Add mobile optimization class
+      if (isMobile) {
+        el.classList.add("mobile-optimized");
+      }
+      animationObserver.observe(el);
     });
 
-    // Recommend items
-    const recommendItems = document.querySelectorAll(".recommend-item");
-    recommendItems.forEach((item) => {
-      // Ensure items start in hidden state
-      item.style.visibility = "hidden";
-      item.style.opacity = "0";
-      item.style.transform = "translate3d(0, 40px, 0)";
-
-      animationObserver.observe(item);
+    // Observe all stagger-up elements (just like float-up)
+    const staggerUps = document.querySelectorAll(".stagger-up");
+    staggerUps.forEach((el) => {
+      if (isMobile) {
+        el.classList.add("mobile-optimized");
+      }
+      animationObserver.observe(el);
     });
 
-    // About images
-    const aboutImages = document.querySelectorAll(".about");
-    aboutImages.forEach((image) => {
-      animationObserver.observe(image);
-    });
-
-    // iPhone items
+    // iPhone items slide-in animation
     const iphoneItems = document.querySelectorAll(".iphone-item");
     iphoneItems.forEach((item) => {
-      // Ensure items start in hidden state
-      item.style.visibility = "hidden";
-      item.style.opacity = "0";
-      item.style.transform = "translate3d(60px, 0, 0)";
-
+      item.classList.add("slide-from-right");
+      if (isMobile) {
+        item.classList.add("mobile-optimized");
+      }
       animationObserver.observe(item);
     });
 
-    // Evi items
+    // Evidence items slide from right animation
     const eviItems = document.querySelectorAll(".evi-item");
     eviItems.forEach((item) => {
-      // Ensure items start in hidden state
-      item.style.visibility = "hidden";
-      item.style.opacity = "0";
-      item.style.transform = "translate3d(60px, 0, 0)";
-
+      item.classList.add("slide-from-right");
+      if (isMobile) {
+        item.classList.add("mobile-optimized");
+      }
       animationObserver.observe(item);
     });
 
-    // Ad panels
-    const adPanels = document.querySelectorAll(".ad-panel");
-    adPanels.forEach((panel) => {
-      animationObserver.observe(panel);
-    });
-
-    // Mobile ad panels
-    const mobileAdPanels = document.querySelectorAll(".mobile-ad-panel");
-    mobileAdPanels.forEach((panel) => {
-      animationObserver.observe(panel);
-    });
-
-    // Step items
+    // Step items float-up animation
     const stepItems = document.querySelectorAll(".step-item");
     stepItems.forEach((item) => {
+      item.classList.add("step-float-up");
+      if (isMobile) {
+        item.classList.add("mobile-optimized");
+      }
       animationObserver.observe(item);
     });
 
-    // Testimonial cards
+    // Testimonial cards float-up animation
     const testimonialCards = document.querySelectorAll(".testimonial-card");
     testimonialCards.forEach((card) => {
-      // Ensure cards start in hidden state
-      card.style.visibility = "hidden";
-      card.style.opacity = "0";
-      card.style.transform = "translate3d(0, 40px, 0)";
-
+      card.classList.add("testimonial-float-up");
+      if (isMobile) {
+        card.classList.add("mobile-optimized");
+      }
       animationObserver.observe(card);
     });
 
-    // QA items
+    // Q&A items float-up animation
     const qaItems = document.querySelectorAll(".qa-item");
     qaItems.forEach((item) => {
-      // Ensure items start in hidden state
-      item.style.visibility = "hidden";
-      item.style.opacity = "0";
-      item.style.transform = "translate3d(0, 40px, 0)";
-
+      item.classList.add("qa-float-up");
+      if (isMobile) {
+        item.classList.add("mobile-optimized");
+      }
       animationObserver.observe(item);
     });
-  }
 
-  // Wait for page to be fully loaded before starting animations
-  if (document.readyState === "complete") {
-    initializeAllAnimations();
-  } else {
-    window.addEventListener("load", () => {
-      initializeAllAnimations();
+    // Mobile ad panels float-up animation
+    const mobileAdPanels = document.querySelectorAll(".mobile-ad-panel");
+    mobileAdPanels.forEach((panel) => {
+      panel.classList.add("mobile-ad-float-up");
+      if (isMobile) {
+        panel.classList.add("mobile-optimized");
+      }
+      animationObserver.observe(panel);
+    });
+
+    // Ad panels (PC version) float-up animation
+    const adPanels = document.querySelectorAll(".ad-panel");
+    adPanels.forEach((panel) => {
+      panel.classList.add("float-up");
+      if (isMobile) {
+        panel.classList.add("mobile-optimized");
+      }
+      animationObserver.observe(panel);
+    });
+
+    // Ad text elements stagger animation
+    const adTexts = document.querySelectorAll(".ad-text");
+    adTexts.forEach((text, index) => {
+      text.classList.add("stagger-up");
+      if (isMobile) {
+        text.classList.add("mobile-optimized");
+      }
+      // Use performance-based stagger delay
+      text.style.setProperty(
+        "--stagger-delay",
+        `${index * animationSettings.staggerDelay}s`
+      );
+      animationObserver.observe(text);
     });
   }
-});
 
-// グローバル
+  // Ad panel images scale animation (integrated with main observer)
+  const adImages = document.querySelectorAll(".ad-image img");
+  adImages.forEach((img) => {
+    img.classList.add("ad-scale-up");
 
-// フォーム送信処理
-function submitForm() {
-  const form = document.getElementById("contactForm");
-  if (form) {
-    // フォームの送信処理をここに追加
-    console.log("フォームが送信されました");
-    // 実際の送信処理を実装してください
-  }
-}
-
-// スムーススクロール
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
-  }
-}
-
-// モバイルメニューの開閉
-function toggleMobileMenu() {
-  const mobileMenu = document.getElementById("mobileMenu");
-  if (mobileMenu) {
-    mobileMenu.classList.toggle("active");
-  }
-}
-
-// ページ読み込み完了時の処理
-window.addEventListener("load", function () {
-  // ページ読み込み完了後の処理をここに追加
-  console.log("ページの読み込みが完了しました");
+    // Use the main animation observer for consistency
+    animationObserver.observe(img);
+  });
 });
