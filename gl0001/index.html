@@ -337,7 +337,7 @@
 	
     <div class="bg_white">
       <div class="container">
-        <div class="bg_white-title float-up">
+        <div class="bg_white-title">
           <p>モノリバのリースバックで<br/>iphoneを最高額で売る！</p>
         </div>   
         <div class="bg_white-badge">
@@ -363,7 +363,7 @@
           <div class="section-tip">
             <p>CONSERNS</p>
           </div>
-          <div class="section-title float-up">
+          <div class="section-title">
             <p>こんなお悩みありませんか?</p>
             <div class="title-img">
               <img src="../images/title-img.png" alt="">
@@ -395,12 +395,12 @@
         <div class="bubble">
           そんなお悩み、モノリバにお任せください！
         </div>
-        <div class="section-title float-up">
+        <div class="section-title">
         <p>モノリバが選ばれる6つのPOINT</p>
         </div>
          <div class="recommend">
            <div class="recommend-grid">
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">01</div>
                <div class="recommend-icon">
                  <img src="../images/point01.png" alt="査定アイコン">
@@ -408,7 +408,7 @@
                <div class="recommend-text">最短30秒での<br/>無料査定</div>
              </div>
              
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">02</div>
                <div class="recommend-icon">
                  <img src="../images/point02.png" alt="振込アイコン">
@@ -416,7 +416,7 @@
                <div class="recommend-text">振込まで<br/>最短5分</div>
              </div>
              
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">03</div>
                <div class="recommend-icon">
                  <img src="../images/point03.png" alt="高価買取アイコン">
@@ -424,7 +424,7 @@
                <div class="recommend-text">他社より<br/>高価買取</div>
              </div>
              
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">04</div>
                <div class="recommend-icon">
                  <img src="../images/point04.png" alt="LINEアイコン">
@@ -432,7 +432,7 @@
                <div class="recommend-text">LINEで完結</div>
              </div>
              
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">05</div>
                <div class="recommend-icon">
                  <img src="../images/point05.png" alt="iPhoneアイコン">
@@ -440,7 +440,7 @@
                <div class="recommend-text">iphoneは<br/>そのまま手元に</div>
              </div>
              
-             <div class="recommend-item stagger-up">
+             <div class="recommend-item">
                <div class="recommend-number">06</div>
                <div class="recommend-icon">
                  <img src="../images/point06.png" alt="クレカアイコン">
@@ -458,7 +458,7 @@
           <div class="bubble">
             まずはモノリバで無料査定相談!
           </div>
-          <div class="section-title float-up">
+          <div class="section-title">
             <p>どんなことでもお気軽にご相談ください</p>
           </div>
         </div>
@@ -477,10 +477,10 @@
     <div class="bg_about">
       <div class="container">
         <!-- PCのみ表示 -->
-        <img src="../images/about.png" alt="" class="about pc-only float-up">
+        <img src="../images/about.png" alt="" class="about pc-only">
     
         <!-- スマホのみ表示 -->
-        <img src="../images/about_sp.png" alt="" class="about sp-only float-up">
+        <img src="../images/about_sp.png" alt="" class="about sp-only">
       </div>
     </div>
 	
@@ -584,7 +584,7 @@
         <p>PERCHASED<br/>ITEM</p>
       </div>
       <div class="container">
-        <div class="section-title float-up">
+        <div class="section-title">
         <p>買取商品一覧</p>
         </div>
         <div class="buy-grid">
@@ -737,7 +737,7 @@
         <p>PERCHASED<br/>HISTORY</p>
       </div>
       <div class="container">
-        <div class="section-title float-up">
+        <div class="section-title">
           <p>買取実績</p>
         </div>
         <div class="evi-grid">
@@ -789,7 +789,7 @@
         <p>ADVANTAGE</p>
       </div>
       <div class="container2">
-        <div class="section-title float-up">
+        <div class="section-title">
           <div class="drop-bubble">
             問い合わせ<br>多数!<br>大好評!
           </div>
@@ -878,7 +878,7 @@
         <p>HOW TO USE</p>
       </div>
       <div class="container">
-        <div class="section-title float-up">
+        <div class="section-title">
           <p>簡単4STEP!</p>
           <p>モノリバのご利用方法</p>
         </div>
@@ -936,7 +936,7 @@
         <p>CUSTOMER<br/>REVIEWS</p>
       </div>
       <div class="container">
-        <div class="section-title float-up">
+        <div class="section-title">
           <p>お客様の声</p>
         </div>
         <div class="voice-content">
@@ -1024,7 +1024,7 @@
         <p>FAQ</p>
       </div>
       <div class="container">
-        <div class="section-title float-up">
+        <div class="section-title">
           <p>よくあるご質問</p>
         </div>
         <div class="qa-content">
@@ -1210,132 +1210,6 @@
   </div>
   <p class="footer-license">大阪府公安委員会　第62112R072159号</p>
 </footer>
-
-  <script>
-  // グローバル
-  let buttonPushed = false;
-
-  function onIframeLoaded() {
-    if (buttonPushed) {
-      window.location.href = "https://monoriba.com/lp/lth1234/";
-    }
-  }
-
-  function generateUUIDv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = (c === 'x') ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-
-  function toggleOtherInput() {
-    const jobSelect = document.getElementById("job");
-    const otherJobContainer = document.getElementById("otherJobContainer");
-    const otherJobInput = document.getElementById("otherJob");
-
-    if (jobSelect.value === "__other_option__") {
-      otherJobContainer.style.display = "block";
-      otherJobInput.required = true;
-    } else {
-      otherJobContainer.style.display = "none";
-      otherJobInput.required = false;
-      otherJobInput.value = "";
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    // UUID 埋め込み
-    const uuid = generateUUIDv4();
-    document.getElementById("uuidInput").value = uuid;
-
-    const form = document.getElementById("myForm");
-    const checkbox = document.getElementById("termsCheckbox");
-    const errorMsg = document.getElementById("termsError");
-    const submitBtnPC = document.getElementById("submitBtn");
-    const submitBtnSP = document.getElementById("submitBtnSp");
-
-    // 初期状態
-    submitBtnPC.disabled = !checkbox.checked;
-    submitBtnSP.disabled = !checkbox.checked;
-
-    // 規約チェックでボタン有効化
-    checkbox.addEventListener("change", function () {
-      const isChecked = checkbox.checked;
-      submitBtnPC.disabled = !isChecked;
-      submitBtnSP.disabled = !isChecked;
-      errorMsg.style.display = isChecked ? "none" : "block";
-    });
-
-    // 送信共通処理
-    function handleSubmit(e) {
-      if (!checkbox.checked) {
-        e.preventDefault();
-        errorMsg.style.display = "block";
-        return;
-      }
-      if (form.checkValidity()) {
-        errorMsg.style.display = "none";
-        // ★ここが重要：フラグを立ててから送信
-        buttonPushed = true;
-        form.submit(); // target="resultFrame" に送信
-      } else {
-        e.preventDefault();
-        form.reportValidity();
-      }
-    }
-
-    submitBtnPC.addEventListener("click", handleSubmit);
-    submitBtnSP.addEventListener("click", handleSubmit);
-  });
-</script>
-
-  
-	
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("myForm");
-    const checkbox = document.getElementById("termsCheckbox");
-    const errorMsg = document.getElementById("termsError");
-
-    const submitBtnPC = document.getElementById("submitBtn");
-    const submitBtnSP = document.getElementById("submitBtnSp");
-
-    // ✅ チェックされてる時だけ両方のボタンを有効にする
-    checkbox.addEventListener("change", function () {
-      const isChecked = checkbox.checked;
-      submitBtnPC.disabled = !isChecked;
-      submitBtnSP.disabled = !isChecked;
-      errorMsg.style.display = isChecked ? "none" : "block";
-    });
-
-    // ✅ ボタンクリック時の共通処理
-    function handleSubmit(e) {
-      if (!checkbox.checked) {
-        e.preventDefault();
-        errorMsg.style.display = "block";
-        return;
-      }
-
-      if (form.checkValidity()) {
-        errorMsg.style.display = "none";
-        form.submit();
-      } else {
-        e.preventDefault();
-        form.reportValidity();
-      }
-    }
-
-    // PC・SP 両方にイベント登録
-    submitBtnPC.addEventListener("click", handleSubmit);
-    submitBtnSP.addEventListener("click", handleSubmit);
-  });
-</script>
-
-
-
-<!-- Animation is now handled by gl0001.js -->
-
 <script src="../js/gl0001.js"></script>
 </body>
 

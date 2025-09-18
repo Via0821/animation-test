@@ -40,244 +40,346 @@ header.scrolled {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Float-up animation styles */
-.float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+/* Section title floating animation */
+.section-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
-  visibility: hidden;
+}
+
+.section-title.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Recommend items floating animation */
+.recommend-item {
+  opacity: 0 !important;
+  transform: translate3d(0, 40px, 0) !important;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-}
-
-.float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-  visibility: visible !important;
-}
-
-.float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-  transition: none !important;
-  will-change: auto;
-  visibility: visible !important;
-  pointer-events: auto;
-}
-
-/* Flexible staggered animation system */
-.stagger-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
   visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
-.stagger-up.is-visible {
+.recommend-item.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
   visibility: visible !important;
 }
 
-.stagger-up.animation-completed {
+/* Staggered delays for recommend items */
+.recommend-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.recommend-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.recommend-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.recommend-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+.recommend-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+.recommend-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Prevent animation re-triggering and flickering */
+.recommend-item.animation-completed {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   will-change: auto;
   visibility: visible !important;
 }
 
-/* Staggered delays for up to 20 items */
-.stagger-up:nth-child(1) { transition-delay: 0.2s; }
-.stagger-up:nth-child(2) { transition-delay: 0.4s; }
-.stagger-up:nth-child(3) { transition-delay: 0.6s; }
-.stagger-up:nth-child(4) { transition-delay: 0.8s; }
-.stagger-up:nth-child(5) { transition-delay: 1.0s; }
-.stagger-up:nth-child(6) { transition-delay: 1.2s; }
-.stagger-up:nth-child(7) { transition-delay: 1.4s; }
-.stagger-up:nth-child(8) { transition-delay: 1.6s; }
-.stagger-up:nth-child(9) { transition-delay: 1.8s; }
-.stagger-up:nth-child(10) { transition-delay: 2.0s; }
-.stagger-up:nth-child(11) { transition-delay: 2.2s; }
-.stagger-up:nth-child(12) { transition-delay: 2.4s; }
-.stagger-up:nth-child(13) { transition-delay: 2.6s; }
-.stagger-up:nth-child(14) { transition-delay: 2.8s; }
-.stagger-up:nth-child(15) { transition-delay: 3.0s; }
-.stagger-up:nth-child(16) { transition-delay: 3.2s; }
-.stagger-up:nth-child(17) { transition-delay: 3.4s; }
-.stagger-up:nth-child(18) { transition-delay: 3.6s; }
-.stagger-up:nth-child(19) { transition-delay: 3.8s; }
-.stagger-up:nth-child(20) { transition-delay: 4.0s; }
-
-/* Custom stagger delay support */
-.stagger-up[style*="--stagger-delay"] {
-  transition-delay: var(--stagger-delay, 0.2s) !important;
+/* About images floating animation */
+.about {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* iPhone items slide-in from right animation */
-.slide-from-right {
+.about.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* iPhone items sliding from right animation */
+.iphone-item {
   opacity: 0 !important;
   transform: translate3d(60px, 0, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
-.slide-from-right.is-visible {
+.iphone-item.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
   visibility: visible !important;
 }
 
-.slide-from-right.animation-completed {
+/* Staggered delays for iPhone items */
+.iphone-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.iphone-item:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.iphone-item:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.iphone-item:nth-child(4) {
+  transition-delay: 0.25s;
+}
+.iphone-item:nth-child(5) {
+  transition-delay: 0.3s;
+}
+.iphone-item:nth-child(6) {
+  transition-delay: 0.35s;
+}
+.iphone-item:nth-child(7) {
+  transition-delay: 0.4s;
+}
+.iphone-item:nth-child(8) {
+  transition-delay: 0.45s;
+}
+.iphone-item:nth-child(9) {
+  transition-delay: 0.5s;
+}
+.iphone-item:nth-child(10) {
+  transition-delay: 0.55s;
+}
+.iphone-item:nth-child(11) {
+  transition-delay: 0.6s;
+}
+.iphone-item:nth-child(12) {
+  transition-delay: 0.65s;
+}
+.iphone-item:nth-child(13) {
+  transition-delay: 0.7s;
+}
+.iphone-item:nth-child(14) {
+  transition-delay: 0.75s;
+}
+.iphone-item:nth-child(15) {
+  transition-delay: 0.8s;
+}
+.iphone-item:nth-child(16) {
+  transition-delay: 0.85s;
+}
+.iphone-item:nth-child(17) {
+  transition-delay: 0.9s;
+}
+.iphone-item:nth-child(18) {
+  transition-delay: 0.95s;
+}
+.iphone-item:nth-child(19) {
+  transition-delay: 1s;
+}
+.iphone-item:nth-child(20) {
+  transition-delay: 1.05s;
+}
+
+/* Prevent animation re-triggering and flickering */
+.iphone-item.animation-completed {
   opacity: 1 !important;
-  transform: translateX(0) !important;
+  transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   will-change: auto;
   visibility: visible !important;
 }
 
-
-/* Ad panel images scale animation */
-.ad-scale-up {
-  transform: scale(1);
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.ad-scale-up.is-visible {
-  animation: scalePulse 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-.ad-scale-up.animation-completed {
-  transform: scale(1);
-  animation: none;
-  transition: none;
-}
-
-@keyframes scalePulse {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Step items float-up animation */
-.step-float-up {
+/* Evi items sliding from right animation */
+.evi-item {
   opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  transform: translate3d(60px, 0, 0) !important;
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  visibility: hidden;
+}
+
+.evi-item.is-visible {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  visibility: visible !important;
+}
+
+/* Staggered delays for evi items */
+.evi-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.evi-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.evi-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.evi-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+.evi-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+.evi-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Prevent animation re-triggering and flickering */
+.evi-item.animation-completed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: none !important;
+  will-change: auto;
+  visibility: visible !important;
+}
+
+/* Ad panel floating upward animation */
+.ad-panel {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.step-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
+.ad-panel.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.step-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Testimonial cards float-up animation */
-.testimonial-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+/* Mobile ad panel floating upward animation */
+.mobile-ad-panel {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.testimonial-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
+.mobile-ad-panel.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.testimonial-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Q&A items float-up animation */
-.qa-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+/* Step item floating upward animation */
+.step-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-.qa-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
+.step-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.qa-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Mobile ad panels float-up animation */
-.mobile-ad-float-up {
+/* Testimonial card floating upward animation */
+.testimonial-card {
   opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  transform: translate3d(0, 40px, 0) !important;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  visibility: hidden;
 }
 
-.mobile-ad-float-up.is-visible {
+.testimonial-card.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
+  visibility: visible !important;
 }
 
-.mobile-ad-float-up.animation-completed {
+/* Staggered delays for testimonial cards */
+.testimonial-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.testimonial-card:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.testimonial-card:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.testimonial-card:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+/* Prevent animation re-triggering and flickering */
+.testimonial-card.animation-completed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   will-change: auto;
+  visibility: visible !important;
 }
 
-/* Prevent animation re-triggering */
-.animation-completed {
-  opacity: 1 !important;
-  transform: translateY(0) translateX(0) scale(1) !important;
-  transition: none !important;
-  animation: none !important;
-  pointer-events: auto;
-  will-change: auto;
+/* QA item floating upward animation */
+.qa-item {
+  opacity: 0 !important;
+  transform: translate3d(0, 40px, 0) !important;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  visibility: hidden;
 }
 
-/* Ensure completed animations stay in final state */
-.animation-completed.is-visible {
+.qa-item.is-visible {
   opacity: 1 !important;
-  transform: translateY(0) translateX(0) scale(1) !important;
-  transition: none !important;
-  animation: none !important;
-  pointer-events: auto;
-  will-change: auto;
+  transform: translate3d(0, 0, 0) !important;
+  visibility: visible !important;
 }
+
+/* Staggered delays for QA items */
+.qa-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.qa-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.qa-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.qa-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+.qa-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+.qa-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Prevent animation re-triggering and flickering */
+.qa-item.animation-completed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: none !important;
+  will-change: auto;
+  visibility: visible !important;
+}
+
+/* Scroll animations removed - keeping only main animation */
 .header-container {
   width: 100%;
   max-width: 1101px;
@@ -584,7 +686,6 @@ main {
 .price-digits {
   display: inline-flex;
   align-items: center;
-
 }
 
 /* Digit container for overflow control */
@@ -921,7 +1022,7 @@ main {
   z-index: 1;
 }
 .bg_point {
-  background-color: #EEF0F0;
+  background-color: #eef0f0;
 }
 
 .bg_point .container {
@@ -1230,15 +1331,15 @@ main {
 
 /* Responsive design for buy section */
 
-@media (max-width: 480px) {  
+@media (max-width: 480px) {
   .iphone-item {
     padding: 12px 8px;
   }
-  
+
   .iphone-image {
     height: 80px;
   }
-  
+
   .iphone-name {
     font-size: 11px;
   }
@@ -1699,7 +1800,7 @@ main {
     display: block;
     padding: 40px 20px;
   }
-  
+
   .mobile-ad-panels {
     display: flex;
     flex-direction: column;
@@ -1707,7 +1808,7 @@ main {
     max-width: 100%;
     margin: 0 auto;
   }
-  
+
   .mobile-ad-panel {
     background-color: #ffffff;
     border-radius: 15px;
@@ -1715,19 +1816,19 @@ main {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .mobile-ad-panel:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
-  
+
   .panel-image {
     position: relative;
     width: 100%;
     height: 200px;
     overflow: hidden;
   }
-  
+
   .panel-image img {
     width: 100%;
     height: 100%;
@@ -1735,11 +1836,11 @@ main {
     filter: brightness(0.7);
     transition: transform 0.3s ease;
   }
-  
+
   .mobile-ad-panel:hover .panel-image img {
     transform: scale(1.05);
   }
-  
+
   .panel-overlay {
     position: absolute;
     top: 0;
@@ -1753,7 +1854,7 @@ main {
     padding: 20px;
     text-align: center;
   }
-  
+
   .panel-overlay h3 {
     color: #ffffff;
     font-size: 24px;
@@ -1762,20 +1863,20 @@ main {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     line-height: 1.2;
   }
-  
+
   .panel-overlay h3:first-child {
     margin-bottom: 5px;
   }
-  
+
   /* Specific styling for each panel */
   .mobile-ad-panel:nth-child(1) .panel-overlay h3 {
     color: #ffffff;
   }
-  
+
   .mobile-ad-panel:nth-child(2) .panel-overlay h3 {
     color: #ffffff;
   }
-  
+
   .mobile-ad-panel:nth-child(3) .panel-overlay h3 {
     color: #ffffff;
   }
@@ -1931,15 +2032,15 @@ main {
     gap: 35px;
     padding: 0 20px;
   }
-  
+
   .recommend-item {
     padding: 25px 15px;
   }
-  
+
   .recommend-number {
     font-size: 40px;
   }
-  
+
   .recommend-icon {
     height: 55px;
     margin-bottom: 15px;
@@ -1961,26 +2062,26 @@ main {
   .bg_buy {
     padding: 60px 0;
   }
-  
+
   .bg_buy .section-title p {
     font-size: 32px;
   }
-  
+
   .buy-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     padding: 0 20px;
   }
-  
+
   .iphone-item {
     padding: 10px 20px;
   }
-  
+
   .iphone-image {
     height: 100px;
     margin-bottom: 10px;
   }
-  
+
   .iphone-name {
     font-size: 12px;
   }
@@ -1989,7 +2090,7 @@ main {
     padding: 50px 70px;
     gap: 60px;
   }
-  
+
   .step-number {
     font-size: 36px;
   }
@@ -1997,81 +2098,81 @@ main {
   .step-content h3 {
     font-size: 22px;
   }
-  
+
   .step-content p {
     font-size: 14px;
   }
-  
+
   .step-highlight {
     font-size: 16px !important;
   }
   .bg_qa {
     padding: 60px 0;
   }
-  
+
   .bg_qa .section-title p {
     font-size: 32px;
   }
-  
+
   .qa-content {
     padding: 0 15px;
   }
-  
+
   .qa-item {
     padding: 25px 20px;
     margin-bottom: 25px;
   }
-  
+
   .qa-indicator {
     width: 35px;
     height: 35px;
     font-size: 18px;
     margin-right: 15px;
   }
-  
+
   .qa-text {
     font-size: 16px;
   }
-  
+
   .qa-divider {
     margin: 15px 0;
   }
   .bg_voice {
     padding: 60px 0;
   }
-  
+
   .bg_voice .section-title p {
     font-size: 32px;
   }
-  
+
   .voice-content {
     gap: 25px;
     padding: 0 15px;
   }
-  
+
   .testimonial-card {
     padding: 25px 20px;
   }
-  
+
   .customer-image {
     margin-bottom: 15px;
   }
-  
+
   .star {
     font-size: 18px;
   }
-  
+
   .customer-info {
     font-size: 14px;
     padding: 6px 12px;
     margin-bottom: 15px;
   }
-  
+
   .testimonial-text {
     font-size: 14px;
     padding: 15px;
   }
-  
+
   .testimonial-text::before {
     font-size: 40px;
     top: -5px;
@@ -2080,47 +2181,47 @@ main {
   .bg_evi {
     padding: 60px 0;
   }
-  
+
   .bg_evi .section-title p {
     font-size: 32px;
   }
-  
+
   .evi-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 0 20px;
   }
-  
+
   .evi-item {
     padding: 25px 15px;
   }
-  
+
   .evi-iphone-image {
     height: 100px;
     margin-bottom: 15px;
   }
-  
+
   .evi-iphone-image img {
     max-width: 60px;
     max-height: 80px;
   }
-  
+
   .evi-model-name {
     font-size: 16px;
   }
-  
+
   .evi-storage {
     font-size: 14px;
   }
-  
+
   .evi-price {
     font-size: 20px;
   }
-  
+
   .evi-check-text {
     font-size: 24px;
   }
-  
+
   .evi-disclaimer {
     font-size: 12px;
     padding: 8px 15px;
@@ -2128,37 +2229,37 @@ main {
   .bg_about {
     padding: 0;
   }
-  
+
   .about-title {
     font-size: 32px;
   }
-  
+
   .about-description {
     font-size: 16px;
   }
-  
+
   .process-box {
     padding: 30px 20px;
   }
-  
+
   .process-flow {
     flex-direction: column;
     gap: 20px;
   }
-  
+
   .process-arrows {
     order: 2;
   }
-  
+
   .arrow-group {
     flex-direction: row;
     gap: 20px;
   }
-  
+
   .arrow {
     flex-direction: column;
   }
-  
+
   .entity-icon {
     width: 130px;
     height: 130px;
@@ -2167,17 +2268,17 @@ main {
   .arrow-text {
     font-size: 18px;
   }
-  
+
   .entity-box {
     padding: 15px 20px;
     font-size: 16px;
   }
-  
+
   .highlight-text {
     font-size: 22px;
     line-height: 1.6;
   }
-  
+
   .process-separator span {
     font-size: 22px;
   }
@@ -2189,7 +2290,7 @@ main {
   .about-disclaimer {
     padding: 20px;
   }
-  
+
   .about-disclaimer p {
     font-size: 13px;
   }
@@ -2517,7 +2618,7 @@ main {
     height: 40px;
   }
   .bg_white-title {
-    font-size: 22px; 
+    font-size: 22px;
   }
   .section-title {
     font-size: 32px;
@@ -2589,22 +2690,21 @@ main {
   }
 }
 @media (max-width: 650px) {
-
   .coin--animated,
   .coin--animated .coin-img {
-  animation-duration: var(--coin-duration, 2.7s);
+    animation-duration: var(--coin-duration, 2.7s);
   }
 
   .coin--animated {
     animation-name: unset;
     animation-name: coin-x-axis-sp;
   }
-  
+
   .coin--animated .coin-img {
     animation-name: unset;
     animation-name: coin-y-axis-sp;
   }
-  @keyframes coin-x-axis-sp{
+  @keyframes coin-x-axis-sp {
     0% {
       opacity: 1;
       transform: scale(0.1);
@@ -2626,7 +2726,7 @@ main {
       transform: translateX(var(--coin-to-x));
     }
   }
-  
+
   @keyframes coin-y-axis-sp {
     0% {
       opacity: 0;

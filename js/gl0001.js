@@ -1,16 +1,16 @@
 // Counter animation function
 function startCounterAnimation(priceTag) {
   const digitContainers = priceTag.querySelectorAll(".digit-container");
-  
+
   // Animate each digit from right to left
   digitContainers.forEach((container, index) => {
     const targetValue = parseInt(container.dataset.target);
-    
+
     // Clear container and create rolling digits
     container.innerHTML = "";
     container.style.overflow = "hidden";
     container.style.position = "relative";
-    
+
     // Create 20 digit elements for smooth rolling effect
     for (let i = 0; i < 20; i++) {
       const digitElement = document.createElement("div");
@@ -29,25 +29,28 @@ function startCounterAnimation(priceTag) {
       digitElement.style.color = "inherit";
       container.appendChild(digitElement);
     }
-    
+
     // Start rolling animation
     setTimeout(() => {
       // Find the target digit (first occurrence of target value)
       const targetIndex = Array.from(container.children).findIndex(
         (el, i) => parseInt(el.textContent) === targetValue && i >= 10
       );
-      
+
       if (targetIndex !== -1) {
         // Animate to target position
         const targetElement = container.children[targetIndex];
         const translateY = -(targetIndex * 1.2);
-        
+
         // Apply rolling animation
         Array.from(container.children).forEach((el, i) => {
-          el.style.transition = "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-          el.style.transform = `translateY(${translateY + (i - targetIndex) * 1.2}em)`;
+          el.style.transition =
+            "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+          el.style.transform = `translateY(${
+            translateY + (i - targetIndex) * 1.2
+          }em)`;
         });
-        
+
         // Hide non-target digits after animation
         setTimeout(() => {
           Array.from(container.children).forEach((el, i) => {
@@ -64,10 +67,12 @@ function startCounterAnimation(priceTag) {
 // Smartphone and price tag animation script
 document.addEventListener("DOMContentLoaded", function () {
   // Ensure all animation elements start in hidden state
-  const animationElements = document.querySelectorAll('.float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up');
-  animationElements.forEach(el => {
-    el.style.visibility = 'hidden';
-    el.style.opacity = '0';
+  const animationElements = document.querySelectorAll(
+    ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
+  );
+  animationElements.forEach((el) => {
+    el.style.visibility = "hidden";
+    el.style.opacity = "0";
   });
   function startAnimation() {
     // 1. First, animate the smartphone images with fade-in effect from both sides
@@ -99,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Both tags appear simultaneously with flexible animation
       priceTags.forEach((tag) => {
         tag.classList.add("animate");
-        
+
         // Start counter animation after price tag appears
         setTimeout(() => {
           startCounterAnimation(tag);
@@ -128,14 +133,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleScroll() {
     const scrollPosition = window.scrollY;
-    
+
     // Hide header when scrolling down 200px
     if (scrollPosition > 35) {
       header.classList.add("hidden");
     } else {
       header.classList.remove("hidden");
     }
-    
+
     // Keep existing scrolled effect for main section
     if (mainSection && boxContent) {
       const mainBottom = mainSection.offsetTop + mainSection.offsetHeight;
@@ -155,111 +160,546 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial check
   handleScroll();
 
-  // Create a single observer that triggers animations only once
-  const animationObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !entry.target.classList.contains("is-visible") && !entry.target.classList.contains("animation-completed")) {
-        // Use requestAnimationFrame for smoother animation triggering
-        requestAnimationFrame(() => {
-          entry.target.classList.add("is-visible");
-          entry.target.style.visibility = 'visible';
-          
-          // Mark as completed after animation duration
-          setTimeout(() => {
-            entry.target.classList.add("animation-completed");
-          }, 1500);
-        });
-        
-        // Stop observing this element immediately after animation is triggered
-        animationObserver.unobserve(entry.target);
-      }
+  // Section title floating animation
+  const sectionTitleObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+          });
+
+          // Stop observing this element after animation is triggered
+          sectionTitleObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation slightly before element is fully visible
+    }
+  );
+
+  // Recommend items floating animation
+  const recommendItemObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1200);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          recommendItemObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize section title animations
+  function initializeSectionTitleAnimations() {
+    const sectionTitles = document.querySelectorAll(".section-title");
+    sectionTitles.forEach((title) => {
+      sectionTitleObserver.observe(title);
     });
-  }, {
-    threshold: 0.1,  // Trigger when 10% of the element is visible
-    rootMargin: "0px 0px -30px 0px" // Smaller margin for earlier triggering
-  });
+  }
+
+  // Initialize recommend item animations
+  function initializeRecommendItemAnimations() {
+    const recommendItems = document.querySelectorAll(".recommend-item");
+    recommendItems.forEach((item) => {
+      // Ensure items start in hidden state
+      item.style.visibility = "hidden";
+      item.style.opacity = "0";
+      item.style.transform = "translate3d(0, 40px, 0)";
+
+      recommendItemObserver.observe(item);
+    });
+  }
+
+  // About images floating animation
+  const aboutImageObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1500);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          aboutImageObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize about image animations
+  function initializeAboutImageAnimations() {
+    const aboutImages = document.querySelectorAll(".about");
+    aboutImages.forEach((image) => {
+      aboutImageObserver.observe(image);
+    });
+  }
+
+  // iPhone items sliding from right animation
+  const iphoneItemObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1200);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          iphoneItemObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -50px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize iPhone item animations
+  function initializeIphoneItemAnimations() {
+    const iphoneItems = document.querySelectorAll(".iphone-item");
+    iphoneItems.forEach((item) => {
+      // Ensure items start in hidden state
+      item.style.visibility = "hidden";
+      item.style.opacity = "0";
+      item.style.transform = "translate3d(60px, 0, 0)";
+
+      iphoneItemObserver.observe(item);
+    });
+  }
+
+  // Evi items sliding from right animation
+  const eviItemObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1500);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          eviItemObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -50px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize evi item animations
+  function initializeEviItemAnimations() {
+    const eviItems = document.querySelectorAll(".evi-item");
+    eviItems.forEach((item) => {
+      // Ensure items start in hidden state
+      item.style.visibility = "hidden";
+      item.style.opacity = "0";
+      item.style.transform = "translate3d(60px, 0, 0)";
+
+      eviItemObserver.observe(item);
+    });
+  }
+
+  // Ad panel floating upward animation
+  const adPanelObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1500);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          adPanelObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize ad panel animations
+  function initializeAdPanelAnimations() {
+    const adPanels = document.querySelectorAll(".ad-panel");
+    adPanels.forEach((panel) => {
+      adPanelObserver.observe(panel);
+    });
+  }
+
+  // Mobile ad panel floating upward animation
+  const mobileAdPanelObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1500);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          mobileAdPanelObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize mobile ad panel animations
+  function initializeMobileAdPanelAnimations() {
+    const mobileAdPanels = document.querySelectorAll(".mobile-ad-panel");
+    mobileAdPanels.forEach((panel) => {
+      mobileAdPanelObserver.observe(panel);
+    });
+  }
+
+  // Step item floating upward animation
+  const stepItemObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1500);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          stepItemObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15, // Trigger when 15% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize step item animations
+  function initializeStepItemAnimations() {
+    const stepItems = document.querySelectorAll(".step-item");
+    stepItems.forEach((item) => {
+      stepItemObserver.observe(item);
+    });
+  }
+
+  // Testimonial card floating upward animation
+  const testimonialCardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1200);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          testimonialCardObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize testimonial card animations
+  function initializeTestimonialCardAnimations() {
+    const testimonialCards = document.querySelectorAll(".testimonial-card");
+    testimonialCards.forEach((card) => {
+      // Ensure cards start in hidden state
+      card.style.visibility = "hidden";
+      card.style.opacity = "0";
+      card.style.transform = "translate3d(0, 40px, 0)";
+
+      testimonialCardObserver.observe(card);
+    });
+  }
+
+  // QA item floating upward animation
+  const qaItemObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (
+          entry.isIntersecting &&
+          !entry.target.classList.contains("is-visible") &&
+          !entry.target.classList.contains("animation-completed")
+        ) {
+          // Use requestAnimationFrame for smoother animation triggering
+          requestAnimationFrame(() => {
+            entry.target.classList.add("is-visible");
+
+            // Mark as completed after animation duration
+            setTimeout(() => {
+              entry.target.classList.add("animation-completed");
+            }, 1200);
+          });
+
+          // Stop observing this element immediately after animation is triggered
+          qaItemObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2, // Trigger when 20% of the element is visible
+      rootMargin: "0px 0px -30px 0px" // Start animation when element is more visible
+    }
+  );
+
+  // Initialize QA item animations
+  function initializeQaItemAnimations() {
+    const qaItems = document.querySelectorAll(".qa-item");
+    qaItems.forEach((item) => {
+      // Ensure items start in hidden state
+      item.style.visibility = "hidden";
+      item.style.opacity = "0";
+      item.style.transform = "translate3d(0, 40px, 0)";
+
+      qaItemObserver.observe(item);
+    });
+  }
 
   // Wait for page to be fully loaded before starting animations
-  if (document.readyState === 'complete') {
-    initializeAnimations();
+  if (document.readyState === "complete") {
+    initializeSectionTitleAnimations();
+    initializeRecommendItemAnimations();
+    initializeAboutImageAnimations();
+    initializeIphoneItemAnimations();
+    initializeEviItemAnimations();
+    initializeAdPanelAnimations();
+    initializeMobileAdPanelAnimations();
+    initializeStepItemAnimations();
+    initializeTestimonialCardAnimations();
+    initializeQaItemAnimations();
   } else {
-    window.addEventListener('load', initializeAnimations);
-  }
-  
-  function initializeAnimations() {
-    // Float-up animation on scroll
-    const floatUps = document.querySelectorAll(".float-up");
-    floatUps.forEach(el => animationObserver.observe(el));
-  
-    // Observe all stagger-up elements (just like float-up)
-    const staggerUps = document.querySelectorAll(".stagger-up");
-    staggerUps.forEach(el => animationObserver.observe(el));
-    
-    // iPhone items slide-in animation
-    const iphoneItems = document.querySelectorAll(".iphone-item");
-    iphoneItems.forEach(item => {
-      item.classList.add("slide-from-right");
-      animationObserver.observe(item);
-    });
-    
-    // Evidence items slide from right animation
-    const eviItems = document.querySelectorAll(".evi-item");
-    eviItems.forEach(item => {
-      item.classList.add("slide-from-right");
-      animationObserver.observe(item);
-    });
-    
-    // Step items float-up animation
-    const stepItems = document.querySelectorAll(".step-item");
-    stepItems.forEach(item => {
-      item.classList.add("step-float-up");
-      animationObserver.observe(item);
-    });
-    
-    // Testimonial cards float-up animation
-    const testimonialCards = document.querySelectorAll(".testimonial-card");
-    testimonialCards.forEach(card => {
-      card.classList.add("testimonial-float-up");
-      animationObserver.observe(card);
-    });
-    
-    // Q&A items float-up animation
-    const qaItems = document.querySelectorAll(".qa-item");
-    qaItems.forEach(item => {
-      item.classList.add("qa-float-up");
-      animationObserver.observe(item);
-    });
-    
-    // Mobile ad panels float-up animation
-    const mobileAdPanels = document.querySelectorAll(".mobile-ad-panel");
-    mobileAdPanels.forEach(panel => {
-      panel.classList.add("mobile-ad-float-up");
-      animationObserver.observe(panel);
-    });
-    
-    // Ad panels (PC version) float-up animation
-    const adPanels = document.querySelectorAll(".ad-panel");
-    adPanels.forEach(panel => {
-      panel.classList.add("float-up");
-      animationObserver.observe(panel);
-    });
-    
-    // Ad text elements stagger animation
-    const adTexts = document.querySelectorAll(".ad-text");
-    adTexts.forEach((text, index) => {
-      text.classList.add("stagger-up");
-      // Add staggered delay
-      text.style.setProperty('--stagger-delay', `${index * 0.2}s`);
-      animationObserver.observe(text);
+    window.addEventListener("load", () => {
+      initializeSectionTitleAnimations();
+      initializeRecommendItemAnimations();
+      initializeAboutImageAnimations();
+      initializeIphoneItemAnimations();
+      initializeEviItemAnimations();
+      initializeAdPanelAnimations();
+      initializeMobileAdPanelAnimations();
+      initializeStepItemAnimations();
+      initializeTestimonialCardAnimations();
+      initializeQaItemAnimations();
     });
   }
-  
-  // Ad panel images scale animation (integrated with main observer)
-  const adImages = document.querySelectorAll(".ad-image img");
-  adImages.forEach(img => {
-    img.classList.add("ad-scale-up");
-    
-    // Use the main animation observer for consistency
-    animationObserver.observe(img);
+
+  // Scroll animations removed - keeping only main animation
+});
+
+// グローバル
+let buttonPushed = false;
+
+function onIframeLoaded() {
+  if (buttonPushed) {
+    window.location.href = "https://monoriba.com/lp/lth1234/";
+  }
+}
+
+function generateUUIDv4() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
   });
+}
+
+function toggleOtherInput() {
+  const jobSelect = document.getElementById("job");
+  const otherJobContainer = document.getElementById("otherJobContainer");
+  const otherJobInput = document.getElementById("otherJob");
+
+  if (jobSelect.value === "__other_option__") {
+    otherJobContainer.style.display = "block";
+    otherJobInput.required = true;
+  } else {
+    otherJobContainer.style.display = "none";
+    otherJobInput.required = false;
+    otherJobInput.value = "";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // UUID 埋め込み
+  const uuid = generateUUIDv4();
+  document.getElementById("uuidInput").value = uuid;
+
+  const form = document.getElementById("myForm");
+  const checkbox = document.getElementById("termsCheckbox");
+  const errorMsg = document.getElementById("termsError");
+  const submitBtnPC = document.getElementById("submitBtn");
+  const submitBtnSP = document.getElementById("submitBtnSp");
+
+  // 初期状態
+  submitBtnPC.disabled = !checkbox.checked;
+  submitBtnSP.disabled = !checkbox.checked;
+
+  // 規約チェックでボタン有効化
+  checkbox.addEventListener("change", function () {
+    const isChecked = checkbox.checked;
+    submitBtnPC.disabled = !isChecked;
+    submitBtnSP.disabled = !isChecked;
+    errorMsg.style.display = isChecked ? "none" : "block";
+  });
+
+  // 送信共通処理
+  function handleSubmit(e) {
+    if (!checkbox.checked) {
+      e.preventDefault();
+      errorMsg.style.display = "block";
+      return;
+    }
+    if (form.checkValidity()) {
+      errorMsg.style.display = "none";
+      // ★ここが重要：フラグを立ててから送信
+      buttonPushed = true;
+      form.submit(); // target="resultFrame" に送信
+    } else {
+      e.preventDefault();
+      form.reportValidity();
+    }
+  }
+
+  submitBtnPC.addEventListener("click", handleSubmit);
+  submitBtnSP.addEventListener("click", handleSubmit);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("myForm");
+  const checkbox = document.getElementById("termsCheckbox");
+  const errorMsg = document.getElementById("termsError");
+
+  const submitBtnPC = document.getElementById("submitBtn");
+  const submitBtnSP = document.getElementById("submitBtnSp");
+
+  // ✅ チェックされてる時だけ両方のボタンを有効にする
+  checkbox.addEventListener("change", function () {
+    const isChecked = checkbox.checked;
+    submitBtnPC.disabled = !isChecked;
+    submitBtnSP.disabled = !isChecked;
+    errorMsg.style.display = isChecked ? "none" : "block";
+  });
+
+  // ✅ ボタンクリック時の共通処理
+  function handleSubmit(e) {
+    if (!checkbox.checked) {
+      e.preventDefault();
+      errorMsg.style.display = "block";
+      return;
+    }
+
+    if (form.checkValidity()) {
+      errorMsg.style.display = "none";
+      form.submit();
+    } else {
+      e.preventDefault();
+      form.reportValidity();
+    }
+  }
+
+  // PC・SP 両方にイベント登録
+  submitBtnPC.addEventListener("click", handleSubmit);
+  submitBtnSP.addEventListener("click", handleSubmit);
 });
