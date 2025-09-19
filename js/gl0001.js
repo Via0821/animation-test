@@ -1,5 +1,3 @@
-//Final
-
 // Device performance detection
 function detectDevicePerformance() {
   const canvas = document.createElement("canvas");
@@ -27,8 +25,13 @@ function detectDevicePerformance() {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  // Performance score calculation
-  let performanceScore = 0;
+  // Detect iOS devices
+  const isIOS =
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  // More balanced performance score calculation
+  let performanceScore = 5; // Start with higher base score
 
   if (hasWebGL) performanceScore += 2;
   if (deviceMemory >= 4) performanceScore += 2;
@@ -39,11 +42,16 @@ function detectDevicePerformance() {
   if (connectionSpeed === "3g") performanceScore -= 1;
   if (connectionSpeed === "2g") performanceScore -= 2;
 
-  // Determine performance level
+  // iOS specific adjustments
+  if (isIOS) {
+    performanceScore += 1; // iOS generally has good performance
+  }
+
+  // More lenient performance level thresholds
   let performanceLevel = "high";
-  if (performanceScore <= 2 || prefersReducedMotion) {
+  if (performanceScore <= 3 || prefersReducedMotion) {
     performanceLevel = "low";
-  } else if (performanceScore <= 4) {
+  } else if (performanceScore <= 6) {
     performanceLevel = "medium";
   }
 
@@ -54,7 +62,8 @@ function detectDevicePerformance() {
     deviceMemory,
     cores,
     connectionSpeed,
-    prefersReducedMotion
+    prefersReducedMotion,
+    isIOS
   };
 }
 
@@ -62,22 +71,28 @@ function detectDevicePerformance() {
 function getAnimationSettings(performance) {
   const settings = {
     low: {
-      duration: 0.3,
-      staggerDelay: 0.05,
-      useTransforms: false,
+      duration: 0.6, // Increased from 0.3
+      staggerDelay: 0.1, // Increased from 0.05
+      useTransforms: true, // Enable transforms even for low performance
       useOpacity: true,
       useScale: false,
-      useHardwareAcceleration: false,
-      reduceMotion: true
+      useHardwareAcceleration: true, // Enable hardware acceleration
+      reduceMotion: false, // Allow motion
+      // iOS specific settings
+      useIOSOptimizations: performance.isIOS,
+      forceGPUAcceleration: performance.isIOS
     },
     medium: {
-      duration: 0.5,
-      staggerDelay: 0.1,
+      duration: 0.8, // Increased from 0.5
+      staggerDelay: 0.15, // Increased from 0.1
       useTransforms: true,
       useOpacity: true,
-      useScale: false,
+      useScale: true, // Enable scale for medium performance
       useHardwareAcceleration: true,
-      reduceMotion: false
+      reduceMotion: false,
+      // iOS specific settings
+      useIOSOptimizations: performance.isIOS,
+      forceGPUAcceleration: performance.isIOS
     },
     high: {
       duration: 0.8,
@@ -86,7 +101,10 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: true,
       useHardwareAcceleration: true,
-      reduceMotion: false
+      reduceMotion: false,
+      // iOS specific settings
+      useIOSOptimizations: performance.isIOS,
+      forceGPUAcceleration: performance.isIOS
     }
   };
 
@@ -111,22 +129,23 @@ function monitorPerformance() {
 
     lastTime = currentTime;
 
-    // Check every 60 frames
-    if (frameCount % 60 === 0) {
-      const dropRate = droppedFrames / 60;
+    // Check every 120 frames (less frequent monitoring)
+    if (frameCount % 120 === 0) {
+      const dropRate = droppedFrames / 120;
 
-      // If more than 20% frames are dropped, reduce animation complexity
-      if (dropRate > 0.2) {
+      // If more than 40% frames are dropped, reduce animation complexity (less aggressive)
+      if (dropRate > 0.4) {
         console.log("High frame drop rate detected:", dropRate);
         document.body.classList.add("performance-degraded");
 
-        // Reduce animation complexity
+        // Only reduce animation duration, don't disable transforms
         const animatedElements = document.querySelectorAll(
           ".float-up, .stagger-up, .slide-from-right"
         );
         animatedElements.forEach((el) => {
           el.classList.add("reduced-motion");
-          el.style.transition = "opacity 0.2s ease-out";
+          el.style.transition = "all 0.3s ease-out";
+          el.style.webkitTransition = "all 0.3s ease-out";
         });
       }
 
@@ -246,12 +265,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (phoneContainer) {
       phoneContainer.classList.add("animate");
+
+      // iOS specific: Force hardware acceleration on phone container
+      if (devicePerformance.isIOS) {
+        phoneContainer.style.webkitTransform = "translate3d(0, 0, 0)";
+        phoneContainer.style.transform = "translate3d(0, 0, 0)";
+        phoneContainer.style.webkitBackfaceVisibility = "hidden";
+        phoneContainer.style.backfaceVisibility = "hidden";
+      }
     }
 
     // Animate smartphone1 from right side with enhanced slide animation
     if (smartphone1) {
       setTimeout(() => {
         smartphone1.classList.add("slide-animate");
+
+        // iOS specific: Force hardware acceleration
+        if (devicePerformance.isIOS) {
+          smartphone1.style.webkitTransform = "translate3d(0, 0, 0)";
+          smartphone1.style.transform = "translate3d(0, 0, 0)";
+        }
       }, 100);
     }
 
@@ -259,6 +292,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (smartphone2) {
       setTimeout(() => {
         smartphone2.classList.add("slide-animate");
+
+        // iOS specific: Force hardware acceleration
+        if (devicePerformance.isIOS) {
+          smartphone2.style.webkitTransform = "translate3d(0, 0, 0)";
+          smartphone2.style.transform = "translate3d(0, 0, 0)";
+        }
       }, 300);
     }
 
@@ -321,8 +360,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Add scroll event listener
-  window.addEventListener("scroll", handleScroll);
+  // iOS specific scroll handling to prevent flickering
+  let scrollTimeout;
+  const optimizedScrollHandler = () => {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    if (devicePerformance.isIOS) {
+      // Use passive listener for iOS to prevent scroll blocking
+      requestAnimationFrame(handleScroll);
+    } else {
+      scrollTimeout = setTimeout(handleScroll, 16); // ~60fps
+    }
+  };
+
+  // Add scroll event listener with iOS optimization
+  if (devicePerformance.isIOS) {
+    window.addEventListener("scroll", optimizedScrollHandler, {
+      passive: true
+    });
+  } else {
+    window.addEventListener("scroll", optimizedScrollHandler);
+  }
 
   // Initial check
   handleScroll();
@@ -347,27 +407,54 @@ document.addEventListener("DOMContentLoaded", function () {
           // Mark as being animated
           animatedElements.add(elementId);
 
-          // Use requestAnimationFrame for smoother animation triggering
-          requestAnimationFrame(() => {
-            element.classList.add("is-visible");
-            element.style.visibility = "visible";
+          // iOS specific handling - use double requestAnimationFrame for better performance
+          const triggerAnimation = () => {
+            if (animationSettings.useIOSOptimizations) {
+              // Double RAF for iOS
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  element.classList.add("is-visible");
+                  element.style.visibility = "visible";
 
-            // Apply performance-based animation duration
-            const duration = animationSettings.duration * 1000;
+                  // Force hardware acceleration on iOS
+                  if (animationSettings.forceGPUAcceleration) {
+                    element.style.webkitTransform =
+                      "translate3d(0, 0, 0) scale3d(1, 1, 1)";
+                    element.style.transform =
+                      "translate3d(0, 0, 0) scale3d(1, 1, 1)";
+                  }
+                });
+              });
+            } else {
+              requestAnimationFrame(() => {
+                element.classList.add("is-visible");
+                element.style.visibility = "visible";
+              });
+            }
+          };
 
-            // Mark as completed after animation duration
-            setTimeout(() => {
-              element.classList.add("animation-completed");
-              // Remove the is-visible class to prevent conflicts
-              element.classList.remove("is-visible");
-              // Force final state based on performance settings
-              element.style.opacity = "1";
-              if (animationSettings.useTransforms) {
-                element.style.transform = "translate3d(0, 0, 0)";
-                element.style.webkitTransform = "translate3d(0, 0, 0)";
-              }
-            }, duration);
-          });
+          triggerAnimation();
+
+          // Apply performance-based animation duration
+          const duration = animationSettings.duration * 1000;
+
+          // Mark as completed after animation duration
+          setTimeout(() => {
+            element.classList.add("animation-completed");
+            // Remove the is-visible class to prevent conflicts
+            element.classList.remove("is-visible");
+            // Force final state based on performance settings
+            element.style.opacity = "1";
+            if (animationSettings.useTransforms) {
+              element.style.transform = "translate3d(0, 0, 0)";
+              element.style.webkitTransform = "translate3d(0, 0, 0)";
+            }
+            if (animationSettings.forceGPUAcceleration) {
+              element.style.webkitTransform =
+                "translate3d(0, 0, 0) scale3d(1, 1, 1)";
+              element.style.transform = "translate3d(0, 0, 0) scale3d(1, 1, 1)";
+            }
+          }, duration);
 
           // Stop observing this element immediately after animation is triggered
           animationObserver.unobserve(element);
@@ -375,16 +462,45 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     },
     {
-      threshold: 0.15, // Trigger when 15% of the element is visible
-      rootMargin: "0px 0px -50px 0px" // Larger margin to prevent re-triggering
+      threshold: devicePerformance.isIOS ? 0.1 : 0.15, // Lower threshold for iOS
+      rootMargin: devicePerformance.isIOS
+        ? "0px 0px -30px 0px"
+        : "0px 0px -50px 0px" // Smaller margin for iOS
     }
   );
 
+  // iOS specific initialization
+  const initializeForIOS = () => {
+    if (devicePerformance.isIOS) {
+      // Force a repaint to ensure iOS renders properly
+      document.body.style.webkitTransform = "translate3d(0, 0, 0)";
+      document.body.style.transform = "translate3d(0, 0, 0)";
+
+      // Add iOS specific class
+      document.body.classList.add("ios-device");
+
+      // Force hardware acceleration on all animated elements
+      const allAnimatedElements = document.querySelectorAll(
+        ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
+      );
+      allAnimatedElements.forEach((el) => {
+        el.style.webkitTransform = "translate3d(0, 0, 0)";
+        el.style.transform = "translate3d(0, 0, 0)";
+        el.style.webkitBackfaceVisibility = "hidden";
+        el.style.backfaceVisibility = "hidden";
+      });
+    }
+  };
+
   // Wait for page to be fully loaded before starting animations
   if (document.readyState === "complete") {
+    initializeForIOS();
     initializeAnimations();
   } else {
-    window.addEventListener("load", initializeAnimations);
+    window.addEventListener("load", () => {
+      initializeForIOS();
+      initializeAnimations();
+    });
   }
 
   function initializeAnimations() {

@@ -17,7 +17,6 @@ body {
   align-items: center;
   overflow-x: hidden;
 }
-/* ---- Header ------ */
 header {
   width: 100%;
   display: flex;
@@ -45,29 +44,39 @@ header.scrolled {
 .float-up {
   opacity: 0 !important;
   transform: translate3d(0, 30px, 0) !important;
+  -webkit-transform: translate3d(0, 30px, 0) !important;
   transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   will-change: transform, opacity;
   visibility: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* Prevent flickering on mobile */
-  -webkit-transform: translate3d(0, 30px, 0);
-  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* iOS specific fixes */
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /* Prevent flickering on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .float-up.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   visibility: visible !important;
+  /* Force hardware acceleration on iOS */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 .float-up.animation-completed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   -webkit-transition: none !important;
   will-change: auto;
@@ -76,40 +85,57 @@ header.scrolled {
   /* Prevent any further animation triggers */
   animation: none !important;
   -webkit-animation: none !important;
+  /* iOS specific final state */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 /* Flexible staggered animation system */
 .stagger-up {
   opacity: 0 !important;
   transform: translate3d(0, 30px, 0) !important;
+  -webkit-transform: translate3d(0, 30px, 0) !important;
   transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   will-change: transform, opacity;
   visibility: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* Prevent flickering on mobile */
-  -webkit-transform: translate3d(0, 30px, 0);
-  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* iOS specific fixes */
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /* Prevent flickering on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .stagger-up.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   visibility: visible !important;
+  /* Force hardware acceleration on iOS */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 .stagger-up.animation-completed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   -webkit-transition: none !important;
   will-change: auto;
   visibility: visible !important;
+  pointer-events: auto;
   /* Prevent any further animation triggers */
   animation: none !important;
   -webkit-animation: none !important;
+  /* iOS specific final state */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 /* Staggered delays for up to 20 items */
@@ -183,34 +209,48 @@ header.scrolled {
 .slide-from-right {
   opacity: 0 !important;
   transform: translate3d(60px, 0, 0) !important;
+  -webkit-transform: translate3d(60px, 0, 0) !important;
   transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   will-change: transform, opacity;
   visibility: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  /* Prevent flickering on mobile */
-  -webkit-transform: translate3d(60px, 0, 0);
-  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* iOS specific fixes */
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /* Prevent flickering on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .slide-from-right.is-visible {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   visibility: visible !important;
+  /* Force hardware acceleration on iOS */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 .slide-from-right.animation-completed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0) !important;
   transition: none !important;
   -webkit-transition: none !important;
   will-change: auto;
   visibility: visible !important;
+  pointer-events: auto;
   /* Prevent any further animation triggers */
   animation: none !important;
   -webkit-animation: none !important;
+  /* iOS specific final state */
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 /* Ad panel images scale animation */
@@ -370,11 +410,13 @@ header.scrolled {
 .performance-low .testimonial-float-up,
 .performance-low .qa-float-up,
 .performance-low .mobile-ad-float-up {
-  transition: opacity 0.3s ease-out !important;
-  -webkit-transition: opacity 0.3s ease-out !important;
-  /* Disable transforms for low-performance devices */
-  transform: none !important;
-  -webkit-transform: none !important;
+  transition: all 0.6s ease-out !important;
+  -webkit-transition: all 0.6s ease-out !important;
+  /* Keep transforms but ensure hardware acceleration */
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .performance-medium .float-up,
@@ -423,7 +465,7 @@ header.scrolled {
   perspective: none;
 }
 
-/* Performance degraded - minimal animations */
+/* Performance degraded - reduced animations */
 .performance-degraded .float-up,
 .performance-degraded .stagger-up,
 .performance-degraded .slide-from-right,
@@ -431,12 +473,77 @@ header.scrolled {
 .performance-degraded .testimonial-float-up,
 .performance-degraded .qa-float-up,
 .performance-degraded .mobile-ad-float-up {
-  transition: opacity 0.1s ease-out !important;
-  -webkit-transition: opacity 0.1s ease-out !important;
-  transform: none !important;
-  -webkit-transform: none !important;
+  transition: all 0.3s ease-out !important;
+  -webkit-transition: all 0.3s ease-out !important;
+  /* Keep basic transforms but reduce complexity */
+  transform: translate3d(0, 0, 0) !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  /* Disable complex animations but keep basic ones */
   animation: none !important;
   -webkit-animation: none !important;
+}
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .float-up,
+  .stagger-up,
+  .slide-from-right,
+  .step-float-up,
+  .testimonial-float-up,
+  .qa-float-up,
+  .mobile-ad-float-up {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+  }
+
+  .float-up.is-visible,
+  .stagger-up.is-visible,
+  .slide-from-right.is-visible,
+  .step-float-up.is-visible,
+  .testimonial-float-up.is-visible,
+  .qa-float-up.is-visible,
+  .mobile-ad-float-up.is-visible {
+    -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+}
+
+/* iOS device specific optimizations */
+.ios-device {
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.ios-device .float-up,
+.ios-device .stagger-up,
+.ios-device .slide-from-right,
+.ios-device .step-float-up,
+.ios-device .testimonial-float-up,
+.ios-device .qa-float-up,
+.ios-device .mobile-ad-float-up {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+.ios-device .float-up.is-visible,
+.ios-device .stagger-up.is-visible,
+.ios-device .slide-from-right.is-visible,
+.ios-device .step-float-up.is-visible,
+.ios-device .testimonial-float-up.is-visible,
+.ios-device .qa-float-up.is-visible,
+.ios-device .mobile-ad-float-up.is-visible {
+  -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 }
 
 /* Mobile-optimized class for better performance */
@@ -671,9 +778,27 @@ main {
 }
 .smartphone1.slide-animate {
   animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  -webkit-animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
 }
 .smartphone2.slide-animate {
   animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  -webkit-animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* iOS specific smartphone animations */
+.ios-device .smartphone1.slide-animate {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.ios-device .smartphone2.slide-animate {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .coin-animation.animate {
   opacity: 1;
@@ -692,6 +817,19 @@ main {
   }
 }
 
+@-webkit-keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(400px) scale(0.7);
+    transform: translateX(400px) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0) scale(1);
+    transform: translateX(0) scale(1);
+  }
+}
+
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -699,6 +837,19 @@ main {
   }
   100% {
     opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@-webkit-keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-400px) scale(0.7);
+    transform: translateX(-400px) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0) scale(1);
     transform: translateX(0) scale(1);
   }
 }
