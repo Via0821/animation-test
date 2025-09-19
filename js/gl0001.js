@@ -409,6 +409,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (devicePerformance.isIOS) {
       // Add iOS specific class - let CSS handle the rest
       document.body.classList.add("ios-device");
+
+      // Add a small delay to iOS animations to make them feel more natural
+      const iosElements = document.querySelectorAll(
+        ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
+      );
+      iosElements.forEach((el, index) => {
+        // Add a small random delay (0-200ms) to make animations feel more organic
+        const randomDelay = Math.random() * 200;
+        el.style.setProperty("--ios-delay", `${randomDelay}ms`);
+      });
     }
   };
 
@@ -527,11 +537,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isMobile) {
         text.classList.add("mobile-optimized");
       }
-      // Use performance-based stagger delay
-      text.style.setProperty(
-        "--stagger-delay",
-        `${index * animationSettings.staggerDelay}s`
-      );
+      // Use performance-based stagger delay (slower for iOS)
+      const staggerDelay = devicePerformance.isIOS
+        ? animationSettings.staggerDelay * 1.5
+        : animationSettings.staggerDelay;
+      text.style.setProperty("--stagger-delay", `${index * staggerDelay}s`);
       animationObserver.observe(text);
     });
   }
