@@ -942,6 +942,7 @@ main {
   align-items: center;
   padding-bottom: 100px;
   margin-top: -50px;
+  overflow: hidden;
 }
 .bubble {
   position: relative;
