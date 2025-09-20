@@ -39,644 +39,6 @@ header {
 header.hidden {
   transform: translateY(-100%);
 }
-
-header.scrolled {
-  background-color: #1c7574b8;
-  /* Removed backdrop-filter and box-shadow for iOS performance */
-}
-
-/* Float-up animation styles - iOS optimized */
-.float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 30px, 0) translateZ(0) !important;
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-  -webkit-transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-  will-change: transform, opacity;
-  visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  /* Force GPU acceleration */
-  -webkit-transform: translate3d(0, 30px, 0) translateZ(0);
-  transform: translate3d(0, 30px, 0) translateZ(0);
-}
-
-.float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  visibility: visible !important;
-}
-
-.float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  will-change: auto;
-  visibility: visible !important;
-  pointer-events: auto;
-  /* Prevent any further animation triggers */
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
-/* Flexible staggered animation system - iOS optimized */
-.stagger-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 30px, 0) translateZ(0) !important;
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  -webkit-transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  /* Force GPU acceleration */
-  -webkit-transform: translate3d(0, 30px, 0) translateZ(0);
-  transform: translate3d(0, 30px, 0) translateZ(0);
-}
-
-.stagger-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  visibility: visible !important;
-}
-
-.stagger-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  will-change: auto;
-  visibility: visible !important;
-  pointer-events: auto;
-  /* Prevent any further animation triggers */
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
-/* Staggered delays for up to 20 items */
-.stagger-up:nth-child(1) {
-  transition-delay: 0.2s;
-}
-.stagger-up:nth-child(2) {
-  transition-delay: 0.4s;
-}
-.stagger-up:nth-child(3) {
-  transition-delay: 0.6s;
-}
-.stagger-up:nth-child(4) {
-  transition-delay: 0.8s;
-}
-.stagger-up:nth-child(5) {
-  transition-delay: 1s;
-}
-.stagger-up:nth-child(6) {
-  transition-delay: 1.2s;
-}
-.stagger-up:nth-child(7) {
-  transition-delay: 1.4s;
-}
-.stagger-up:nth-child(8) {
-  transition-delay: 1.6s;
-}
-.stagger-up:nth-child(9) {
-  transition-delay: 1.8s;
-}
-.stagger-up:nth-child(10) {
-  transition-delay: 2s;
-}
-.stagger-up:nth-child(11) {
-  transition-delay: 2.2s;
-}
-.stagger-up:nth-child(12) {
-  transition-delay: 2.4s;
-}
-.stagger-up:nth-child(13) {
-  transition-delay: 2.6s;
-}
-.stagger-up:nth-child(14) {
-  transition-delay: 2.8s;
-}
-.stagger-up:nth-child(15) {
-  transition-delay: 3s;
-}
-.stagger-up:nth-child(16) {
-  transition-delay: 3.2s;
-}
-.stagger-up:nth-child(17) {
-  transition-delay: 3.4s;
-}
-.stagger-up:nth-child(18) {
-  transition-delay: 3.6s;
-}
-.stagger-up:nth-child(19) {
-  transition-delay: 3.8s;
-}
-.stagger-up:nth-child(20) {
-  transition-delay: 4s;
-}
-
-/* iOS specific slower stagger delays */
-.ios-device .stagger-up:nth-child(1) {
-  transition-delay: 0.3s;
-}
-.ios-device .stagger-up:nth-child(2) {
-  transition-delay: 0.6s;
-}
-.ios-device .stagger-up:nth-child(3) {
-  transition-delay: 0.9s;
-}
-.ios-device .stagger-up:nth-child(4) {
-  transition-delay: 1.2s;
-}
-.ios-device .stagger-up:nth-child(5) {
-  transition-delay: 1.5s;
-}
-.ios-device .stagger-up:nth-child(6) {
-  transition-delay: 1.8s;
-}
-.ios-device .stagger-up:nth-child(7) {
-  transition-delay: 2.1s;
-}
-.ios-device .stagger-up:nth-child(8) {
-  transition-delay: 2.4s;
-}
-.ios-device .stagger-up:nth-child(9) {
-  transition-delay: 2.7s;
-}
-.ios-device .stagger-up:nth-child(10) {
-  transition-delay: 3s;
-}
-
-/* iOS specific smoother easing for all animation types */
-.ios-device .float-up,
-.ios-device .stagger-up,
-.ios-device .slide-from-right,
-.ios-device .step-float-up,
-.ios-device .testimonial-float-up,
-.ios-device .qa-float-up,
-.ios-device .mobile-ad-float-up {
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  -webkit-transition-timing-function: cubic-bezier(
-    0.25,
-    0.46,
-    0.45,
-    0.94
-  ) !important;
-}
-
-/* Custom stagger delay support */
-.stagger-up[style*="--stagger-delay"] {
-  transition-delay: var(--stagger-delay, 0.2s) !important;
-}
-
-/* iPhone items slide-in from right animation - iOS optimized */
-.slide-from-right {
-  opacity: 0 !important;
-  transform: translate3d(60px, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(60px, 0, 0) translateZ(0) !important;
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  -webkit-transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
-    opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  /* Force GPU acceleration */
-  -webkit-transform: translate3d(60px, 0, 0) translateZ(0);
-  transform: translate3d(60px, 0, 0) translateZ(0);
-}
-
-.slide-from-right.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  visibility: visible !important;
-}
-
-.slide-from-right.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) translateZ(0) !important;
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0) !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  will-change: auto;
-  visibility: visible !important;
-  pointer-events: auto;
-  /* Prevent any further animation triggers */
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
-/* Ad panel images scale animation */
-.ad-scale-up {
-  transform: scale(1);
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.ad-scale-up.is-visible {
-  animation: scalePulse 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-}
-
-.ad-scale-up.animation-completed {
-  transform: scale(1);
-  animation: none;
-  transition: none;
-}
-
-@keyframes scalePulse {
-  0% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Step items float-up animation */
-.step-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.step-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-}
-
-.step-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Testimonial cards float-up animation */
-.testimonial-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.testimonial-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-}
-
-.testimonial-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Q&A items float-up animation */
-.qa-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.qa-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-}
-
-.qa-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Mobile ad panels float-up animation */
-.mobile-ad-float-up {
-  opacity: 0 !important;
-  transform: translate3d(0, 30px, 0) !important;
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.mobile-ad-float-up.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-}
-
-.mobile-ad-float-up.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-  transition: none !important;
-  will-change: auto;
-}
-
-/* Prevent animation re-triggering */
-.animation-completed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) scale(1) !important;
-  -webkit-transform: translate3d(0, 0, 0) scale(1) !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  animation: none !important;
-  -webkit-animation: none !important;
-  pointer-events: auto;
-  will-change: auto;
-  /* Force hardware acceleration on mobile */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-/* Ensure completed animations stay in final state */
-.animation-completed.is-visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) scale(1) !important;
-  -webkit-transform: translate3d(0, 0, 0) scale(1) !important;
-  transition: none !important;
-  -webkit-transition: none !important;
-  animation: none !important;
-  -webkit-animation: none !important;
-  pointer-events: auto;
-  will-change: auto;
-  /* Force hardware acceleration on mobile */
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-/* Performance-based animation classes */
-.performance-low .float-up,
-.performance-low .stagger-up,
-.performance-low .slide-from-right,
-.performance-low .step-float-up,
-.performance-low .testimonial-float-up,
-.performance-low .qa-float-up,
-.performance-low .mobile-ad-float-up {
-  transition: all 0.6s ease-out !important;
-  -webkit-transition: all 0.6s ease-out !important;
-  /* Keep transforms but ensure hardware acceleration */
-  transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0) !important;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.performance-medium .float-up,
-.performance-medium .stagger-up,
-.performance-medium .slide-from-right,
-.performance-medium .step-float-up,
-.performance-medium .testimonial-float-up,
-.performance-medium .qa-float-up,
-.performance-medium .mobile-ad-float-up {
-  transition: all 0.5s ease-out !important;
-  -webkit-transition: all 0.5s ease-out !important;
-}
-
-.performance-high .float-up,
-.performance-high .stagger-up,
-.performance-high .slide-from-right,
-.performance-high .step-float-up,
-.performance-high .testimonial-float-up,
-.performance-high .qa-float-up,
-.performance-high .mobile-ad-float-up {
-  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-  -webkit-transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
-}
-
-/* Reduced motion support */
-.reduced-motion .float-up,
-.reduced-motion .stagger-up,
-.reduced-motion .slide-from-right,
-.reduced-motion .step-float-up,
-.reduced-motion .testimonial-float-up,
-.reduced-motion .qa-float-up,
-.reduced-motion .mobile-ad-float-up {
-  transition: opacity 0.2s ease-out !important;
-  -webkit-transition: opacity 0.2s ease-out !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-}
-
-/* No hardware acceleration for very low-end devices */
-.no-hardware-accel {
-  transform: none !important;
-  -webkit-transform: none !important;
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
-  -webkit-perspective: none;
-  perspective: none;
-}
-
-/* Performance degraded - reduced animations */
-.performance-degraded .float-up,
-.performance-degraded .stagger-up,
-.performance-degraded .slide-from-right,
-.performance-degraded .step-float-up,
-.performance-degraded .testimonial-float-up,
-.performance-degraded .qa-float-up,
-.performance-degraded .mobile-ad-float-up {
-  transition: all 0.3s ease-out !important;
-  -webkit-transition: all 0.3s ease-out !important;
-  /* Keep basic transforms but reduce complexity */
-  transform: translate3d(0, 0, 0) !important;
-  -webkit-transform: translate3d(0, 0, 0) !important;
-  /* Disable complex animations but keep basic ones */
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
-/* iOS specific fixes */
-@supports (-webkit-touch-callout: none) {
-  .float-up,
-  .stagger-up,
-  .slide-from-right,
-  .step-float-up,
-  .testimonial-float-up,
-  .qa-float-up,
-  .mobile-ad-float-up {
-    -webkit-transform: translate3d(0, 0, 0) translateZ(0);
-    transform: translate3d(0, 0, 0) translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    will-change: transform, opacity;
-  }
-
-  .float-up.is-visible,
-  .stagger-up.is-visible,
-  .slide-from-right.is-visible,
-  .step-float-up.is-visible,
-  .testimonial-float-up.is-visible,
-  .qa-float-up.is-visible,
-  .mobile-ad-float-up.is-visible {
-    -webkit-transform: translate3d(0, 0, 0) translateZ(0);
-    transform: translate3d(0, 0, 0) translateZ(0);
-  }
-}
-
-/* iOS device specific optimizations */
-.ios-device {
-  -webkit-overflow-scrolling: touch;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.ios-device .float-up,
-.ios-device .stagger-up,
-.ios-device .slide-from-right,
-.ios-device .step-float-up,
-.ios-device .testimonial-float-up,
-.ios-device .qa-float-up,
-.ios-device .mobile-ad-float-up {
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0);
-  transform: translate3d(0, 0, 0) translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
-}
-
-.ios-device .float-up.is-visible,
-.ios-device .stagger-up.is-visible,
-.ios-device .slide-from-right.is-visible,
-.ios-device .step-float-up.is-visible,
-.ios-device .testimonial-float-up.is-visible,
-.ios-device .qa-float-up.is-visible,
-.ios-device .mobile-ad-float-up.is-visible {
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0);
-  transform: translate3d(0, 0, 0) translateZ(0);
-}
-
-/* iOS specific slower, smoother animations */
-.ios-device .float-up,
-.ios-device .stagger-up,
-.ios-device .slide-from-right,
-.ios-device .step-float-up,
-.ios-device .testimonial-float-up,
-.ios-device .qa-float-up,
-.ios-device .mobile-ad-float-up {
-  transition-duration: 1.2s !important;
-  -webkit-transition-duration: 1.2s !important;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
-  -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
-  transition-delay: calc(0.1s + var(--ios-delay, 0ms)) !important;
-  -webkit-transition-delay: calc(0.1s + var(--ios-delay, 0ms)) !important;
-}
-
-/* Mobile-optimized class for better performance */
-.mobile-optimized {
-  /* Force hardware acceleration */
-  -webkit-transform: translate3d(0, 0, 0) translateZ(0);
-  transform: translate3d(0, 0, 0) translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
-  /* Reduce animation complexity */
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out !important;
-  -webkit-transition: transform 0.5s ease-out, opacity 0.5s ease-out !important;
-}
-
-.mobile-optimized.is-visible {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.mobile-optimized.animation-completed {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  transition: none !important;
-  -webkit-transition: none !important;
-  animation: none !important;
-  -webkit-animation: none !important;
-}
-
-/* Additional performance optimizations for very low-end devices */
-@media (max-width: 480px) {
-  .performance-low .float-up,
-  .performance-low .stagger-up,
-  .performance-low .slide-from-right,
-  .performance-low .step-float-up,
-  .performance-low .testimonial-float-up,
-  .performance-low .qa-float-up,
-  .performance-low .mobile-ad-float-up {
-    /* Minimal animations for very small screens */
-    transition: opacity 0.2s ease-out !important;
-    -webkit-transition: opacity 0.2s ease-out !important;
-    transform: none !important;
-    -webkit-transform: none !important;
-  }
-}
-
-/* Battery optimization - reduce animations when battery is low */
-@media (prefers-reduced-motion: reduce) {
-  .float-up,
-  .stagger-up,
-  .slide-from-right,
-  .step-float-up,
-  .testimonial-float-up,
-  .qa-float-up,
-  .mobile-ad-float-up {
-    transition: opacity 0.1s ease-out !important;
-    -webkit-transition: opacity 0.1s ease-out !important;
-    transform: none !important;
-    -webkit-transform: none !important;
-  }
-}
-
-/* Mobile-specific optimizations to prevent flickering */
-@media (max-width: 768px) {
-  .float-up,
-  .stagger-up,
-  .slide-from-right,
-  .step-float-up,
-  .testimonial-float-up,
-  .qa-float-up,
-  .mobile-ad-float-up {
-    /* Reduce animation complexity on mobile */
-    transition: all 0.6s ease-out !important;
-    -webkit-transition: all 0.6s ease-out !important;
-    /* Force hardware acceleration */
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
-  }
-
-  .float-up.is-visible,
-  .stagger-up.is-visible,
-  .slide-from-right.is-visible,
-  .step-float-up.is-visible,
-  .testimonial-float-up.is-visible,
-  .qa-float-up.is-visible,
-  .mobile-ad-float-up.is-visible {
-    /* Ensure smooth final state on mobile */
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
 .header-container {
   width: 100%;
   max-width: 1101px;
@@ -715,6 +77,9 @@ header .logo img {
   width: 10px;
 }
 main {
+  width: 100%;
+}
+.fv {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1193,10 +558,6 @@ main {
     opacity: 1;
     transform: scale(1.1) translateY(calc(var(--coin-to-y) * 0.68));
   }
-  /* 12% {
-    opacity: 1;
-    transform: translateY(calc(var(--coin-to-y) * 0.9));
-  } */
   83% {
     opacity: 1;
     transform: translateY(calc(var(--coin-to-y) * 2.9));
@@ -1226,6 +587,205 @@ main {
   font-size: 42px;
   font-weight: 600;
   line-height: 1.2;
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Floating animation keyframes */
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes floatUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.bg_white-title.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to all section titles */
+.section-title {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.section-title.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to recommend items */
+.recommend-item {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.recommend-item.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to about images */
+.about {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.about.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to step items */
+.step-item {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.step-item.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to testimonial cards */
+.testimonial-card {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.testimonial-card.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply floating animation to QA items */
+.qa-item {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.qa-item.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+/* Apply horizontal floating animation to iPhone items */
+.iphone-item {
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.iphone-item.animate-in {
+  -webkit-animation: floatRight 0.8s ease-out forwards;
+  animation: floatRight 0.8s ease-out forwards;
+}
+
+/* Right-to-left floating animation keyframes */
+@keyframes floatRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes floatRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+/* Apply horizontal floating animation to evidence items */
+.evi-item {
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.evi-item.animate-in {
+  -webkit-animation: floatRight 0.8s ease-out forwards;
+  animation: floatRight 0.8s ease-out forwards;
 }
 .bg_white-title p {
   text-align: center;
@@ -1413,204 +973,6 @@ main {
   align-items: center;
   width: 100%;
 }
-
-/* About section styling */
-/* .bg_about {
-  padding: 80px 0;
-  position: relative;
-  width: 100%;
-}
-.bg_about .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-block: 50px 60px;
-  background: linear-gradient(120deg, #46a37a, #1c7574);
-  border-radius: 15px;
-}
-
-.bg_about .section-tip {
-  top: 90px;
-  color: rgba(255, 255, 255, 0.1);
-}
-.about-header {
-  text-align: center;
-  color: white;
-  margin-bottom: 60px;
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.about-subtitle {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-.about-subtitle p {
-  background-color: rgba(0, 0, 0, 0.5);
-  width: fit-content;
-  text-align: center;
-  margin: 0 auto;
-  padding-inline: 25px;
-}
-
-.about-title {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.about-description {
-  font-size: 20px;
-  line-height: 1.6;
-  font-weight: 600;
-  width: 63%;
-}
-
-.process-container {
-  max-width: 1000px;
-  width: 100%;
-  padding-inline: 40px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.process-box {
-  background-color: white;
-  border-radius: 20px;
-  padding: 40px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-}
-
-.process-flow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
-.process-entity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 120px;
-}
-
-.entity-icon {
-  width: 250px;
-  height: 250px;
-  border-radius: 20px;
-  overflow: hidden;
-  background-color: #f0f0f0;
-}
-
-.entity-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.entity-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  background-color: #0ca373;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  text-align: center;
-}
-
-.process-arrows {
-  display: flex;
-  justify-content: center;
-}
-
-.arrow-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-.arrow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.arrow img {
-  width: 100%;
-  height: 20px;
-}
-
-.arrow-text {
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.process-highlight {
-  text-align: center;
-  padding: 15px 20px;
-}
-
-.highlight-text {
-  font-size: 30px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* Highlight text with yellow underline */
-/* .highlight-text {
-  position: relative;
-  display: inline-block;
-  line-height: 1.4;
-}
-
-.highlight-text::after {
-  content: "";
-  position: absolute;
-  bottom: 3px;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background-color: #fff404;
-  z-index: 1;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.process-separator {
-  background: url("../images/separator.png") no-repeat center / contain;
-  padding: 15px 0;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.process-separator span {
-  font-size: 30px;
-  font-weight: 700;
-  color: #333;
-}
-
-.about-disclaimer {
-  color: #ffffff;
-  padding: 30px;
-  text-align: center;
-}
-
-  .about-disclaimer p {
-    font-size: 18px;
-    line-height: 1.5;
-  } */
 
 /* Buy section styling */
 .bg_buy {
@@ -2346,7 +1708,7 @@ main {
     padding-block: 15px;
     border-radius: 15px;
   }
-  main {
+  .fv {
     padding-top: 0;
   }
   .smartphone-group {
@@ -2681,7 +2043,7 @@ main {
   header .logo img {
     width: 110px;
   }
-  main {
+  .fv {
     padding-bottom: 40px;
   }
 

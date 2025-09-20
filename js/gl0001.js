@@ -241,14 +241,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("reduced-motion");
   }
 
-  // Ensure all animation elements start in hidden state
-  const animationElements = document.querySelectorAll(
-    ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
+  // Ensure main section animation elements are optimized
+  const mainAnimationElements = document.querySelectorAll(
+    ".smartphone1, .smartphone2, .coin--animated"
   );
-  animationElements.forEach((el) => {
-    el.style.visibility = "hidden";
-    el.style.opacity = "0";
-
+  mainAnimationElements.forEach((el) => {
     // Apply performance-based optimizations
     if (animationSettings.reduceMotion) {
       el.classList.add("reduced-motion");
@@ -314,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Header scroll effect
   const header = document.querySelector("header");
-  const mainSection = document.querySelector("main");
+  const mainSection = document.querySelector(".fv");
   const boxContent = document.querySelector(".box-content");
 
   function handleScroll() {
@@ -410,15 +407,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Add iOS specific class - let CSS handle the rest
       document.body.classList.add("ios-device");
 
-      // Add a small delay to iOS animations to make them feel more natural
-      const iosElements = document.querySelectorAll(
-        ".float-up, .stagger-up, .slide-from-right, .step-float-up, .testimonial-float-up, .qa-float-up, .mobile-ad-float-up"
-      );
-      iosElements.forEach((el, index) => {
-        // Add a small random delay (0-200ms) to make animations feel more organic
-        const randomDelay = Math.random() * 200;
-        el.style.setProperty("--ios-delay", `${randomDelay}ms`);
-      });
+      // iOS animation delays removed for elements outside header and main
     }
   };
 
@@ -440,118 +429,68 @@ document.addEventListener("DOMContentLoaded", function () {
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       );
-
-    // Float-up animation on scroll
-    const floatUps = document.querySelectorAll(".float-up");
-    floatUps.forEach((el) => {
-      // Add mobile optimization class
-      if (isMobile) {
-        el.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(el);
-    });
-
-    // Observe all stagger-up elements (just like float-up)
-    const staggerUps = document.querySelectorAll(".stagger-up");
-    staggerUps.forEach((el) => {
-      if (isMobile) {
-        el.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(el);
-    });
-
-    // iPhone items slide-in animation
-    const iphoneItems = document.querySelectorAll(".iphone-item");
-    iphoneItems.forEach((item) => {
-      item.classList.add("slide-from-right");
-      if (isMobile) {
-        item.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(item);
-    });
-
-    // Evidence items slide from right animation
-    const eviItems = document.querySelectorAll(".evi-item");
-    eviItems.forEach((item) => {
-      item.classList.add("slide-from-right");
-      if (isMobile) {
-        item.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(item);
-    });
-
-    // Step items float-up animation
-    const stepItems = document.querySelectorAll(".step-item");
-    stepItems.forEach((item) => {
-      item.classList.add("step-float-up");
-      if (isMobile) {
-        item.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(item);
-    });
-
-    // Testimonial cards float-up animation
-    const testimonialCards = document.querySelectorAll(".testimonial-card");
-    testimonialCards.forEach((card) => {
-      card.classList.add("testimonial-float-up");
-      if (isMobile) {
-        card.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(card);
-    });
-
-    // Q&A items float-up animation
-    const qaItems = document.querySelectorAll(".qa-item");
-    qaItems.forEach((item) => {
-      item.classList.add("qa-float-up");
-      if (isMobile) {
-        item.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(item);
-    });
-
-    // Mobile ad panels float-up animation
-    const mobileAdPanels = document.querySelectorAll(".mobile-ad-panel");
-    mobileAdPanels.forEach((panel) => {
-      panel.classList.add("mobile-ad-float-up");
-      if (isMobile) {
-        panel.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(panel);
-    });
-
-    // Ad panels (PC version) float-up animation
-    const adPanels = document.querySelectorAll(".ad-panel");
-    adPanels.forEach((panel) => {
-      panel.classList.add("float-up");
-      if (isMobile) {
-        panel.classList.add("mobile-optimized");
-      }
-      animationObserver.observe(panel);
-    });
-
-    // Ad text elements stagger animation
-    const adTexts = document.querySelectorAll(".ad-text");
-    adTexts.forEach((text, index) => {
-      text.classList.add("stagger-up");
-      if (isMobile) {
-        text.classList.add("mobile-optimized");
-      }
-      // Use performance-based stagger delay (slower for iOS)
-      const staggerDelay = devicePerformance.isIOS
-        ? animationSettings.staggerDelay * 1.5
-        : animationSettings.staggerDelay;
-      text.style.setProperty("--stagger-delay", `${index * staggerDelay}s`);
-      animationObserver.observe(text);
-    });
   }
 
-  // Ad panel images scale animation (integrated with main observer)
-  const adImages = document.querySelectorAll(".ad-image img");
-  adImages.forEach((img) => {
-    img.classList.add("ad-scale-up");
+  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, and evidence items
+  function initFloatingAnimation() {
+    const targetElements = document.querySelectorAll(
+      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item"
+    );
+    const animatedElements = new Set();
 
-    // Use the main animation observer for consistency
-    animationObserver.observe(img);
-  });
+    // Safari-specific optimizations
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    function checkScroll() {
+      targetElements.forEach((element) => {
+        if (animatedElements.has(element)) return;
+
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+
+        if (elementTop < window.innerHeight - elementVisible) {
+          // Safari-specific optimizations
+          if (isSafari) {
+            element.style.webkitTransform = "translate3d(0, 0, 0)";
+            element.style.transform = "translate3d(0, 0, 0)";
+            element.style.webkitBackfaceVisibility = "hidden";
+            element.style.backfaceVisibility = "hidden";
+          }
+
+          element.classList.add("animate-in");
+          animatedElements.add(element);
+        }
+      });
+    }
+
+    // Safari-optimized scroll handling
+    let scrollTimeout;
+    const optimizedScrollHandler = () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+
+      if (isSafari) {
+        // Use requestAnimationFrame for Safari to prevent scroll blocking
+        requestAnimationFrame(checkScroll);
+      } else {
+        scrollTimeout = setTimeout(checkScroll, 16); // ~60fps
+      }
+    };
+
+    // Add scroll event listener with Safari optimization
+    if (isSafari) {
+      window.addEventListener("scroll", optimizedScrollHandler, {
+        passive: true
+      });
+    } else {
+      window.addEventListener("scroll", optimizedScrollHandler);
+    }
+
+    // Check on initial load
+    checkScroll();
+  }
+
+  // Initialize floating animation
+  initFloatingAnimation();
 });
