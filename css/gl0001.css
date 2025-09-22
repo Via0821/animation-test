@@ -592,9 +592,6 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 /* Floating animation keyframes */
@@ -625,6 +622,9 @@ main {
 .bg_white-title.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to all section titles */
@@ -634,14 +634,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .section-title.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to recommend items */
@@ -651,14 +651,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .recommend-item.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to about images */
@@ -668,14 +668,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .about.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to step items */
@@ -685,14 +685,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .step-item.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to testimonial cards */
@@ -702,14 +702,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .testimonial-card.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply floating animation to QA items */
@@ -719,14 +719,14 @@ main {
   transform: translateY(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .qa-item.animate-in {
   -webkit-animation: floatUp 0.8s ease-out forwards;
   animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 
 /* Apply horizontal floating animation to iPhone items */
@@ -736,14 +736,14 @@ main {
   transform: translateX(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .iphone-item.animate-in {
   -webkit-animation: floatRight 0.8s ease-out forwards;
   animation: floatRight 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 }
 
 /* Right-to-left floating animation keyframes */
@@ -778,14 +778,31 @@ main {
   transform: translateX(30px);
   -webkit-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
 }
 
 .evi-item.animate-in {
   -webkit-animation: floatRight 0.8s ease-out forwards;
   animation: floatRight 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+/* Apply floating animation to LINE images */
+.line {
+  opacity: 0;
+  -webkit-transform: translateY(30px);
+  transform: translateY(30px);
+  -webkit-transition: all 0.6s ease-out;
+  transition: all 0.6s ease-out;
+}
+
+.line.animate-in {
+  -webkit-animation: floatUp 0.8s ease-out forwards;
+  animation: floatUp 0.8s ease-out forwards;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 .bg_white-title p {
   text-align: center;
@@ -942,7 +959,6 @@ main {
   align-items: center;
   padding-bottom: 100px;
   margin-top: -50px;
-  overflow: hidden;
 }
 .bubble {
   position: relative;

@@ -434,7 +434,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, and evidence items
   function initFloatingAnimation() {
     const targetElements = document.querySelectorAll(
-      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item"
+      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item, .line"
     );
     const animatedElements = new Set();
 
@@ -449,14 +449,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const elementVisible = 150;
 
         if (elementTop < window.innerHeight - elementVisible) {
-          // Safari-specific optimizations
-          if (isSafari) {
-            element.style.webkitTransform = "translate3d(0, 0, 0)";
-            element.style.transform = "translate3d(0, 0, 0)";
-            element.style.webkitBackfaceVisibility = "hidden";
-            element.style.backfaceVisibility = "hidden";
-          }
-
           element.classList.add("animate-in");
           animatedElements.add(element);
         }

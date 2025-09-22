@@ -1,101 +1,96 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Old+Mincho:wght@400;700&display=swap');
 * {
-  padding: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  list-style-type: none;
-  word-break: break-all;
+	padding: 0;
+	margin: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	list-style-type: none;
+	word-break: break-all;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
+html,body{
+	width: 100%;
+	height: 100%;
   scroll-behavior: smooth;
 }
 
 /* common
 ---------------------------------------------*/
-* {
-  margin: 0;
-  padding: 0;
-}
+* {margin:0;padding:0;}
 
-a:link,
-a:visited {
-  color: #fff;
-  text-decoration: underline;
+a:link,a:visited {
+	color: #fff;
+	text-decoration:underline;
 }
-a:hover,
-a:active {
-  color: #fff;
-  text-decoration: underline;
+a:hover,a:active {
+	color: #fff;
+	text-decoration:underline;
 }
 
 body {
-  position: relative;
-  font-family: "Noto Sans JP", "游ゴシック体", YuGothic, "游ゴシック",
-    "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka,
-    sans-serif;
-  -webkit-text-size-adjust: 100%;
+	position: relative;
+	font-family: 'Noto Sans JP', "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, sans-serif;
+	-webkit-text-size-adjust: 100%;
 
-  font-weight: normal;
-  font-feature-settings: "palt";
-  -webkit-font-feature-settings: "palt";
-  letter-spacing: 0.05em;
-  font-size: 3.7vw;
-  line-height: 6.8vw;
-  color: #272727;
+	font-weight: normal;
+	font-feature-settings: "palt";
+	-webkit-font-feature-settings: "palt";
+	letter-spacing: 0.05em;
+	font-size: 3.7vw;
+	line-height: 6.8vw;
+	color: #272727;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: #fff;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  animation: fadeIn 2s ease 0s;
+	
+	background: #fff;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	animation: fadeIn 2s ease 0s;
 }
 
 /* 初期状態ではスマホ用ヘッダーを非表示 */
 .header-pc {
-  display: none;
+    display: none;
 }
 
 .header-sp {
-  display: block;
-  width: 100%; /* 画面幅いっぱいにする場合 */
+    display: block;
+    width: 100%; /* 画面幅いっぱいにする場合 */
 }
 
-/* 表示領域が1001px以上の場合に適用するスタイル（パソコン向け） */
+ /* 表示領域が1001px以上の場合に適用するスタイル（パソコン向け） */
 @media screen and (min-width: 780px) {
-  .pc {
-    display: block;
-  }
-  .sp {
-    display: none;
-  }
+.pc{
+	display: block;
+}
+.sp{
+	display: none;
+}
+	
 }
 
 /* 画面幅が780px以上ならPC用を表示、スマホ用を非表示 */
 @media screen and (min-width: 780px) {
-  .header-pc {
-    display: block;
-    width: 100%; /* 画面幅いっぱいにする場合 */
-  }
+    .header-pc {
+        display: block;
+        width: 100%; /* 画面幅いっぱいにする場合 */
+    }
 
-  .header-sp {
-    display: none;
-  }
+    .header-sp {
+        display: none;
+    }
+	
+	body {
+	font-size: 20px;
+	line-height: 36px;
 
-  body {
-    font-size: 20px;
-    line-height: 36px;
-  }
 }
+}
+
 
 ul,
 ol {
@@ -112,13 +107,13 @@ table {
 
 a,
 a img {
-  color: #163c52;
+	color: #163c52;
   text-decoration: none;
 }
-img {
-  display: block;
-  width: 100%;
-  height: auto;
+img{
+	display:block;
+	width: 100%;
+	height: auto;
 }
 
 .float-up {
@@ -132,226 +127,241 @@ img {
   transform: translateY(0);
 }
 
-.pc {
-  display: block;
+
+.pc{
+	display: block;
 }
-.sp {
-  display: none;
+.sp{
+	display: none;
+}
+	
+	
+.yellow{
+	color: #fffc50!important;
+}
+.red{
+	color: #ea2218!important;
 }
 
-.yellow {
-  color: #fffc50 !important;
-}
-.red {
-  color: #ea2218 !important;
-}
 
 .container {
-  width: 100%;
-  max-width: 1010px; /* PCで最大1010pxに */
-  margin: 0 auto;
-  padding: 0;
-  background-size: cover;
-  position: relative;
-  z-index: 3;
-  overflow: hidden;
+    width: 100%;
+    max-width: 1010px; /* PCで最大1010pxに */
+    margin: 0 auto;
+    padding: 0;
+    background-size: cover;
+    position: relative;
+    z-index: 3;
+    overflow: hidden;
 }
 
 .container2 {
-  width: 100%;
-  max-width: 2000px;
-  margin: 0 auto;
-  padding: 0;
-  overflow: hidden;
-  background-size: cover;
+    width: 100%;
+    max-width: 2000px; 
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    background-size: cover;
 }
 
 @media screen and (max-width: 780px) {
-  .container2 {
-    max-width: 1010px; /* PCで最大1010pxに */
-  }
+    .container2 {
+        max-width: 1010px; /* PCで最大1010pxに */
+    }
+
 }
 
+
 .wrap_black {
-  width: 100%;
-  margin: 0% auto 0;
-  background-color: rgba(0, 0, 0, 0.32);
-  background-repeat: repeat-y;
-  background-position: center top;
-  padding-top: 30px;
-  padding-bottom: 30px;
+	width: 100%;
+	margin:0% auto 0;
+	background-color: rgba(0, 0, 0, 0.32);
+	background-repeat: repeat-y;
+	background-position:center top;
+	padding-top:30px;
+	padding-bottom:30px;
 }
 
 .box_form {
-  width: 95%;
-  margin: 0% auto 0;
-  background-color: rgba(12, 12, 30, 0.49);
-  background-repeat: repeat-y;
-  background-position: center top;
-  border: 2px solid #f8f2b7;
-  border-radius: 10px;
-  margin-bottom: 30px;
+    width: 95%;
+    margin: 0% auto 0;
+    background-color: rgba(12, 12, 30, 0.49); 
+    background-repeat: repeat-y;
+    background-position: center top;
+    border: 2px solid #f8f2b7; 
+    border-radius: 10px; 
+	margin-bottom:30px;
 }
 
 .box_merit {
-  width: 95%;
-  margin: 5% auto 0;
-  background-color: #f8f8f8;
-  background-repeat: repeat-y;
-  background-position: center top;
-  padding: 30px;
-  border-radius: 10px;
-  margin-bottom: 0px;
+    width: 95%;
+    margin: 5% auto 0;
+    background-color: #f8f8f8; 
+    background-repeat: repeat-y;
+    background-position: center top;
+    padding:30px;
+    border-radius: 10px;
+	margin-bottom:0px;
 }
 
-.wrap_form {
-  width: 100%;
-  margin: -5% auto 0;
-  background: url("../images/form.jpg") no-repeat top center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: relative;
-  padding-top: 5%;
-  padding-bottom: 70%; /* 画像の縦横比を維持 */
+
+ .wrap_form {
+    width: 100%;
+    margin: -5% auto 0;
+    background: url("../images/form.jpg") no-repeat top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-top: 5%;
+    padding-bottom: 70%; /* 画像の縦横比を維持 */
 }
 
 /* 上部画像 */
 .ft {
-  width: 90%;
-  margin: 0 auto;
-  display: block;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
 }
 
+
+
 .form-note {
-  text-align: center;
-  font-size: clamp(20px, 2.5vw, 25px);
-  color: #00f9ff;
-  margin: 20px 0;
+    text-align: center;
+    font-size: clamp(20px, 2.5vw, 25px); 
+    color: #00f9ff;
+    margin: 20px 0;
 }
 .confirm-box {
-  margin-top: 30px;
-  color: white;
-  font-size: 20px;
-  margin-bottom: 30px;
+    margin-top: 30px;
+    color: white;
+    font-size: 20px; 
+	margin-bottom:30px;
 }
 
 .confirm-title {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .confirm-list {
-  list-style: none;
-  padding: 0 20px;
-  margin: 0;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
 }
 
 .confirm-list li {
-  margin-bottom: 4px;
-  line-height: 1.3;
-  text-align: left;
+    margin-bottom: 4px; 
+    line-height: 1.3;  
+    text-align: left;
 }
 
 .confirm-list .warning {
-  color: #ff4071;
-  font-weight: bold;
+    color: #ff4071;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 780px) {
-  .form-note {
-    font-size: clamp(16px, 4vw, 20px);
-  }
+    .form-note {
+        font-size: clamp(16px, 4vw, 20px); 
+    }
 
-  .confirm-box {
-    font-size: 10px;
-    margin-bottom: 20px;
-  }
+    .confirm-box {
+        font-size: 10px; 
+        margin-bottom: 20px;
+    }
 
-  .confirm-list li {
-    margin-bottom: 3px;
-    line-height: 1.2;
-  }
+    .confirm-list li {
+        margin-bottom: 3px;
+        line-height: 1.2; 
+    }
 }
 
+
+
+
+
+
 #wrap {
-  width: 100%;
-  margin: 0% auto 0;
-  padding-top: 30px;
-  background-color: white;
-  background-repeat: repeat-y;
-  background-position: center top;
+	width: 100%;
+	margin:0% auto 0;
+	padding-top:30px;
+	background-color: white;
+	background-repeat: repeat-y;
+	background-position:center top;
 }
 
 #wrap2 {
-  width: 100%;
-  margin: 0% auto 0;
-  padding-top: 20px;
-  background-color: white;
-  background-repeat: repeat-y;
-  background-position: center top;
+	width: 100%;
+	margin:0% auto 0;
+	padding-top:20px;
+	background-color: white;
+	background-repeat: repeat-y;
+	background-position:center top;
 }
 
 #wrap_re {
-  width: 95%;
-  margin: -3% auto 0;
-  background-color: white;
-  background-repeat: repeat-y;
-  background-position: center top;
-  border-radius: 10px;
-  border: 3px solid #005fa8;
-  padding-bottom: 15px;
-  margin-bottom: 40px;
+	width: 95%;
+	margin: -3% auto 0;
+	background-color: white;
+	background-repeat: repeat-y;
+	background-position:center top;
+	border-radius:10px;
+	border: 3px solid #005fa8;
+	padding-bottom:15px;
+	margin-bottom:40px;
 }
 
 #wrap_re2 {
-  width: 95%;
-  margin: 5% auto 0;
-  background-color: white;
-  background-repeat: repeat-y;
-  background-position: center top;
-  border-radius: 10px;
-  border: 3px solid #005fa8;
+	width: 95%;
+	margin:5% auto 0;
+	background-color: white;
+	background-repeat: repeat-y;
+	background-position:center top;
+	border-radius:10px;
+	border: 3px solid #005fa8;
 }
 
 #wrap_q {
-  width: 90%;
-  margin: 4% auto 0% auto;
-  background-color: #be0c15;
-  background-repeat: repeat-y;
-  background-position: center top;
-  border-radius: 10px;
+	width: 90%;
+	margin:4%  auto 0% auto;
+	background-color: #be0c15;
+	background-repeat: repeat-y;
+	background-position:center top;
+	border-radius:10px;
+
 }
 #wrap_a {
-  width: 90%;
-  margin: 1% auto 0% auto;
-  background-color: white;
-  background-repeat: repeat-y;
-  background-position: center top;
-  border-radius: 0px 0px 10px 10px;
+	width: 90%;
+	margin:1%  auto 0% auto;
+	background-color: white;
+	background-repeat: repeat-y;
+	background-position:center top;
+	border-radius:0px 0px 10px 10px;
 }
 
+
 .bg_head {
-  background-image: url("../images/bg_head.jpg");
-  padding-bottom: 0px;
-  padding-top: 0px;
-  background-position: center top;
-  background-repeat: repeat;
-  background-attachment: fixed;
+    background-image: url("../images/bg_head.jpg");
+    padding-bottom: 0px;
+    padding-top: 0px;
+    background-position: center top;
+    background-repeat: repeat;
+    background-attachment: fixed;
 }
 
 /* スマホ（768px以下）だけ画像を切り替える */
 @media screen and (max-width: 768px) {
-  .bg_head {
-    background-image: url("../images/bg_head.jpg");
-    background-attachment: scroll;
-  }
+    .bg_head {
+        background-image: url("../images/bg_head.jpg");
+        background-attachment: scroll;
+    }
 }
 
 .bg_glay {
-  background-color: #dedede;
-  background-attachment: scroll;
-  padding-bottom: 0px;
+    background-color: #dedede;
+    background-attachment: scroll;
+	padding-bottom:0px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -362,43 +372,44 @@ img {
 
 /* スマホ（768px以下）だけ画像を切り替える */
 @media screen and (max-width: 768px) {
-  .bg_glay {
-    background-attachment: scroll;
-  }
+    .bg_glay {
+        background-attachment: scroll;
+    }
 }
 
 .bg_point {
-  background-attachment: scroll;
-  width: 100%;
-  position: relative;
+   background-attachment: scroll;
+   width: 100%;
+   position: relative;
 }
 
 /* スマホ（768px以下）だけ画像を切り替える */
 @media screen and (max-width: 768px) {
-  .bg_point {
-    background-attachment: scroll;
-  }
+    .bg_point {
+        background-attachment: scroll;
+    }
 }
 
+
 .bg_about {
-  background-attachment: scroll;
-  width: 100%;
-  background-color: #edf4f2;
+   background-attachment: scroll;
+   width: 100%;
+   background-color: #edf4f2;
 }
 
 .bg_buy {
-  background-color: #dedede;
-  background-attachment: scroll;
-  padding-block: 100px;
+    background-color: #dedede;
+   background-attachment: scroll;
+	padding-block:100px;
   width: 100%;
 }
 
+
 /* スマホ（768px以下）だけ画像を切り替える */
 @media screen and (max-width: 768px) {
-  .bg_buy {
-    background-color: #f5f5f5;
-    padding-bottom: 40px;
-  }
+    .bg_buy { background-color:#f5f5f5;
+		      padding-bottom:40px;
+    }
 }
 
 .bg_evi {
@@ -408,10 +419,10 @@ img {
 
 /* スマホ（768px以下）のときに別画像を指定 */
 @media screen and (max-width: 768px) {
-  .bg_evi {
-    background-image: url("../images/bg_evi_sp.jpg");
-    padding-bottom: 40px;
-  }
+    .bg_evi {
+        background-image: url("../images/bg_evi_sp.jpg");
+        padding-bottom: 40px;
+    }
 }
 
 .bg_ad {
@@ -424,11 +435,11 @@ img {
 
 /* スマホ（768px以下）のときに別画像を指定 */
 @media screen and (max-width: 768px) {
-  .bg_ad {
-    background-image: url("../images/bg_ad_sp.jpg"); /* ← ここが大事！ */
-    background-color: #edf4f2;
-    padding-bottom: 0px;
-  }
+    .bg_ad {
+        background-image: url("../images/bg_ad_sp.jpg");  /* ← ここが大事！ */
+        background-color: #edf4f2;
+        padding-bottom: 0px;
+    }
 }
 
 .bg_use {
@@ -440,49 +451,51 @@ img {
 
 /* スマホ（768px以下）のときに .bg_use に対して別画像を指定 */
 @media screen and (max-width: 768px) {
-  .bg_use {
-    background-image: url("../images/bg_use_sp.jpg");
-    background-color: white;
-    padding-bottom: 0;
-  }
+    .bg_use {
+        background-image: url("../images/bg_use_sp.jpg"); 
+        background-color: white;
+        padding-bottom: 0;
+    }
 }
 
 .bg_voice {
-  background-image: url("../images/bg_voice.jpg");
-  background-attachment: scroll;
-  background-size: cover;
-  background-position: center;
-  padding-bottom: 40px;
+    background-image: url("../images/bg_voice.jpg");
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 40px;
 }
 
 /* スマホ（768px以下）のときに .bg_use に対して別画像を指定 */
 @media screen and (max-width: 768px) {
-  .bg_voice {
-    background-image: url("../images/bg_voice_sp.jpg");
-    background-color: white;
-  }
+    .bg_voice {
+        background-image: url("../images/bg_voice_sp.jpg"); 
+        background-color: white;
+    }
 }
 
 .bg_qa {
-  background-attachment: scroll;
-  padding-bottom: 20px;
-  width: 100%;
+    background-attachment: scroll;
+    padding-bottom: 20px;
+    width: 100%;
 }
 
 /* スマホ（768px以下）のときに .bg_use に対して別画像を指定 */
 @media screen and (max-width: 768px) {
-  .bg_qa {
-    background-image: url("../images/bg_qa.jpg");
-    background-color: #f5f5f5;
-    padding-bottom: 40px;
-  }
+    .bg_qa {
+        background-image: url("../images/bg_qa.jpg"); 
+        background-color: #f5f5f5;
+        padding-bottom: 40px;
+    }
 }
 
-.bg_white {
-  background-color: white;
-  padding-bottom: 0px;
-  padding-top: 40px;
-  width: 100%;
+
+
+.bg_white{
+background-color:white;
+padding-bottom:0px;
+padding-top: 40px;
+width: 100%;
 }
 .bg_white .container {
   /* display: flex;
@@ -490,110 +503,120 @@ img {
   align-items: center; */
 }
 
+
+
+
 /* 画面サイズによって表示を切り替える */
 .pc-only {
-  display: block;
+    display: block;
 }
 
 .sp-only {
-  display: none;
+    display: none;
 }
 
 /* スマホサイズ（768px以下）の場合 */
 @media screen and (max-width: 780px) {
-  .pc-only {
-    display: none;
-  }
+    .pc-only {
+        display: none;
+    }
 
-  .sp-only {
-    display: block;
-  }
+    .sp-only {
+        display: block;
+    }
 }
+
 
 .nayami {
-  width: 100%;
-  margin: 5% auto 0;
+    width: 100%;
+    margin: 5% auto 0;
 }
+
 
 /* スマホ（768px以下） */
 @media screen and (max-width: 768px) {
-  .nayami {
-    width: 90%;
-    margin: 0% auto 0;
-  }
+   .nayami{
+	width: 90%;
+	margin: 0% auto 0
 }
+	}
 
 .step {
-  width: 100%;
-  margin: 5% auto 0;
+    width: 100%;
+    margin: 5% auto 0;
 }
+
 
 /* スマホ（768px以下） */
 @media screen and (max-width: 768px) {
-  .step {
-    width: 90%;
-    margin: 10% auto 0;
-  }
+   .step{
+	width: 90%;
+	margin: 10% auto 0
 }
+	}
 
 .about {
-  width: 100%;
-  margin: 5% auto 0;
+    width: 100%;
+    margin: 5% auto 0;
 }
+
 
 /* スマホ（768px以下） */
 @media screen and (max-width: 768px) {
-  .about {
-    width: 96%;
-    margin: 5% auto 0;
-  }
+   .about{
+	width: 96%;
+	margin: 5% auto 0
 }
+	}
 
 .use {
-  width: 80%;
-  margin: 5% auto 0;
-}
-
-/* スマホ（768px以下） */
-@media screen and (max-width: 768px) {
-  .use {
     width: 80%;
     margin: 5% auto 0;
-  }
 }
 
-.qa {
-  width: 80%;
-  margin: 5% auto 0;
-}
 
 /* スマホ（768px以下） */
 @media screen and (max-width: 768px) {
-  .qa {
-    width: 90%;
+   .use{
+	width: 80%;
+	margin: 5% auto 0
+}
+	}
+
+.qa {
+    width: 80%;
     margin: 5% auto 0;
-  }
 }
 
+
+/* スマホ（768px以下） */
+@media screen and (max-width: 768px) {
+   .qa{
+	width: 90%;
+	margin: 5% auto 0
+}
+	}
+
 .sub {
-  width: 40%;
-  margin: 5% auto 0;
+    width: 40%;
+    margin: 5% auto 0;
 }
 
 .ad_right {
-  width: 80%;
-  margin: 5% 0 0 auto;
+    width: 80%;
+    margin: 5% 0 0 auto;  
 }
 
 .ad_left {
-  width: 80%;
-  margin: 5% auto 0 0;
+    width: 80%;
+    margin: 5% auto 0 0;
 }
 
 .ad {
-  width: 80%;
-  margin: 5% auto 0;
+    width: 80%;
+    margin: 5% auto 0;
 }
+
 
 /* form */
 /* 全体の背景エリアを横幅100%に */
@@ -613,12 +636,14 @@ img {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
+
 .form-wrapper h2 {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 30px;
 }
+
 
 .form-row {
   display: flex;
@@ -728,10 +753,11 @@ img {
 
 /* スマホ対応 */
 @media screen and (max-width: 768px) {
-  .submit-note {
-    margin-top: 40px;
+  .submit-note  {
+   margin-top: 40px;
   }
-}
+
+	 }
 
 .checkbox-wrap {
   display: flex;
@@ -740,6 +766,7 @@ img {
   margin-top: 20px;
   margin-bottom: 40px; /* ←ここを増やす！30px〜40pxがオススメ */
 }
+
 
 .checkbox-label {
   display: inline-flex;
@@ -799,29 +826,33 @@ img {
   color: red;
   text-align: center;
   font-size: 14px;
-  margin-top: -40px;
+  margin-top: -40px; 
 }
 
 @media screen and (max-width: 768px) {
-  .error-message {
+  .error-message  {
     margin-top: -33px;
   }
 }
 
-.delta {
-  width: 10%;
-  margin: 0% auto 0;
+
+
+.delta{
+	width: 10%;
+	margin: 0% auto 0;
 }
 
-.sub01 {
-  width: 85%;
-  margin: 5% auto 0;
+
+.sub01{
+	width: 85%;
+	margin: 5% auto 0;
 }
 
-.sub01_sp {
-  width: 75%;
-  margin: 5% auto 0;
-}
+.sub01_sp{
+	width: 75%;
+	margin: 5% auto 0;
+	}
+
 
 .footer {
   width: 100%;
@@ -834,8 +865,8 @@ img {
 .footer-links {
   display: flex;
   justify-content: center;
-  flex-wrap: nowrap; /* ← 折り返さないように */
-  gap: 20px; /* ← 3つの間の余白 */
+  flex-wrap: nowrap;      /* ← 折り返さないように */
+  gap: 20px;               /* ← 3つの間の余白 */
   font-size: 16px;
   margin-bottom: 5px;
 }
@@ -844,7 +875,7 @@ img {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  white-space: nowrap; /* ← 長いテキストで改行しないように */
+  white-space: nowrap;     /* ← 長いテキストで改行しないように */
 }
 
 .footer-license {
@@ -855,14 +886,14 @@ img {
 /* スマホ表示（768px以下）でも横並びにしたい場合 */
 @media screen and (max-width: 768px) {
   .footer-links {
-    flex-wrap: nowrap; /* ← ここもwrapではなくnowrapに */
+    flex-wrap: nowrap;       /* ← ここもwrapではなくnowrapに */
     justify-content: center;
     gap: 16px;
     font-size: 10px;
   }
 
   .footer-links a {
-    width: auto; /* ← 固定幅は不要 */
+    width: auto;             /* ← 固定幅は不要 */
     font-size: 10px;
   }
 }
