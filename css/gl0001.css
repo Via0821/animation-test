@@ -12,6 +12,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Prevent jerky movements after animations */
+.smartphone1,
+.smartphone2,
+.price,
+.coin--animated {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Ensure final states are stable */
+.smartphone1.slide-animate,
+.smartphone2.slide-animate {
+  animation-fill-mode: forwards;
+}
+
+.price.animate {
+  animation-fill-mode: forwards;
+}
+
+.coin--animated.started {
+  animation-fill-mode: forwards;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -180,13 +205,11 @@ main {
 .smartphone1.slide-animate {
   animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
-  transform: translate3d(0, 0, 0) translateZ(0);
   opacity: 1;
 }
 .smartphone2.slide-animate {
   animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: transform, opacity;
-  transform: translate3d(0, 0, 0) translateZ(0);
   opacity: 1;
 }
 
@@ -409,6 +432,7 @@ main {
 .price.animate {
   opacity: 1;
   transform: scale(1) rotate(0deg);
+  transition: none;
 }
 .ticket1 {
   top: 245px;
@@ -469,6 +493,7 @@ main {
 .coin--animated.started .coin-img {
   animation-play-state: running;
   opacity: 1;
+  transition: none;
 }
 
 .coin--animated {
@@ -484,30 +509,30 @@ main {
 @keyframes coin-x-axis {
   0% {
     opacity: 0;
-    transform: scale(0.1);
+    transform: scale(0.1) translateX(0);
   }
   3% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.1) translateX(0);
   }
   10% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateX(0);
   }
   12% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateX(0);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateX(var(--coin-to-x));
+    transform: scale(1) translateX(var(--coin-to-x));
   }
 }
 
 @keyframes coin-y-axis {
   0% {
     opacity: 0;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
   3% {
     opacity: 1;
@@ -519,11 +544,11 @@ main {
   }
   83% {
     opacity: 1;
-    transform: translateY(calc(var(--coin-to-y) * 2.9));
+    transform: scale(1) translateY(calc(var(--coin-to-y) * 2.9));
   }
   100% {
     opacity: 0;
-    transform: translateY(calc(var(--coin-to-y) * 3));
+    transform: scale(1) translateY(calc(var(--coin-to-y) * 3));
   }
 }
 
@@ -569,6 +594,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to all section titles */
@@ -584,6 +610,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to recommend items */
@@ -599,6 +626,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to about images */
@@ -614,6 +642,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to step items */
@@ -629,6 +658,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to testimonial cards */
@@ -644,6 +674,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to QA items */
@@ -659,6 +690,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply horizontal floating animation to iPhone items */
@@ -674,6 +706,7 @@ main {
   opacity: 1;
   transform: translateX(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Right-to-left floating animation keyframes */
@@ -701,6 +734,7 @@ main {
   opacity: 1;
   transform: translateX(0);
   visibility: visible;
+  transition: none;
 }
 
 /* Apply floating animation to LINE images */
@@ -716,6 +750,7 @@ main {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
+  transition: none;
 }
 .bg_white-title p {
   text-align: center;

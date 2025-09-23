@@ -392,6 +392,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Check on initial load
     checkScroll();
+
+    // Add scroll event listener with proper throttling
+    window.addEventListener("scroll", optimizedScrollHandler, {
+      passive: true
+    });
   }
 
   // Initialize floating animation
@@ -399,6 +404,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Form handling functionality
   initFormHandling();
+
+  // Ensure smooth animations without jerky movements
+  ensureSmoothAnimations();
 });
 
 // Global variables for form handling
@@ -499,4 +507,32 @@ function initFormHandling() {
   // Add event listeners
   submitBtnPC.addEventListener("click", handleSubmit);
   submitBtnSP.addEventListener("click", handleSubmit);
+}
+
+// Ensure smooth animations without jerky movements
+function ensureSmoothAnimations() {
+  // Remove conflicting transitions after animations complete
+  const animatedElements = document.querySelectorAll(
+    ".smartphone1.slide-animate, .smartphone2.slide-animate, .price.animate, .coin--animated.started"
+  );
+
+  animatedElements.forEach((element) => {
+    // Wait for animation to complete, then remove conflicting properties
+    element.addEventListener("animationend", () => {
+      element.style.transition = "none";
+      element.style.willChange = "auto";
+    });
+  });
+
+  // Ensure floating animations don't have conflicting transitions
+  const floatingElements = document.querySelectorAll(
+    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .evi-item.animate-in, .line.animate-in"
+  );
+
+  floatingElements.forEach((element) => {
+    element.addEventListener("animationend", () => {
+      element.style.transition = "none";
+      element.style.willChange = "auto";
+    });
+  });
 }
