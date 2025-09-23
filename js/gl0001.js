@@ -14,21 +14,13 @@ function detectDevicePerformance() {
   const cores = navigator.hardwareConcurrency || 4;
 
   // Check connection speed (if available)
-  const connection =
-    navigator.connection ||
-    navigator.mozConnection ||
-    navigator.webkitConnection;
+  const connection = navigator.connection || navigator.mozConnection;
   const connectionSpeed = connection ? connection.effectiveType : "4g";
 
   // Check if device prefers reduced motion
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
-
-  // Detect iOS devices
-  const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
   // More balanced performance score calculation
   let performanceScore = 5; // Start with higher base score
@@ -41,11 +33,6 @@ function detectDevicePerformance() {
   if (connectionSpeed === "4g") performanceScore += 1;
   if (connectionSpeed === "3g") performanceScore -= 1;
   if (connectionSpeed === "2g") performanceScore -= 2;
-
-  // iOS specific adjustments
-  if (isIOS) {
-    performanceScore += 1; // iOS generally has good performance
-  }
 
   // More lenient performance level thresholds
   let performanceLevel = "high";
@@ -62,8 +49,7 @@ function detectDevicePerformance() {
     deviceMemory,
     cores,
     connectionSpeed,
-    prefersReducedMotion,
-    isIOS
+    prefersReducedMotion
   };
 }
 
@@ -77,10 +63,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: false,
       useHardwareAcceleration: true, // Enable hardware acceleration
-      reduceMotion: false, // Allow motion
-      // iOS specific settings
-      useIOSOptimizations: performance.isIOS,
-      forceGPUAcceleration: performance.isIOS
+      reduceMotion: false // Allow motion
     },
     medium: {
       duration: 0.8, // Increased from 0.5
@@ -89,10 +72,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: true, // Enable scale for medium performance
       useHardwareAcceleration: true,
-      reduceMotion: false,
-      // iOS specific settings
-      useIOSOptimizations: performance.isIOS,
-      forceGPUAcceleration: performance.isIOS
+      reduceMotion: false
     },
     high: {
       duration: 0.8,
@@ -101,10 +81,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: true,
       useHardwareAcceleration: true,
-      reduceMotion: false,
-      // iOS specific settings
-      useIOSOptimizations: performance.isIOS,
-      forceGPUAcceleration: performance.isIOS
+      reduceMotion: false
     }
   };
 
@@ -116,8 +93,11 @@ function monitorPerformance() {
   let frameCount = 0;
   let lastTime = performance.now();
   let droppedFrames = 0;
+  let isMonitoring = true;
 
   function checkFrame() {
+    if (!isMonitoring) return;
+
     frameCount++;
     const currentTime = performance.now();
     const deltaTime = currentTime - lastTime;
@@ -133,20 +113,13 @@ function monitorPerformance() {
     if (frameCount % 120 === 0) {
       const dropRate = droppedFrames / 120;
 
-      // If more than 40% frames are dropped, reduce animation complexity (less aggressive)
-      if (dropRate > 0.4) {
+      // If more than 50% frames are dropped, reduce animation complexity
+      if (dropRate > 0.5) {
         console.log("High frame drop rate detected:", dropRate);
         document.body.classList.add("performance-degraded");
 
-        // Only reduce animation duration, don't disable transforms
-        const animatedElements = document.querySelectorAll(
-          ".float-up, .stagger-up, .slide-from-right"
-        );
-        animatedElements.forEach((el) => {
-          el.classList.add("reduced-motion");
-          el.style.transition = "all 0.3s ease-out";
-          el.style.webkitTransition = "all 0.3s ease-out";
-        });
+        // Stop monitoring after first detection to avoid interference
+        isMonitoring = false;
       }
 
       // Reset counters
@@ -156,7 +129,10 @@ function monitorPerformance() {
     requestAnimationFrame(checkFrame);
   }
 
-  requestAnimationFrame(checkFrame);
+  // Start monitoring after initial animations complete
+  setTimeout(() => {
+    requestAnimationFrame(checkFrame);
+  }, 5000);
 }
 
 // Counter animation function
@@ -188,6 +164,7 @@ function startCounterAnimation(priceTag) {
       digitElement.style.fontSize = "inherit";
       digitElement.style.fontWeight = "inherit";
       digitElement.style.color = "inherit";
+      digitElement.style.opacity = "1";
       container.appendChild(digitElement);
     }
 
@@ -200,10 +177,9 @@ function startCounterAnimation(priceTag) {
 
       if (targetIndex !== -1) {
         // Animate to target position
-        const targetElement = container.children[targetIndex];
         const translateY = -(targetIndex * 1.2);
 
-        // Apply rolling animation
+        // Apply rolling animation to all digits
         Array.from(container.children).forEach((el, i) => {
           el.style.transition =
             "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
@@ -217,11 +193,13 @@ function startCounterAnimation(priceTag) {
           Array.from(container.children).forEach((el, i) => {
             if (i !== targetIndex) {
               el.style.opacity = "0";
+            } else {
+              el.style.opacity = "1";
             }
           });
         }, 800);
       }
-    }, 200 + (digitContainers.length - 1 - index) * 200); // Right to left timing
+    }, 100 + (digitContainers.length - 1 - index) * 150); // Right to left timing
   });
 }
 
@@ -268,14 +246,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (smartphone1) {
       setTimeout(() => {
         smartphone1.classList.add("slide-animate");
-      }, 100);
+      }, 200);
     }
 
     // Animate smartphone2 from left side with enhanced slide animation
     if (smartphone2) {
       setTimeout(() => {
         smartphone2.classList.add("slide-animate");
-      }, 300);
+      }, 400);
     }
 
     // 2. Wait for smartphones to appear, then animate price tags
@@ -288,9 +266,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Start counter animation after price tag appears
         setTimeout(() => {
           startCounterAnimation(tag);
-        }, 200); // Small delay after price tag appears
+        }, 300); // Small delay after price tag appears
       });
-    }, 1300); // Wait for smartphones to complete (1200ms + 100ms buffer)
+    }, 1200); // Wait for smartphones to complete
 
     // 3. Wait for price tags to finish, then start coin animations
     setTimeout(() => {
@@ -300,11 +278,19 @@ document.addEventListener("DOMContentLoaded", function () {
       coins.forEach((coin) => {
         coin.classList.add("started");
       });
-    }, 3000); // Wait for price tags to complete (1300ms + 1500ms + 200ms buffer)
+    }, 2500); // Wait for price tags to complete
   }
 
   // Start animation once on page load
   setTimeout(startAnimation, 500);
+
+  // Fallback: ensure animations start even if there are issues
+  setTimeout(() => {
+    const phoneContainer = document.querySelector(".coin-animation");
+    if (phoneContainer && !phoneContainer.classList.contains("animate")) {
+      phoneContainer.classList.add("animate");
+    }
+  }, 2000);
 
   // Start performance monitoring
   monitorPerformance();
@@ -337,99 +323,37 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // iOS specific scroll handling to prevent flickering
-  let scrollTimeout;
-  const optimizedScrollHandler = () => {
-    if (scrollTimeout) {
-      clearTimeout(scrollTimeout);
-    }
-
-    if (devicePerformance.isIOS) {
-      // Use passive listener for iOS to prevent scroll blocking
-      requestAnimationFrame(handleScroll);
-    } else {
-      scrollTimeout = setTimeout(handleScroll, 16); // ~60fps
-    }
-  };
-
-  // Add scroll event listener with iOS optimization
-  if (devicePerformance.isIOS) {
-    window.addEventListener("scroll", optimizedScrollHandler, {
-      passive: true
-    });
-  } else {
-    window.addEventListener("scroll", optimizedScrollHandler);
-  }
-
   // Initial check
   handleScroll();
 
   // Track animated elements to prevent re-triggering
   const animatedElements = new Set();
 
-  // Create a single observer that triggers animations only once - iOS optimized
-  const animationObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const element = entry.target;
-        const elementId = element.id || element.className + Math.random();
+  // Create a single observer that triggers animations only once
+  const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const element = entry.target;
+      const elementId = element.id || element.className + Math.random();
 
-        // Check if element is already animated or currently animating
-        if (
-          entry.isIntersecting &&
-          !element.classList.contains("is-visible") &&
-          !element.classList.contains("animation-completed") &&
-          !animatedElements.has(elementId)
-        ) {
-          // Mark as being animated
-          animatedElements.add(elementId);
+      // Check if element is already animated or currently animating
+      if (
+        entry.isIntersecting &&
+        !element.classList.contains("is-visible") &&
+        !element.classList.contains("animation-completed") &&
+        !animatedElements.has(elementId)
+      ) {
+        // Mark as being animated
+        animatedElements.add(elementId);
 
-          // LIGHTWEIGHT callback - just toggle CSS class, let CSS handle animation
-          element.classList.add("is-visible");
-          element.style.visibility = "visible";
+        // Lightweight callback - just toggle CSS class, let CSS handle animation
+        element.classList.add("is-visible");
+        element.style.visibility = "visible";
 
-          // Stop observing this element immediately after animation is triggered
-          animationObserver.unobserve(element);
-        }
-      });
-    },
-    {
-      threshold: devicePerformance.isIOS ? 0.1 : 0.15, // Lower threshold for iOS
-      rootMargin: devicePerformance.isIOS
-        ? "0px 0px -30px 0px"
-        : "0px 0px -50px 0px" // Smaller margin for iOS
-    }
-  );
-
-  // iOS specific initialization
-  const initializeForIOS = () => {
-    if (devicePerformance.isIOS) {
-      // Add iOS specific class - let CSS handle the rest
-      document.body.classList.add("ios-device");
-
-      // iOS animation delays removed for elements outside header and main
-    }
-  };
-
-  // Wait for page to be fully loaded before starting animations
-  if (document.readyState === "complete") {
-    initializeForIOS();
-    initializeAnimations();
-  } else {
-    window.addEventListener("load", () => {
-      initializeForIOS();
-      initializeAnimations();
+        // Stop observing this element immediately after animation is triggered
+        animationObserver.unobserve(element);
+      }
     });
-  }
-
-  function initializeAnimations() {
-    // Check if mobile device for optimization
-    const isMobile =
-      window.innerWidth <= 768 ||
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-  }
+  });
 
   // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, and evidence items
   function initFloatingAnimation() {
@@ -437,9 +361,6 @@ document.addEventListener("DOMContentLoaded", function () {
       ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item, .line"
     );
     const animatedElements = new Set();
-
-    // Safari-specific optimizations
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
     function checkScroll() {
       targetElements.forEach((element) => {
@@ -455,29 +376,19 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Safari-optimized scroll handling
+    // Optimized scroll handling
     let scrollTimeout;
     const optimizedScrollHandler = () => {
       if (scrollTimeout) {
         clearTimeout(scrollTimeout);
       }
-
-      if (isSafari) {
-        // Use requestAnimationFrame for Safari to prevent scroll blocking
-        requestAnimationFrame(checkScroll);
-      } else {
-        scrollTimeout = setTimeout(checkScroll, 16); // ~60fps
-      }
+      scrollTimeout = setTimeout(checkScroll, 10);
     };
 
-    // Add scroll event listener with Safari optimization
-    if (isSafari) {
-      window.addEventListener("scroll", optimizedScrollHandler, {
-        passive: true
-      });
-    } else {
-      window.addEventListener("scroll", optimizedScrollHandler);
-    }
+    // Add scroll event listener
+    window.addEventListener("scroll", optimizedScrollHandler, {
+      passive: true
+    });
 
     // Check on initial load
     checkScroll();
@@ -485,4 +396,107 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize floating animation
   initFloatingAnimation();
+
+  // Form handling functionality
+  initFormHandling();
 });
+
+// Global variables for form handling
+let buttonPushed = false;
+
+// Form handling initialization
+function initFormHandling() {
+  // UUID generation
+  function generateUUIDv4() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0;
+        const v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
+  }
+
+  // Toggle other job input
+  function toggleOtherInput() {
+    const jobSelect = document.getElementById("job");
+    const otherJobContainer = document.getElementById("otherJobContainer");
+    const otherJobInput = document.getElementById("otherJob");
+
+    if (jobSelect.value === "__other_option__") {
+      otherJobContainer.style.display = "block";
+      otherJobInput.required = true;
+    } else {
+      otherJobContainer.style.display = "none";
+      otherJobInput.required = false;
+      otherJobInput.value = "";
+    }
+  }
+
+  // Iframe loaded handler
+  function onIframeLoaded() {
+    if (buttonPushed) {
+      window.location.href = "https://monoriba.com/lp/lth1234/";
+    }
+  }
+
+  // Make onIframeLoaded globally available
+  window.onIframeLoaded = onIframeLoaded;
+  window.toggleOtherInput = toggleOtherInput;
+
+  // Initialize form elements
+  const form = document.getElementById("myForm");
+  const checkbox = document.getElementById("termsCheckbox");
+  const errorMsg = document.getElementById("termsError");
+  const submitBtnPC = document.getElementById("submitBtn");
+  const submitBtnSP = document.getElementById("submitBtnSp");
+
+  // Check if form elements exist before proceeding
+  if (!form || !checkbox || !errorMsg || !submitBtnPC || !submitBtnSP) {
+    console.warn("Form elements not found, skipping form initialization");
+    return;
+  }
+
+  // Set UUID
+  const uuid = generateUUIDv4();
+  const uuidInput = document.getElementById("uuidInput");
+  if (uuidInput) {
+    uuidInput.value = uuid;
+  }
+
+  // Initial state
+  submitBtnPC.disabled = !checkbox.checked;
+  submitBtnSP.disabled = !checkbox.checked;
+
+  // Checkbox change handler
+  checkbox.addEventListener("change", function () {
+    const isChecked = checkbox.checked;
+    submitBtnPC.disabled = !isChecked;
+    submitBtnSP.disabled = !isChecked;
+    errorMsg.style.display = isChecked ? "none" : "block";
+  });
+
+  // Submit handler
+  function handleSubmit(e) {
+    if (!checkbox.checked) {
+      e.preventDefault();
+      errorMsg.style.display = "block";
+      return;
+    }
+
+    if (form.checkValidity()) {
+      errorMsg.style.display = "none";
+      // Set flag before submission
+      buttonPushed = true;
+      form.submit(); // Submit to target="resultFrame"
+    } else {
+      e.preventDefault();
+      form.reportValidity();
+    }
+  }
+
+  // Add event listeners
+  submitBtnPC.addEventListener("click", handleSubmit);
+  submitBtnSP.addEventListener("click", handleSubmit);
+}
