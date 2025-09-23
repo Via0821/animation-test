@@ -2395,14 +2395,6 @@ main {
   }
 
   @keyframes coin-y-axis-sp {
-    /* 0%   { transform: translateY(0); opacity: 0; }
-    3%   { transform: translateY(0); opacity: 1; scale: 0.9;}
-    22%  { transform: translateY(calc(var(--coin-to-y) * 1.3)); opacity: 1;} */
-    /* 45%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1; scale: 1;} */
-    /* 50%  { transform: translateY(calc(var(--coin-to-y) * 1.8)); opacity: 1; scale: 1;}
-    70%  { transform: translateY(calc(var(--coin-to-y) * 2.7)); opacity: 1;} */
-    /* 80%  { transform: translateY(calc(var(--coin-to-y) * 2)); opacity: 1;}
-    100% { transform: translateY(calc(var(--coin-to-y) * 2.3)); opacity: 0;} */
     0% {
       opacity: 0;
       transform: translateY(0);
