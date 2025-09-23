@@ -479,7 +479,7 @@ main {
 .coin--animated,
 .coin--animated .coin-img {
   animation-delay: var(--coin-delay, 0s);
-  animation-duration: var(--coin-duration, 2.5s);
+  animation-duration: var(--coin-duration, 2s);
   animation-direction: normal;
   animation-fill-mode: both;
   animation-play-state: paused;
@@ -509,46 +509,44 @@ main {
 @keyframes coin-x-axis {
   0% {
     opacity: 0;
-    transform: scale(0.1) translateX(0);
+  }
+  2% {
+    opacity: 0.5;
+    transform: scale(0.5);
   }
   3% {
     opacity: 1;
-    transform: scale(1.1) translateX(0);
+    transform: scale(0.8);
   }
-  10% {
-    opacity: 1;
-    transform: scale(1) translateX(0);
-  }
-  12% {
-    opacity: 1;
-    transform: scale(1) translateX(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateX(var(--coin-to-x));
+  to {
+    transform: translateX(var(--coin-to-x)) scale(1.2);
   }
 }
 
 @keyframes coin-y-axis {
   0% {
+    transform: translateY(0);
     opacity: 0;
-    transform: translateY(0) scale(1);
   }
   3% {
+    transform: translateY(0);
     opacity: 1;
-    transform: scale(1.1) translateY(calc(var(--coin-to-y) * 0.1));
+    scale: 0.9;
   }
-  8% {
+  17% {
+    transform: translateY(calc(var(--coin-to-y) * 1.2));
     opacity: 1;
-    transform: scale(1) translateY(calc(var(--coin-to-y) * 0.68));
   }
-  83% {
+  /* 45%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1; scale: 1;} */
+  /* 50%  { transform: translateY(calc(var(--coin-to-y) * 1.8)); opacity: 1; scale: 1;}
+  70%  { transform: translateY(calc(var(--coin-to-y) * 2.7)); opacity: 1;} */
+  80% {
+    transform: translateY(calc(var(--coin-to-y) * 2.8));
     opacity: 1;
-    transform: scale(1) translateY(calc(var(--coin-to-y) * 2.9));
   }
   100% {
+    transform: translateY(calc(var(--coin-to-y) * 3));
     opacity: 0;
-    transform: scale(1) translateY(calc(var(--coin-to-y) * 3));
   }
 }
 
@@ -2292,10 +2290,6 @@ main {
     top: 80px;
     left: 80px;
   }
-  .coin-img {
-    width: 40px;
-    height: 40px;
-  }
   .bg_white-title {
     font-size: 22px;
   }
@@ -2371,7 +2365,7 @@ main {
 @media (max-width: 650px) {
   .coin--animated,
   .coin--animated .coin-img {
-    animation-duration: var(--coin-duration, 2.7s);
+    animation-duration: var(--coin-duration, 2.5s);
   }
 
   .coin--animated {
@@ -2385,46 +2379,47 @@ main {
   }
   @keyframes coin-x-axis-sp {
     0% {
-      opacity: 1;
-      transform: scale(0.1);
+      opacity: 0;
+    }
+    2% {
+      opacity: 0.5;
+      transform: scale(0.5);
     }
     3% {
-      transform: scale(1.1);
-    }
-    10% {
       opacity: 1;
-      transform: scale(1);
-    }
-    12% {
-      transform: scale(1);
-    }
-    70% {
-      transform: translateX(var(--coin-to-x));
+      transform: scale(0.8);
     }
     to {
-      transform: translateX(var(--coin-to-x));
+      transform: translateX(var(--coin-to-x)) scale(1.2);
     }
   }
 
   @keyframes coin-y-axis-sp {
+    /* 0%   { transform: translateY(0); opacity: 0; }
+    3%   { transform: translateY(0); opacity: 1; scale: 0.9;}
+    22%  { transform: translateY(calc(var(--coin-to-y) * 1.3)); opacity: 1;} */
+    /* 45%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1; scale: 1;} */
+    /* 50%  { transform: translateY(calc(var(--coin-to-y) * 1.8)); opacity: 1; scale: 1;}
+    70%  { transform: translateY(calc(var(--coin-to-y) * 2.7)); opacity: 1;} */
+    /* 80%  { transform: translateY(calc(var(--coin-to-y) * 2)); opacity: 1;}
+    100% { transform: translateY(calc(var(--coin-to-y) * 2.3)); opacity: 0;} */
     0% {
       opacity: 0;
       transform: translateY(0);
     }
     3% {
       opacity: 1;
-      transform: scale(1.1) translateY(calc(var(--coin-to-y) * 0.01));
+      transform: translateY(0);
     }
-    7% {
+    27% {
+      transform: translateY(calc(var(--coin-to-y) * 1.1));
       opacity: 1;
-      transform: scale(1) translateY(calc(var(--coin-to-y) * 0.25));
     }
-    83% {
+    70% {
+      transform: translateY(calc(var(--coin-to-y) * 1.6));
       opacity: 1;
-      transform: translateY(calc(var(--coin-to-y) * 2.3));
     }
     to {
-      opacity: 0;
       transform: translateY(calc(var(--coin-to-y) * 2.5));
     }
   }
