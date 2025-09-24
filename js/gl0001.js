@@ -14,16 +14,13 @@ function detectDevicePerformance() {
   const cores = navigator.hardwareConcurrency || 4;
 
   // Check connection speed (if available)
-  const connection =
-    navigator.connection ||
-    navigator.mozConnection;
+  const connection = navigator.connection || navigator.mozConnection;
   const connectionSpeed = connection ? connection.effectiveType : "4g";
 
   // Check if device prefers reduced motion
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
-
 
   // More balanced performance score calculation
   let performanceScore = 5; // Start with higher base score
@@ -36,7 +33,6 @@ function detectDevicePerformance() {
   if (connectionSpeed === "4g") performanceScore += 1;
   if (connectionSpeed === "3g") performanceScore -= 1;
   if (connectionSpeed === "2g") performanceScore -= 2;
-
 
   // More lenient performance level thresholds
   let performanceLevel = "high";
@@ -67,7 +63,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: false,
       useHardwareAcceleration: true, // Enable hardware acceleration
-      reduceMotion: false, // Allow motion
+      reduceMotion: false // Allow motion
     },
     medium: {
       duration: 0.8, // Increased from 0.5
@@ -76,7 +72,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: true, // Enable scale for medium performance
       useHardwareAcceleration: true,
-      reduceMotion: false,
+      reduceMotion: false
     },
     high: {
       duration: 0.8,
@@ -85,7 +81,7 @@ function getAnimationSettings(performance) {
       useOpacity: true,
       useScale: true,
       useHardwareAcceleration: true,
-      reduceMotion: false,
+      reduceMotion: false
     }
   };
 
@@ -101,7 +97,7 @@ function monitorPerformance() {
 
   function checkFrame() {
     if (!isMonitoring) return;
-    
+
     frameCount++;
     const currentTime = performance.now();
     const deltaTime = currentTime - lastTime;
@@ -121,7 +117,7 @@ function monitorPerformance() {
       if (dropRate > 0.5) {
         console.log("High frame drop rate detected:", dropRate);
         document.body.classList.add("performance-degraded");
-        
+
         // Stop monitoring after first detection to avoid interference
         isMonitoring = false;
       }
@@ -185,8 +181,11 @@ function startCounterAnimation(priceTag) {
 
         // Apply rolling animation to all digits
         Array.from(container.children).forEach((el, i) => {
-          el.style.transition = "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-          el.style.transform = `translateY(${translateY + (i - targetIndex) * 1.2}em)`;
+          el.style.transition =
+            "transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+          el.style.transform = `translateY(${
+            translateY + (i - targetIndex) * 1.2
+          }em)`;
         });
 
         // Hide non-target digits after animation
@@ -284,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Start animation once on page load
   setTimeout(startAnimation, 500);
-  
+
   // Fallback: ensure animations start even if there are issues
   setTimeout(() => {
     const phoneContainer = document.querySelector(".coin-animation");
@@ -331,52 +330,60 @@ document.addEventListener("DOMContentLoaded", function () {
   const animatedElements = new Set();
 
   // Create a single observer that triggers animations only once
-  const animationObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const element = entry.target;
-        const elementId = element.id || element.className + Math.random();
+  const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const element = entry.target;
+      const elementId = element.id || element.className + Math.random();
 
-        // Check if element is already animated or currently animating
-        if (
-          entry.isIntersecting &&
-          !element.classList.contains("is-visible") &&
-          !element.classList.contains("animation-completed") &&
-          !animatedElements.has(elementId)
-        ) {
-          // Mark as being animated
-          animatedElements.add(elementId);
+      // Check if element is already animated or currently animating
+      if (
+        entry.isIntersecting &&
+        !element.classList.contains("is-visible") &&
+        !element.classList.contains("animation-completed") &&
+        !animatedElements.has(elementId)
+      ) {
+        // Mark as being animated
+        animatedElements.add(elementId);
 
-          // Lightweight callback - just toggle CSS class, let CSS handle animation
-          element.classList.add("is-visible");
-          element.style.visibility = "visible";
+        // Lightweight callback - just toggle CSS class, let CSS handle animation
+        element.classList.add("is-visible");
+        element.style.visibility = "visible";
 
-          // Stop observing this element immediately after animation is triggered
-          animationObserver.unobserve(element);
-        }
-      });
-    }
-  );
+        // Stop observing this element immediately after animation is triggered
+        animationObserver.unobserve(element);
+      }
+    });
+  });
 
-  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, evidence items, and ad panels
+  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, evidence items, ad panel images, and mobile ad panel images
   function initFloatingAnimation() {
-    const targetElements = document.querySelectorAll('.bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item, .line, .ad-panel, .mobile-ad-panel');
+    const targetElements = document.querySelectorAll(
+      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item, .line, .ad-image img, .mobile-ad-panel .panel-image img"
+    );
     const animatedElements = new Set();
-    
+
     function checkScroll() {
       targetElements.forEach((element) => {
         if (animatedElements.has(element)) return;
-        
+
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-        
+
         if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('animate-in');
+          // Special handling for ad panel images with scale animation
+          if (
+            element.tagName === "IMG" &&
+            (element.closest(".ad-image") || element.closest(".panel-image"))
+          ) {
+            element.classList.add("animate-in");
+          } else {
+            element.classList.add("animate-in");
+          }
           animatedElements.add(element);
         }
       });
     }
-    
+
     // Optimized scroll handling
     let scrollTimeout;
     const optimizedScrollHandler = () => {
@@ -385,15 +392,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       scrollTimeout = setTimeout(checkScroll, 10);
     };
-    
+
     // Add scroll event listener
-    window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
-    
+    window.addEventListener("scroll", optimizedScrollHandler, {
+      passive: true
+    });
+
     // Check on initial load
     checkScroll();
-    
+
     // Add scroll event listener with proper throttling
-    window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+    window.addEventListener("scroll", optimizedScrollHandler, {
+      passive: true
+    });
   }
 
   // Initialize floating animation
@@ -401,10 +412,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Form handling functionality
   initFormHandling();
-  
+
   // Ensure smooth animations without jerky movements
   ensureSmoothAnimations();
-
 });
 
 // Global variables for form handling
@@ -414,11 +424,14 @@ let buttonPushed = false;
 function initFormHandling() {
   // UUID generation
   function generateUUIDv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = (c === 'x') ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0;
+        const v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      }
+    );
   }
 
   // Toggle other job input
@@ -487,7 +500,7 @@ function initFormHandling() {
       errorMsg.style.display = "block";
       return;
     }
-    
+
     if (form.checkValidity()) {
       errorMsg.style.display = "none";
       // Set flag before submission
@@ -508,26 +521,26 @@ function initFormHandling() {
 function ensureSmoothAnimations() {
   // Remove conflicting transitions after animations complete
   const animatedElements = document.querySelectorAll(
-    '.smartphone1.slide-animate, .smartphone2.slide-animate, .price.animate, .coin--animated.started'
+    ".smartphone1.slide-animate, .smartphone2.slide-animate, .price.animate, .coin--animated.started"
   );
-  
+
   animatedElements.forEach((element) => {
     // Wait for animation to complete, then remove conflicting properties
-    element.addEventListener('animationend', () => {
-      element.style.transition = 'none';
-      element.style.willChange = 'auto';
+    element.addEventListener("animationend", () => {
+      element.style.transition = "none";
+      element.style.willChange = "auto";
     });
   });
-  
+
   // Ensure floating animations don't have conflicting transitions
   const floatingElements = document.querySelectorAll(
-    '.bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .evi-item.animate-in, .line.animate-in, .ad-panel.animate-in, .mobile-ad-panel.animate-in'
+    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .evi-item.animate-in, .line.animate-in, .ad-image img.animate-in, .mobile-ad-panel .panel-image img.animate-in"
   );
-  
+
   floatingElements.forEach((element) => {
-    element.addEventListener('animationend', () => {
-      element.style.transition = 'none';
-      element.style.willChange = 'auto';
+    element.addEventListener("animationend", () => {
+      element.style.transition = "none";
+      element.style.willChange = "auto";
     });
   });
 }

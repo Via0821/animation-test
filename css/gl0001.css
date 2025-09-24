@@ -14,7 +14,10 @@
 }
 
 /* Prevent jerky movements after animations */
-.smartphone1, .smartphone2, .price, .coin--animated {
+.smartphone1,
+.smartphone2,
+.price,
+.coin--animated {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
@@ -227,7 +230,6 @@ main {
   }
 }
 
-
 @keyframes slideInFromLeft {
   0% {
     opacity: 0;
@@ -238,7 +240,6 @@ main {
     transform: translateX(0) scale(1);
   }
 }
-
 
 /* Viewport-edge animations for screens 1200px and below */
 @keyframes slideInFromRightEdge {
@@ -523,14 +524,30 @@ main {
 }
 
 @keyframes coin-y-axis {
-  0%   { transform: translateY(0); opacity: 0; }
-  3%   { transform: translateY(0); opacity: 1; scale: 0.9;}
-  17%  { transform: translateY(calc(var(--coin-to-y) * 1.2)); opacity: 1;}
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  3% {
+    transform: translateY(0);
+    opacity: 1;
+    scale: 0.9;
+  }
+  17% {
+    transform: translateY(calc(var(--coin-to-y) * 1.2));
+    opacity: 1;
+  }
   /* 45%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1; scale: 1;} */
   /* 50%  { transform: translateY(calc(var(--coin-to-y) * 1.8)); opacity: 1; scale: 1;}
   70%  { transform: translateY(calc(var(--coin-to-y) * 2.7)); opacity: 1;} */
-  80%  { transform: translateY(calc(var(--coin-to-y) * 2.8)); opacity: 1;}
-  100% { transform: translateY(calc(var(--coin-to-y) * 3)); opacity: 0;}
+  80% {
+    transform: translateY(calc(var(--coin-to-y) * 2.8));
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(var(--coin-to-y) * 3));
+    opacity: 0;
+  }
 }
 
 .coin-group1 {
@@ -569,7 +586,6 @@ main {
     transform: translateY(0);
   }
 }
-
 
 .bg_white-title.animate-in {
   animation: floatUp 0.8s ease-out forwards;
@@ -703,7 +719,6 @@ main {
   }
 }
 
-
 /* Apply horizontal floating animation to evidence items */
 .evi-item {
   opacity: 0;
@@ -736,37 +751,6 @@ main {
   transition: none;
 }
 
-/* Apply floating animation to desktop ad panels */
-.ad-panel {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-  visibility: hidden;
-}
-
-.ad-panel.animate-in {
-  animation: floatUp 0.8s ease-out forwards;
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  transition: none;
-}
-
-/* Apply floating animation to mobile ad panels */
-.mobile-ad-panel {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-  visibility: hidden;
-}
-
-.mobile-ad-panel.animate-in {
-  animation: floatUp 0.8s ease-out forwards;
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  transition: none;
-}
 .bg_white-title p {
   text-align: center;
 }
@@ -1206,6 +1190,35 @@ main {
   font-size: 40px;
   line-height: 1.2;
   font-weight: 600;
+}
+
+/* Ad panel image scale animation */
+.ad-image img {
+  transform: scale(1.1);
+  transition: transform 0.6s ease-out;
+}
+
+.ad-image img.animate-in {
+  animation: imageScaleDown 0.8s ease-out forwards;
+}
+
+@keyframes imageScaleDown {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile ad panel image scale animation */
+.mobile-ad-panel .panel-image img {
+  transform: scale(1.2);
+  transition: transform 0.6s ease-out;
+}
+
+.mobile-ad-panel .panel-image img.animate-in {
+  animation: imageScaleDown 0.8s ease-out forwards;
 }
 .ad-panel-reverse {
   justify-content: start;
@@ -2379,7 +2392,7 @@ main {
     right: 40px;
   }
 }
- @media (max-width: 650px) {
+@media (max-width: 650px) {
   .coin--animated,
   .coin--animated .coin-img {
     animation-duration: var(--coin-duration, 2.5s);
@@ -2420,8 +2433,14 @@ main {
       opacity: 1;
       transform: translateY(0);
     }
-    27%  { transform: translateY(calc(var(--coin-to-y) * 1.1)); opacity: 1;} 
-    70%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1;} 
+    27% {
+      transform: translateY(calc(var(--coin-to-y) * 1.1));
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(calc(var(--coin-to-y) * 1.6));
+      opacity: 1;
+    }
     to {
       transform: translateY(calc(var(--coin-to-y) * 2.5));
     }
