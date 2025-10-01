@@ -533,18 +533,15 @@ main {
     opacity: 1;
     scale: 0.9;
   }
-  17% {
-    transform: translateY(calc(var(--coin-to-y) * 1.2));
+  13% {
+    transform: translateY(calc(var(--coin-to-y) * 0.585));
     opacity: 1;
   }
-  /* 45%  { transform: translateY(calc(var(--coin-to-y) * 1.6)); opacity: 1; scale: 1;} */
-  /* 50%  { transform: translateY(calc(var(--coin-to-y) * 1.8)); opacity: 1; scale: 1;}
-  70%  { transform: translateY(calc(var(--coin-to-y) * 2.7)); opacity: 1;} */
   80% {
-    transform: translateY(calc(var(--coin-to-y) * 2.8));
+    transform: translateY(calc(var(--coin-to-y) * 2.7));
     opacity: 1;
   }
-  100% {
+  to {
     transform: translateY(calc(var(--coin-to-y) * 3));
     opacity: 0;
   }
@@ -2395,7 +2392,7 @@ main {
 @media (max-width: 650px) {
   .coin--animated,
   .coin--animated .coin-img {
-    animation-duration: var(--coin-duration, 2.5s);
+    animation-duration: var(--coin-duration, 3s);
   }
 
   .coin--animated {
@@ -2433,12 +2430,12 @@ main {
       opacity: 1;
       transform: translateY(0);
     }
-    27% {
-      transform: translateY(calc(var(--coin-to-y) * 1.1));
+    11% {
+      transform: translateY(calc(var(--coin-to-y) * 0.41));
       opacity: 1;
     }
-    70% {
-      transform: translateY(calc(var(--coin-to-y) * 1.6));
+    80% {
+      transform: translateY(calc(var(--coin-to-y) * 2.4));
       opacity: 1;
     }
     to {
