@@ -355,10 +355,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, ad panel images, and mobile ad panel images
+  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, ad panel images, and mobile ad panel images
   function initFloatingAnimation() {
     const targetElements = document.querySelectorAll(
-      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .line, .ad-image img, .mobile-ad-panel .panel-image img"
+      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .line, .ad-image img, .mobile-ad-panel .panel-image img"
     );
     const animatedElements = new Set();
 
@@ -534,7 +534,7 @@ function ensureSmoothAnimations() {
 
   // Ensure floating animations don't have conflicting transitions
   const floatingElements = document.querySelectorAll(
-    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .line.animate-in, .ad-image img.animate-in, .mobile-ad-panel .panel-image img.animate-in"
+    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .line.animate-in, .ad-image img.animate-in, .mobile-ad-panel .panel-image img.animate-in"
   );
 
   floatingElements.forEach((element) => {
@@ -604,4 +604,62 @@ function carousel() {
   carouselSlider.addEventListener("mouseleave", unhover);
 }
 
+function buyCarousel() {
+  let carouselSlider = document.querySelector(".buy-grid-case");
+  let list = document.querySelector(".buy-grid");
+  let item = document.querySelectorAll(".iphone-item");
+  let list2;
+
+  const speed = 1;
+
+  const width = list.offsetWidth;
+  let x = 0;
+  let x2 = width;
+
+  function clone() {
+    list2 = list.cloneNode(true);
+    carouselSlider.appendChild(list2);
+    list2.style.left = `${width}px`;
+  }
+
+  function moveFirst() {
+    x -= speed;
+
+    if (width >= Math.abs(x)) {
+      list.style.left = `${x}px`;
+    } else {
+      x = width;
+    }
+  }
+
+  function moveSecond() {
+    x2 -= speed;
+
+    if (list2.offsetWidth >= Math.abs(x2)) {
+      list2.style.left = `${x2}px`;
+    } else {
+      x2 = width;
+    }
+  }
+
+  function hover() {
+    clearInterval(a);
+    clearInterval(b);
+  }
+
+  function unhover() {
+    a = setInterval(moveFirst, 7);
+    b = setInterval(moveSecond, 7);
+  }
+
+  clone();
+
+  let a = setInterval(moveFirst, 7);
+  let b = setInterval(moveSecond, 7);
+
+  carouselSlider.addEventListener("mouseenter", hover);
+  carouselSlider.addEventListener("mouseleave", unhover);
+}
+
+buyCarousel();
 carousel();
