@@ -716,20 +716,24 @@ main {
   }
 }
 
-/* Apply horizontal floating animation to evidence items */
+/* Evidence items - visible and styled */
 .evi-item {
-  opacity: 0;
-  transform: translateX(30px);
-  transition: all 0.6s ease-out;
-  visibility: hidden;
-}
-
-.evi-item.animate-in {
-  animation: floatRight 0.8s ease-out forwards;
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
   visibility: visible;
-  transition: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  padding: 30px 5px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent items from shrinking */
 }
 
 /* Apply floating animation to LINE images */
@@ -1027,6 +1031,10 @@ main {
   position: relative;
 }
 
+.bg_evi .container {
+  max-width: 100%;
+}
+
 .bg_evi .section-tip {
   color: rgba(255, 255, 255, 0.1);
 }
@@ -1042,53 +1050,82 @@ main {
   color: #ffffff;
 }
 
+.evi-grid-case {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
 .evi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 30px;
   width: fit-content;
   margin: 0 auto 50px;
   position: relative;
   z-index: 2;
+  animation: flowRight 20s linear infinite;
+  white-space: nowrap;
+  /* Ensure items are visible immediately */
+  opacity: 1;
+  visibility: visible;
 }
 
-.evi-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 250px;
-  height: 250px;
-  border-radius: 20px;
-  padding: 30px 5px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
+/* Keyframes for seamless left-to-right flowing animation */
+@keyframes flowRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.evi-item:nth-of-type(1) {
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .evi-grid {
+    animation-duration: 15s; /* Faster on mobile */
+    gap: 20px;
+  }
+
+  .evi-item {
+    min-width: 200px; /* Ensure items don't get too small */
+  }
+}
+
+@media (max-width: 480px) {
+  .evi-grid {
+    animation-duration: 12s; /* Even faster on small screens */
+    gap: 15px;
+  }
+
+  .evi-item {
+    min-width: 180px;
+  }
+}
+
+.evi-item:nth-of-type(1),
+.evi-item:nth-of-type(7) {
   background: url("../images/iphone16.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(2) {
+.evi-item:nth-of-type(2),
+.evi-item:nth-of-type(8) {
   background: url("../images/iphone16Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(3) {
+.evi-item:nth-of-type(3),
+.evi-item:nth-of-type(9) {
   background: url("../images/iphone15.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(4) {
+.evi-item:nth-of-type(4),
+.evi-item:nth-of-type(10) {
   background: url("../images/iphone15Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(5) {
+.evi-item:nth-of-type(5),
+.evi-item:nth-of-type(11) {
   background: url("../images/iphone14.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(6) {
+.evi-item:nth-of-type(6),
+.evi-item:nth-of-type(12) {
   background: url("../images/iphone14Pro.png") no-repeat center / cover;
-}
-
-.evi-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .evi-iphone-info {

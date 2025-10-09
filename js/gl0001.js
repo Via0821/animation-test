@@ -355,10 +355,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, evidence items, ad panel images, and mobile ad panel images
+  // Floating animation for all section titles, recommend items, about images, step items, testimonial cards, QA items, iPhone items, ad panel images, and mobile ad panel images
   function initFloatingAnimation() {
     const targetElements = document.querySelectorAll(
-      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .evi-item, .line, .ad-image img, .mobile-ad-panel .panel-image img"
+      ".bg_white-title, .section-title, .recommend-item, .about, .step-item, .testimonial-card, .qa-item, .iphone-item, .line, .ad-image img, .mobile-ad-panel .panel-image img"
     );
     const animatedElements = new Set();
 
@@ -410,6 +410,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize floating animation
   initFloatingAnimation();
 
+  // Initialize evidence items flowing animation
+  initEvidenceFlowAnimation();
+
   // Form handling functionality
   initFormHandling();
 
@@ -419,6 +422,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Global variables for form handling
 let buttonPushed = false;
+
+// Evidence flow animation initialization
+function initEvidenceFlowAnimation() {
+  const eviGrid = document.querySelector(".evi-grid");
+  if (!eviGrid) return;
+
+  // Ensure items are visible immediately
+  eviGrid.style.opacity = "1";
+  eviGrid.style.visibility = "visible";
+  eviGrid.style.display = "flex";
+
+  // Add smooth animation properties
+  eviGrid.style.willChange = "transform";
+  eviGrid.style.perspective = "1000px";
+  eviGrid.style.backfaceVisibility = "hidden";
+
+  // Start animation immediately
+  eviGrid.style.animationPlayState = "running";
+
+  // Pause animation when not in viewport for performance
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          eviGrid.style.animationPlayState = "running";
+        } else {
+          eviGrid.style.animationPlayState = "paused";
+        }
+      });
+    },
+    {
+      threshold: 0.1
+    }
+  );
+
+  observer.observe(eviGrid);
+
+  // Add hover pause functionality
+  eviGrid.addEventListener("mouseenter", () => {
+    eviGrid.style.animationPlayState = "paused";
+  });
+
+  eviGrid.addEventListener("mouseleave", () => {
+    eviGrid.style.animationPlayState = "running";
+  });
+
+  // Force animation to start
+  setTimeout(() => {
+    eviGrid.style.animation = "flowRight 20s linear infinite";
+  }, 100);
+}
 
 // Form handling initialization
 function initFormHandling() {
@@ -534,7 +588,7 @@ function ensureSmoothAnimations() {
 
   // Ensure floating animations don't have conflicting transitions
   const floatingElements = document.querySelectorAll(
-    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .evi-item.animate-in, .line.animate-in, .ad-image img.animate-in, .mobile-ad-panel .panel-image img.animate-in"
+    ".bg_white-title.animate-in, .section-title.animate-in, .recommend-item.animate-in, .about.animate-in, .step-item.animate-in, .testimonial-card.animate-in, .qa-item.animate-in, .iphone-item.animate-in, .line.animate-in, .ad-image img.animate-in, .mobile-ad-panel .panel-image img.animate-in"
   );
 
   floatingElements.forEach((element) => {
