@@ -410,9 +410,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize floating animation
   initFloatingAnimation();
 
-  // Initialize evidence items flowing animation
-  initEvidenceFlowAnimation();
-
   // Form handling functionality
   initFormHandling();
 
@@ -422,57 +419,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Global variables for form handling
 let buttonPushed = false;
-
-// Evidence flow animation initialization
-function initEvidenceFlowAnimation() {
-  const eviGrid = document.querySelector(".evi-grid");
-  if (!eviGrid) return;
-
-  // Ensure items are visible immediately
-  eviGrid.style.opacity = "1";
-  eviGrid.style.visibility = "visible";
-  eviGrid.style.display = "flex";
-
-  // Add smooth animation properties
-  eviGrid.style.willChange = "transform";
-  eviGrid.style.perspective = "1000px";
-  eviGrid.style.backfaceVisibility = "hidden";
-
-  // Start animation immediately
-  eviGrid.style.animationPlayState = "running";
-
-  // Pause animation when not in viewport for performance
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          eviGrid.style.animationPlayState = "running";
-        } else {
-          eviGrid.style.animationPlayState = "paused";
-        }
-      });
-    },
-    {
-      threshold: 0.1
-    }
-  );
-
-  observer.observe(eviGrid);
-
-  // Add hover pause functionality
-  eviGrid.addEventListener("mouseenter", () => {
-    eviGrid.style.animationPlayState = "paused";
-  });
-
-  eviGrid.addEventListener("mouseleave", () => {
-    eviGrid.style.animationPlayState = "running";
-  });
-
-  // Force animation to start
-  setTimeout(() => {
-    eviGrid.style.animation = "flowRight 20s linear infinite";
-  }, 100);
-}
 
 // Form handling initialization
 function initFormHandling() {
@@ -598,3 +544,64 @@ function ensureSmoothAnimations() {
     });
   });
 }
+
+("use strict");
+
+function carousel() {
+  let carouselSlider = document.querySelector(".evi-grid-case");
+  let list = document.querySelector(".evi-grid");
+  let item = document.querySelectorAll(".evi-item");
+  let list2;
+
+  const speed = 1;
+
+  const width = list.offsetWidth;
+  let x = 0;
+  let x2 = width;
+
+  function clone() {
+    list2 = list.cloneNode(true);
+    carouselSlider.appendChild(list2);
+    list2.style.left = `${width}px`;
+  }
+
+  function moveFirst() {
+    x -= speed;
+
+    if (width >= Math.abs(x)) {
+      list.style.left = `${x}px`;
+    } else {
+      x = width;
+    }
+  }
+
+  function moveSecond() {
+    x2 -= speed;
+
+    if (list2.offsetWidth >= Math.abs(x2)) {
+      list2.style.left = `${x2}px`;
+    } else {
+      x2 = width;
+    }
+  }
+
+  function hover() {
+    clearInterval(a);
+    clearInterval(b);
+  }
+
+  function unhover() {
+    a = setInterval(moveFirst, 7);
+    b = setInterval(moveSecond, 7);
+  }
+
+  clone();
+
+  let a = setInterval(moveFirst, 7);
+  let b = setInterval(moveSecond, 7);
+
+  carouselSlider.addEventListener("mouseenter", hover);
+  carouselSlider.addEventListener("mouseleave", unhover);
+}
+
+carousel();

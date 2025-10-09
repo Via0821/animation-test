@@ -1051,80 +1051,42 @@ main {
 }
 
 .evi-grid-case {
-  overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
+  height: 260px;
+  margin-bottom: 30px;
+  border: none;
 }
 
 .evi-grid {
+  position: absolute;
+  width: 120%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
   display: flex;
-  gap: 30px;
-  width: fit-content;
-  margin: 0 auto 50px;
-  position: relative;
-  z-index: 2;
-  animation: flowRight 20s linear infinite;
-  white-space: nowrap;
-  /* Ensure items are visible immediately */
-  opacity: 1;
-  visibility: visible;
+  align-items: center;
+  justify-content: space-around;
 }
 
-/* Keyframes for seamless left-to-right flowing animation */
-@keyframes flowRight {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Responsive adjustments for mobile */
-@media (max-width: 768px) {
-  .evi-grid {
-    animation-duration: 15s; /* Faster on mobile */
-    gap: 20px;
-  }
-
-  .evi-item {
-    min-width: 200px; /* Ensure items don't get too small */
-  }
-}
-
-@media (max-width: 480px) {
-  .evi-grid {
-    animation-duration: 12s; /* Even faster on small screens */
-    gap: 15px;
-  }
-
-  .evi-item {
-    min-width: 180px;
-  }
-}
-
-.evi-item:nth-of-type(1),
-.evi-item:nth-of-type(7) {
+.evi-item:nth-of-type(1) {
   background: url("../images/iphone16.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(2),
-.evi-item:nth-of-type(8) {
+.evi-item:nth-of-type(2) {
   background: url("../images/iphone16Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(3),
-.evi-item:nth-of-type(9) {
+.evi-item:nth-of-type(3) {
   background: url("../images/iphone15.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(4),
-.evi-item:nth-of-type(10) {
+.evi-item:nth-of-type(4) {
   background: url("../images/iphone15Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(5),
-.evi-item:nth-of-type(11) {
+.evi-item:nth-of-type(5) {
   background: url("../images/iphone14.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(6),
-.evi-item:nth-of-type(12) {
+.evi-item:nth-of-type(6) {
   background: url("../images/iphone14Pro.png") no-repeat center / cover;
 }
 
@@ -1674,6 +1636,9 @@ main {
   .ad-text {
     font-size: 32px;
   }
+  .evi-grid {
+    width: 1800px;
+  }
 }
 @media (max-width: 950px) {
   .fv-txt h1 {
@@ -2063,6 +2028,12 @@ main {
     height: 120px;
     line-height: 1.2;
   }
+  .evi-grid-case {
+    height: 200px;
+  }
+  .evi-grid {
+    width: 1550px;
+  }
 }
 @media (max-width: 650px) {
   .header-container {
@@ -2256,7 +2227,7 @@ main {
   }
   .evi-item {
     width: 170px;
-    height: 170px;
+    height: 200px;
     padding: 25px 0;
   }
   .evi-check-text {
@@ -2286,6 +2257,9 @@ main {
   }
   .highlight-text {
     font-size: 18px;
+  }
+  .evi-grid {
+    width: 1200px;
   }
 }
 @media (max-width: 429px) {
@@ -2408,7 +2382,7 @@ main {
   }
   .evi-item {
     width: 160px;
-    height: 160px;
+    height: 190px;
   }
   .evi-check-text {
     font-size: 22px;
