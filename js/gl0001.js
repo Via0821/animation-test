@@ -591,14 +591,14 @@ function carousel() {
   }
 
   function unhover() {
-    a = setInterval(moveFirst, 7);
-    b = setInterval(moveSecond, 7);
+    a = setInterval(moveFirst, 20);
+    b = setInterval(moveSecond, 20);
   }
 
   clone();
 
-  let a = setInterval(moveFirst, 7);
-  let b = setInterval(moveSecond, 7);
+  let a = setInterval(moveFirst, 20);
+  let b = setInterval(moveSecond, 20);
 
   carouselSlider.addEventListener("mouseenter", hover);
   carouselSlider.addEventListener("mouseleave", unhover);
@@ -648,14 +648,14 @@ function buyCarousel() {
   }
 
   function unhover() {
-    a = setInterval(moveFirst, 7);
-    b = setInterval(moveSecond, 7);
+    a = setInterval(moveFirst, 20);
+    b = setInterval(moveSecond, 20);
   }
 
   clone();
 
-  let a = setInterval(moveFirst, 7);
-  let b = setInterval(moveSecond, 7);
+  let a = setInterval(moveFirst, 20);
+  let b = setInterval(moveSecond, 20);
 
   carouselSlider.addEventListener("mouseenter", hover);
   carouselSlider.addEventListener("mouseleave", unhover);
