@@ -1118,28 +1118,22 @@ main {
   flex-shrink: 0;
 } */
 
-.evi-item:nth-of-type(1),
-.evi-item:nth-of-type(7) {
+.evi-img-first {
   background: url("../images/iphone16.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(2), 
-.evi-item:nth-of-type(8) {
+.evi-img-second {
   background: url("../images/iphone16Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(3),
-.evi-item:nth-of-type(9) {
+.evi-img-third {
   background: url("../images/iphone15.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(4),
-.evi-item:nth-of-type(10) {
+.evi-img-fourth {
   background: url("../images/iphone15Pro.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(5),
-.evi-item:nth-of-type(11) {
+.evi-img-five {
   background: url("../images/iphone14.png") no-repeat center / cover;
 }
-.evi-item:nth-of-type(6),
-.evi-item:nth-of-type(12) {
+.evi-img-six {
   background: url("../images/iphone14Pro.png") no-repeat center / cover;
 }
 
