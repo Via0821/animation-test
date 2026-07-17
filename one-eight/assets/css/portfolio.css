@@ -1,0 +1,44 @@
+.goTo-port {
+  padding-block: 175px;
+}
+.port-section {
+  padding-top: 90px;
+}
+.port-content {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-block: 30px 120px;
+  gap: 40px;
+}
+.portfolio {
+  border: 1px solid #000000;
+  width: 40%;
+  max-width: 500px;
+  height: 400px;
+}
+@media (max-width: 950px) {
+  .portfolio {
+    height: 300px;
+  }
+}
+@media (max-width: 768px) {
+  .goTo-port {
+    padding-block: 120px;
+  }
+  .port-content {
+    flex-direction: column;
+  }
+  .portfolio {
+    width: 90%;
+    height: 18em;
+  }
+}
+@media (max-width: 429px) {
+  .goTo-port {
+    padding-block: 100px;
+  }
+}

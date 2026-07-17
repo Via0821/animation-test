@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Zen+Antique+Soft&family=Zen+Kurenaido&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>トップページ</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <a href="./Top.html" class="logo">
+          <img src="./assets/img/logo.png" alt="Logo" />
+        </a>
+        <div class="menu-bar">
+          <a href="#">会社紹介</a>
+          <a href="#">サービスと価格</a>
+          <a href="./portfolio.html">施工事例</a>
+          <a href="#">依頼の流れ</a>
+          <a href="#">採用情報</a>
+        </div>
+        <div class="hamburger-menu">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <a href="#" class="contact-btn">
+          <p>お問い合わせ<br />相談無料</p>
+        </a>
+      </div>
+    </header>
+
+    <!-- モバイルメニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- モバイルメニュー -->
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="close-btn" id="closeBtn">
+        <span class="close-line"></span>
+        <span class="close-line"></span>
+      </button>
+      <a href="#">会社紹介</a>
+      <a href="#">サービスと価格</a>
+      <a href="./portfolio.html">施工事例</a>
+      <a href="#">依頼の流れ</a>
+      <a href="#">採用情報</a>
+    </div>
+    <main>
+      <section class="first-view">
+        <video autoplay muted loop playsinline class="bg-video">
+          <source src="./assets/video/oneeightOP.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <h3>Premium quality.Minimal waste.Unbeatable price.</h3>
+        <h1>無駄を省き、最高の品質を最安価格で。</h1>
+      </section>
+      <section id="fv-static" class="fv-section">
+        <div class="overlay"></div>
+        <h3>Premium quality.Minimal waste.Unbeatable price.</h3>
+        <h1>無駄を省き、最高の品質を最安価格で。</h1>
+      </section>
+      <section class="intro-section">
+        <div class="section-container">
+          <div class="for-mans-case">
+            <div class="for-mans">
+              <h2>物件オーナー様へ</h2>
+              <p>
+                空室対策、資産価値の向上など、クロス貼り換えは物件経営において非常に重要です。しかし、「費用を抑えたいけど、品質も妥協したくない…」というのがオーナー様の本音ではないでしょうか？
+              </p>
+              <a href="#" class="more-btn">＞詳細はこちら</a>
+            </div>
+            <div class="for-mans">
+              <h2>元請け業者様へ</h2>
+              <p>
+                これまでのクロス業者に見られる年配者中心の対応から一転、フレッシュで丁寧なコミュニケーションと、高品質な仕上がりを実現します。ワンエイトにお任せください！
+              </p>
+              <a href="#" class="more-btn">＞詳細はこちら</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="reason-section">
+        <div class="reason-title">
+          <p>「あなたの想い」を「内装に込めて」</p>
+          <p>選ばれる理由がここにある３つの強み</p>
+        </div>
+        <div class="reason-cards">
+          <div class="reason-card">
+            <img src="./assets/img/reason-card01.png" alt="" />
+            <div class="reason-card-txt">
+              <p>確かな技術が織りなす、<br />ワンランク上の仕上がり</p>
+              <p>
+                当社には、一級表装技能士の資格を持つ職人が在籍。
+                長年培ってきた確かな技術と、その職人が直接指導し育成したスタッフが、お客様のご要望を形にします。細部まで妥協のない、美しい仕上がりにご満足いただけることでしょう。
+              </p>
+            </div>
+          </div>
+          <div class="reason-card">
+            <img src="./assets/img/reason-card02.png" alt="" />
+            <div class="reason-card-txt">
+              <p>高品質を適正価格で実現</p>
+              <p>
+                高い技術力を持つからこそ実現できる、高品質と低価格の両立。お客様に安心してサービスをご利用いただけるよう、岡山県内でもトップクラスの低価格帯に挑戦し続けています。
+              </p>
+            </div>
+          </div>
+          <div class="reason-card">
+            <img src="./assets/img/reason-card03.png" alt="" />
+            <div class="reason-card-txt">
+              <p>
+                迅速・丁寧な対応で、
+                <br />
+                お客様をサポート
+              </p>
+              <p>
+                「お客様にとって一番」であり続けるために、迅速かつ丁寧な対応を心がけています。お見積りから施工完了まで、スムーズな流れはもちろんのこと、急なトラブルにもフットワーク軽く対応いたしますのでご安心ください。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="port-section">
+        <div class="port-title">
+          <p>Portfolio</p>
+          <p>施工事例</p>
+        </div>
+        <div class="goTo-port">
+          <p>弊社が過去に施工した事例をご紹介いたします</p>
+          <a href="./portfolio.html" class="more-btn">＞施工事例はこちら</a>
+        </div>
+      </section>
+      <section class="moto-section">
+        <div class="moto-tip">
+          <div class="moto-tip-case">
+            <p>『信頼と技術で、<br />迅速かつ丁寧な<br />空間づくりを』</p>
+          </div>
+        </div>
+        <div class="moto">
+          <div class="moto-txt">
+            <h3>「迅速」</h3>
+            <p>
+              テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。
+            </p>
+          </div>
+          <div class="moto-img">
+            <img src="./assets/img/moto-img01.png" alt="" />
+          </div>
+        </div>
+        <div class="moto">
+          <div class="moto-img">
+            <img src="./assets/img/moto-img02.png" alt="" />
+          </div>
+          <div class="moto-txt">
+            <h3>「丁寧」</h3>
+            <p>
+              テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。テキストが入ります。
+            </p>
+          </div>
+        </div>
+        <div class="moto-bt">
+          <div class="moto">
+            <div class="moto-txt">
+              <h3>「信頼」</h3>
+              <p>
+                「迅速」「丁寧」「信頼」。これらが当社の仕事に対する姿勢です。<br /><br />
+                長年の経験で培った技術と効率的な作業プロセスにより、スピーディーに工事を完了させることができます。<br />
+                そのスピードは、お客様のコスト削減にも直結します。<br />
+                しかし、スピードだけでなく、細部まで丁寧な仕上がりにこだわることも忘れません。<br />
+                これまで多くのお客様から「驚くほど早く、そして美しく仕上げてくれた」との喜びの声を頂いております。<br /><br />
+                私たちは、お客様の大切な空間づくりをお手伝いする立場にあることを常に心に留め、信頼されるサービスを提供することを最も大切にしております。<br /><br />
+                新しい会社だからこそ、一つ一つの仕事に全力で取り組み、お客様に満足していただけるよう努めてまいります。<br />
+                皆様の理想の空間づくりのために、ぜひ当社の技術とサービスをご利用ください。
+              </p>
+            </div>
+            <div class="moto-img">
+              <img src="./assets/img/moto-img03.png" alt="" />
+            </div>
+          </div>
+          <div class="goTo-contact">
+            <div class="contact-tip">よくあるご質問</div>
+            <p>よくご質問いただく内容をまとめました。</p>
+            <a href="#" class="more-btn">＞よくあるご質問はこちら</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="comInfo-group">
+          <div class="com-info">
+            <div class="logo">
+              <img src="./assets/img/logo.png" alt="Logo" />
+            </div>
+            <div class="info-txt">
+              <p>
+                株式会社 ワンエイト<br />
+                岡山県岡山市北区富田516番地1
+              </p>
+              <p>TEL　086-289-6806</p>
+              <p>営業時間　9:00～17:00（日曜定休）</p>
+            </div>
+          </div>
+          <div class="footer-nav">
+            <a href="#">トップページ</a>
+            <a href="#">会社紹介</a>
+            <a href="#">サービスと価格</a>
+            <a href="#">施工事例</a>
+            <a href="#">物件オーナー様へ</a>
+            <a href="#">元請け業者様へ </a>
+            <a href="#">見本サンプル</a>
+            <a href="#">施工事例</a>
+            <a href="#">依頼の流れ</a>
+            <a href="#">よくある質問</a>
+            <a href="#">採用情報</a>
+          </div>
+        </div>
+        <div class="com-reviews">
+          <div class="contact-btn">
+            <p>お問い合わせ<br />相談無料</p>
+          </div>
+          <div class="com-reviews-txt">
+            <p>• 岡山県インテリア事業協同組合加盟</p>
+            <p>• 岡山県知事許可（般-６）第27001号</p>
+            <p>• 一級表装技能士</p>
+          </div>
+          <div class="com-reviews-img">
+            <img src="./assets/img/com-review.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoother Inertia Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: #fff;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .one { background: #1abc9c; }
+    .two { background: #3498db; }
+    .three { background: #9b59b6; }
+    .four { background: #e67e22; }
+  </style>
+</head>
+<body>
+
+  <section class="one">First View</section>
+  <section class="two">Section 2</section>
+  <section class="three">Section 3</section>
+  <section class="four">Section 4</section>
+
+  <!-- Lenis script -->
+  <script src="https://unpkg.com/@studio-freight/lenis"></script>
+  <script>
+    // Initialize Lenis with inertia-like easing
+    const lenis = new Lenis({
+      duration: 1.6,  // longer glide
+      easing: (t) => 1 - Math.pow(1 - t, 3), // easeOutCubic
+      smooth: true
+    })
+
+    // Animation loop
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  </script>
+</body>
+</html>
